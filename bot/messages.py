@@ -42,6 +42,8 @@ CURRICULA_RESULT_ITEM = "<b>({})</b> {}\n"
 SETUP_DONE = ("Abbiamo finito! Ora puoi usare tutti i comandi (/help).\n"
             "Puoi cambiare corso e anno semplicemente rifacendo il /setup")
 
+SETUP_STOPPED = "Setup interrotto. Puoi eseguirlo di nuovo con /setup"
+
 REMINDME_ON = "Ti invierò l'orario del giorno ogni mattina intorno alle ore 7.00"
 REMINDME_OFF = "Smetterò di inviarti l'orario ogni mattina"
 

@@ -55,7 +55,7 @@ class Bot:
                         CommandHandler('cerca', self.setup_search_again)
                     ],
                 },
-                fallbacks=[]
+                fallbacks=[CommandHandler('stop', self.setup_step_stop)]
             )
         ]
         self.context = {}
@@ -212,6 +212,10 @@ class Bot:
 
         self._send(update, context, messages.SETUP_DONE)
         del self.context[update.effective_chat.id]
+        return ConversationHandler.END
+
+    def setup_step_stop(self, update, context):
+        self._send(update, context, messages.SETUP_STOPPED)
         return ConversationHandler.END
 
     def daily_schedule(self, context):
