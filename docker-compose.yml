@@ -1,0 +1,13 @@
+version: '3.5'
+
+services:
+  bot:
+    build: .
+    env_file:
+      - ../unibo_orari_bot-env/bot.env
+    volumes:
+        - bot-data:/app-data
+    restart: unless-stopped
+
+volumes:
+    bot-data:
