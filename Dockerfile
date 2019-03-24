@@ -17,6 +17,7 @@ RUN apk --no-cache add \
 
 WORKDIR /app
 
-COPY bot/ .
+COPY unibot/ ./unibot
+COPY start.py ./start.py
 
-CMD ["python3", "bot.py"]
+CMD ["python3", "start.py"]
