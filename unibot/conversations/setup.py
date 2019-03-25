@@ -4,7 +4,6 @@ from telegram import ParseMode
 import unibot.messages as messages
 import unibot.users
 import unibot.courses as courses
-import unibot.uni_schedule as uni_schedule
 
 SETUP_SEARCH, SETUP_SEARCH_SELECT, SETUP_YEAR, SETUP_CURRICULA_SELECT = range(0,4)
 conv_context = {}
@@ -94,11 +93,10 @@ def setup_step_search_select(update, context):
 def setup_step_year(update, context):
     conv_context[update.effective_chat.id]['settings'].year = int(update.message.text)
 
-    curricula_url = courses.get_url_curricula(
+    curricula = courses.get_curricula(
         conv_context[update.effective_chat.id]['settings'].course_id,
-        conv_context[update.effective_chat.id]['settings'].year)
-
-    curricula = uni_schedule.curricula_from_source(curricula_url)
+        conv_context[update.effective_chat.id]['settings'].year
+    )
     if len(curricula) == 0:
         send(update, context, messages.NO_CURRICULA_FOUND)
         return SETUP_YEAR

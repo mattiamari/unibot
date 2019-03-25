@@ -8,7 +8,7 @@ from telegram import ParseMode
 import unibot.messages as messages
 import unibot.users
 import unibot.courses as courses
-import unibot.uni_schedule as uni_schedule
+import unibot.class_schedule as class_schedule
 import unibot.conversations.setup
 
 import pprint
@@ -59,21 +59,23 @@ class Bot:
         self._send(update, context, messages.CMD_START)
 
     def cmd_command_list(self, update, context):
-        self._send(update, context, messages.COMMAND_LIST)
+        self._send(update, context, messages.COMMAND_LIST.format(env['VERSION']))
 
     def cmd_schedule_today(self, update, context):
-        url = self._get_schedule_url_for_user(update.effective_user.id, update.effective_chat.id)
-        if url is None:
+        settings = self.user_settings().get(update.effective_user.id, update.effective_chat.id)
+        if settings is None:
             self._send(update, context, messages.NEED_SETUP)
             return
-        self._send(update, context, uni_schedule.get_today(url))
+        schedule = class_schedule.get_schedule(settings.course_id, settings.year, settings.curricula).today()
+        self._send(update, context, schedule.tostring())
 
     def cmd_schedule_tomorrow(self, update, context):
-        url = self._get_schedule_url_for_user(update.effective_user.id, update.effective_chat.id)
-        if url is None:
+        settings = self.user_settings().get(update.effective_user.id, update.effective_chat.id)
+        if settings is None:
             self._send(update, context, messages.NEED_SETUP)
             return
-        self._send(update, context, uni_schedule.get_tomorrow(url))
+        schedule = class_schedule.get_schedule(settings.course_id, settings.year, settings.curricula).tomorrow()
+        self._send(update, context, schedule.tostring())
 
     def cmd_remindme_on(self, update, context):
         settings = self.user_settings()
@@ -97,17 +99,12 @@ class Bot:
 
     def daily_schedule(self, context):
         users = self.user_settings().get_to_remind()
-        weekday = date.today().weekday()
         logging.info('Sending todays schedule to {} users'.format(len(users)))
         for user in users:
-            url = self._get_schedule_url_for_user(user.user_id, user.chat_id)
-            if url is None:
+            schedule = class_schedule.get_schedule(user.course_id, user.year, user.curricula)
+            if not schedule.week_has_lessons():
                 continue
-            logging.info(pprint.pformat(weekday))
-            logging.info(pprint.pformat(uni_schedule.lesson_days(url)))
-            if weekday not in uni_schedule.lesson_days(url):
-                continue
-            context.bot.send_message(chat_id=user.chat_id, parse_mode=ParseMode.HTML, text=uni_schedule.get_today(url))
+            context.bot.send_message(chat_id=user.chat_id, parse_mode=ParseMode.HTML, text=schedule.today().tostring())
 
     def _send(self, update, context, text):
         context.bot.send_message(chat_id=update.message.chat_id, parse_mode=ParseMode.HTML, text=text)

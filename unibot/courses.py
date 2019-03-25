@@ -2,6 +2,8 @@ import string
 import re
 import json
 
+from unibot.urlfetch import fetch
+
 QUERY_ALLOWED_CHARS = string.ascii_letters + string.digits + 'àèéìòù '
 SCHEDULE_SUBDIR_URL = {'it': 'orario-lezioni', 'en': 'timetable'}
 AVAILABLE_CURRICULA_URL = '@@available_curricula?anno={}&curricula='
@@ -27,6 +29,10 @@ def get_url_schedule(course_id, year, curricula=''):
 
 def get_course(course_id):
     return next(x for x in COURSES if x['id'] == course_id)
+
+def get_curricula(course_id, year):
+    url = get_url_curricula(course_id, year)
+    return fetch(url).json()
 
 def search(query):
     query = ''.join(c if c not in string.punctuation else ' ' for c in query)

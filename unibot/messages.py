@@ -8,7 +8,8 @@ COMMAND_LIST = ("<b>Lista comandi</b>\n"
                 "/ricordami per ricevere l'orario del giorno ogni mattina\n\n"
                 "/smetti per smettere di ricevere l'orario ogni mattina\n\n\n"
                 "<b>Se riscontri un problema non esitare a farcelo sapere entrando nel gruppo</b> "
-                "https://t.me/joinchat/GOSjsBP21eU22j3fDHzBOQ")
+                "https://t.me/joinchat/GOSjsBP21eU22j3fDHzBOQ\n\n"
+                "<i>Version: {}</i>")
 
 NEED_SETUP = ("Come faccio a dirti il tuo orario se non so quale facoltà frequenti?\n"
             "Psss... usa il comando /setup")
