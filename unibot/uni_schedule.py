@@ -1,10 +1,10 @@
 from datetime import datetime, date, timedelta
-import requests
 import logging
-import os
 import pprint
 
-USER_AGENT = 'unibo_orari_bot/{}'.format(os.environ['VERSION'])
+from unibot.urlfetch import fetch
+from unibot.cache import cache_for
+
 DAY_NAMES = ['Lunedì', 'Martedì', 'Mercoledì', 'Giovedì', 'Venerdì', 'Sabato', 'Domenica']
 STR_TODAY = 'Oggi'
 STR_TOMORROW = 'Domani'
@@ -15,9 +15,6 @@ REPLACEMENTS = {
 }
 
 LESSON_DAYS = range(0,5)
-
-class FetchError(Exception):
-    pass
 
 def get_today(url):
     today = date.today()
@@ -74,6 +71,9 @@ def clean_events(data):
         return []
     return [clean_event(e) for e in data['events']]
 
+def shift_weekdays(days):
+    return [6 if d == 0 else d-1 for d in days]
+
 def clean_event(event):
     e = {
         'time': '???' if 'time' not in event else event['time'],
@@ -89,45 +89,20 @@ def clean_event(event):
 
     return e
 
-def cached(minutes=60):
-    def cached_inner(func):
-        cache = {'some_url': {'data': None, 'last_update': None}}
-        def decorate(url):
-            if url not in cache or cache[url]['last_update'] is None or datetime.now() - cache[url]['last_update'] > timedelta(minutes=minutes):
-                cache[url] = {'data': func(url), 'last_update': datetime.now()}
-            return cache[url]['data']
-        return decorate
-    return cached_inner
-
-@cached(minutes=60)
+@cache_for(minutes=60)
 def lesson_days(url):
-    res = get_url(url).json()
+    res = fetch(url).json()
     if 'daystohide' not in res:
         return set(range(0,6))
-    hide = [6 if d == 0 else d-1 for d in res['daystohide']]
-    hide = set(hide)
+    hide = set(shift_weekdays(res['daystohide']))
     return set(range(0,7)) - hide
 
-@cached(minutes=60)
+@cache_for(minutes=60)
 def events_from_source(url):
-    res = get_url(url)
+    res = fetch(url)
     return clean_events(res.json())
 
-@cached(minutes=60)
+@cache_for(minutes=60)
 def curricula_from_source(url):
-    res = get_url(url)
+    res = fetch(url)
     return res.json()
-
-@cached(minutes=10)
-def get_url(url):
-    try:
-        logging.info("Getting from upstream: {}".format(url))
-        res = requests.get(url, timeout=10, headers={'user-agent': USER_AGENT})
-    except requests.Timeout:
-        logging.warning("Cannot get '{}'. Request timed out".format(url))
-        raise FetchError()
-
-    if res.status_code != requests.codes.ok:
-        logging.warning("Cannot get '{}'. Request returned {}".format(url, res.status_code))
-        raise FetchError()
-    return res
