@@ -34,7 +34,7 @@ class Bot:
             CommandHandler('oggi', self.cmd_schedule_today),
             CommandHandler('domani', self.cmd_schedule_tomorrow),
             CommandHandler('ricordami', self.cmd_remindme_on),
-            CommandHandler('smetti', self.cmd_remindme_off),
+            CommandHandler('nonricordarmi', self.cmd_remindme_off),
             unibot.conversations.setup.get_handler()
         ]
         self.context = {}
@@ -59,7 +59,7 @@ class Bot:
         self._send(update, context, messages.CMD_START)
 
     def cmd_command_list(self, update, context):
-        self._send(update, context, messages.COMMAND_LIST.format(env['VERSION']))
+        self._send(update, context, messages.COMMAND_LIST.format(env['BOT_VERSION']))
 
     def cmd_schedule_today(self, update, context):
         settings = self.user_settings().get(update.effective_user.id, update.effective_chat.id)

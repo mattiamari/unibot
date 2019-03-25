@@ -6,7 +6,7 @@ COMMAND_LIST = ("<b>Lista comandi</b>\n"
                 "/orario o /oggi per l'orario di oggi\n\n"
                 "/domani per l'orario di domani o il prossimo giorno di lezione\n\n"
                 "/ricordami per ricevere l'orario del giorno ogni mattina\n\n"
-                "/smetti per smettere di ricevere l'orario ogni mattina\n\n\n"
+                "/nonricordarmi per smettere di ricevere l'orario ogni mattina\n\n\n"
                 "<b>Se riscontri un problema non esitare a farcelo sapere entrando nel gruppo</b> "
                 "https://t.me/joinchat/GOSjsBP21eU22j3fDHzBOQ\n\n"
                 "<i>Version: {}</i>")

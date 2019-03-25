@@ -8,10 +8,9 @@ if __name__ == '__main__':
     logging.basicConfig(format='%(asctime)s - %(levelname)s - %(message)s',
                         level=logging.INFO,
                         stream=sys.stdout)
-    os.environ['VERSION'] = '0.1.2'
     mode = 'Testing' if os.environ['TESTING'] == '1' else 'Production'
 
-    logging.info("Starting UniBot version {}".format(os.environ['VERSION']))
+    logging.info("Starting UniBot version {}".format(os.environ['BOT_VERSION']))
     logging.info("Current mode is {}".format(mode))
     logging.info('Server time is {}'.format(datetime.now()))
 

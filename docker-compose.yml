@@ -5,6 +5,8 @@ services:
     build: .
     env_file:
       - ../unibo_orari_bot-env/bot.env
+    environment:
+      BOT_VERSION: ${BOT_VERSION}
     volumes:
         - bot-data:/app-data
     restart: unless-stopped
