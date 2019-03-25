@@ -8,7 +8,7 @@ USER_AGENT = 'unibo_orari_bot/{}'.format(os.environ['VERSION'])
 class FetchError(Exception):
     pass
 
-@cache_for(minutes=10)
+@cache_for(minutes=60)
 def fetch(url):
     try:
         logging.info("Getting from upstream: {}".format(url))
