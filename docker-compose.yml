@@ -3,6 +3,7 @@ version: '3.5'
 services:
   bot:
     build: .
+    image: unibot:${BOT_VERSION}
     env_file:
       - ../unibo_orari_bot-env/bot.env
     environment:
