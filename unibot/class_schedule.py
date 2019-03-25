@@ -44,11 +44,17 @@ class EventList:
     def __iter__(self):
         return iter(self.items)
 
+    def __getitem__(self, key):
+        return self.items[key]
+
+    def __len__(self):
+        return len(self.items)
+
     def tostring(self, with_date=False):
         out = ''
         last_day = None
         for e in self.items:
-            if last_day is None or last_day != e.date_start.date():
+            if with_date and (last_day is None or last_day != e.date_start.date()):
                 out += '<b>{} {}</b>\n'.format(
                     DAY_NAMES[e.date_start.date().weekday()],
                     e.date_start.date().strftime(self.DATE_FORMAT)

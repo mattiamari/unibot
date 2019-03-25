@@ -67,7 +67,7 @@ class Bot:
             self._send(update, context, messages.NEED_SETUP)
             return
         schedule = class_schedule.get_schedule(settings.course_id, settings.year, settings.curricula).today()
-        self._send(update, context, schedule.tostring())
+        self._send(update, context, schedule.tostring(with_date=True))
 
     def cmd_schedule_tomorrow(self, update, context):
         settings = self.user_settings().get(update.effective_user.id, update.effective_chat.id)
@@ -75,7 +75,7 @@ class Bot:
             self._send(update, context, messages.NEED_SETUP)
             return
         schedule = class_schedule.get_schedule(settings.course_id, settings.year, settings.curricula).tomorrow()
-        self._send(update, context, schedule.tostring())
+        self._send(update, context, schedule.tostring(with_date=True))
 
     def cmd_remindme_on(self, update, context):
         settings = self.user_settings()
@@ -104,7 +104,7 @@ class Bot:
             schedule = class_schedule.get_schedule(user.course_id, user.year, user.curricula)
             if not schedule.week_has_lessons():
                 continue
-            context.bot.send_message(chat_id=user.chat_id, parse_mode=ParseMode.HTML, text=schedule.today().tostring())
+            context.bot.send_message(chat_id=user.chat_id, parse_mode=ParseMode.HTML, text=schedule.today().tostring(with_date=True))
 
     def _send(self, update, context, text):
         context.bot.send_message(chat_id=update.message.chat_id, parse_mode=ParseMode.HTML, text=text)
