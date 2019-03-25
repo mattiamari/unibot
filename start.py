@@ -9,7 +9,7 @@ if __name__ == '__main__':
                         level=logging.INFO,
                         stream=sys.stdout)
     os.environ['VERSION'] = '0.1.1'
-    mode = 'Testing' if os.environ['TESTING'] = '1' else 'Production'
+    mode = 'Testing' if os.environ['TESTING'] == '1' else 'Production'
 
     logging.info("Starting UniBot version {}".format(os.environ['VERSION']))
     logging.info("Current mode is {}".format(mode))

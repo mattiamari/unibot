@@ -1,2 +1,5 @@
 .directory
 __pycache__
+.gitignore
+docker-compose.yml
+Dockerfile

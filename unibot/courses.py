@@ -32,5 +32,5 @@ AVAILABLE_CURRICULA_URL = '@@available_curricula?anno={}&curricula='
 SCHEDULE_URL = '@@orario_reale_json?anno={}&curricula={}'
 
 COURSES = None
-with open('../assets/courses.json', 'r') as f:
+with open('assets/courses.json', 'r') as f:
     COURSES = json.load(f)
