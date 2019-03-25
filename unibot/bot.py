@@ -41,8 +41,9 @@ class Bot:
 
     def run(self):
         self.register_handlers()
-        self.dispatcher.job_queue.run_daily(self.daily_schedule, time(hour=7, minute=0), days=tuple(range(0,6)))
+        self.dispatcher.job_queue.run_daily(self.daily_schedule, time(hour=7, minute=30))
         # self.dispatcher.job_queue.run_once(self.daily_schedule, 3)
+        self.dispatcher.job_queue.start()
         self.updater.start_polling(poll_interval=1.0)
         self.updater.idle()
 
@@ -97,10 +98,13 @@ class Bot:
     def daily_schedule(self, context):
         users = self.user_settings().get_to_remind()
         weekday = date.today().weekday()
+        logging.info('Sending todays schedule to {} users'.format(len(users)))
         for user in users:
             url = self._get_schedule_url_for_user(user.user_id, user.chat_id)
             if url is None:
                 continue
+            logging.info(pprint.pformat(weekday))
+            logging.info(pprint.pformat(uni_schedule.lesson_days(url)))
             if weekday not in uni_schedule.lesson_days(url):
                 continue
             context.bot.send_message(chat_id=user.chat_id, parse_mode=ParseMode.HTML, text=uni_schedule.get_today(url))

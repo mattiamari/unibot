@@ -1,6 +1,9 @@
 FROM alpine:3.9
 
+ENV TZ=Europe/Rome
+
 RUN apk --no-cache add \
+    tzdata \
     python3 \
     py3-requests \
     git \
@@ -13,7 +16,8 @@ RUN apk --no-cache add \
   cd /tmp/python-telegram-bot && \
   python3 setup.py install && \
   rm -rf /tmp/python-telegram-bot && \
-  apk --no-cache del git build-base python3-dev openssl-dev
+  apk --no-cache del git build-base python3-dev openssl-dev && \
+  ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
 WORKDIR /app
 
