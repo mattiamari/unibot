@@ -1,5 +1,6 @@
 # UniBot
 A Telegram bot that reminds you your class schedule, reading it from unibo.it
+Find it on Telegram: @unibo_orari_bot or http://t.me/unibo_orari_bot
 
 Feel free to open new issues for problems you encountered or features you would like
 to be added, I'll try my best to make them happen.
