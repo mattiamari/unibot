@@ -29,7 +29,6 @@ class Bot:
             unibot.conversations.setup.get_handler(),
             unibot.conversations.remindme.get_handler()
         ]
-        self.context = {}
         self.daily_schedule_repeat_every = timedelta(minutes=5)
         self.daily_schedule_last_run = datetime.now()
 
@@ -47,49 +46,49 @@ class Bot:
 
     def cmd_start(self, update, context):
         if (environ['TESTING'] == '1'):
-            self._send(update, context, ("Io non sono il vero UniBot ma solo un'istanza di test.\n"
+            self.send(update, context, ("Io non sono il vero UniBot ma solo un'istanza di test.\n"
                                         "Usa @unibo_orari_bot"))
             return
-        self._send(update, context, messages.CMD_START)
+        self.send(update, context, messages.CMD_START)
 
     def cmd_command_list(self, update, context):
-        self._send(update, context, messages.COMMAND_LIST.format(environ['BOT_VERSION']))
+        self.send(update, context, messages.COMMAND_LIST.format(environ['BOT_VERSION']))
 
     def cmd_schedule_today(self, update, context):
         settings = self.user_settings().get(update.effective_user.id, update.effective_chat.id)
         if settings is None:
-            self._send(update, context, messages.NEED_SETUP)
+            self.send(update, context, messages.NEED_SETUP)
             return
         logging.info("REQUEST schedule_today course_id={} year={} curricula={}".format(
             settings.course_id, settings.year, settings.curricula))
         schedule = class_schedule.get_schedule(settings.course_id, settings.year, settings.curricula).today()
         if not schedule.has_events():
-            self._send(update, context, messages.NO_LESSONS_TODAY)
+            self.send(update, context, messages.NO_LESSONS_TODAY)
             return
-        self._send(update, context, schedule.tostring(with_date=True))
+        self.send(update, context, schedule.tostring(with_date=True))
 
     def cmd_schedule_tomorrow(self, update, context):
         settings = self.user_settings().get(update.effective_user.id, update.effective_chat.id)
         if settings is None:
-            self._send(update, context, messages.NEED_SETUP)
+            self.send(update, context, messages.NEED_SETUP)
             return
         logging.info("REQUEST schedule_tomorrow course_id={} year={} curricula={}".format(
             settings.course_id, settings.year, settings.curricula))
         schedule = class_schedule.get_schedule(settings.course_id, settings.year, settings.curricula).tomorrow()
         if not schedule.has_events():
-            self._send(update, context, messages.NO_LESSONS_TOMORROW)
+            self.send(update, context, messages.NO_LESSONS_TOMORROW)
             return
-        self._send(update, context, schedule.tostring(with_date=True))
+        self.send(update, context, schedule.tostring(with_date=True))
 
     def cmd_remindme_off(self, update, context):
         settings = self.user_settings()
         setting = settings.get(update.effective_user.id, update.effective_chat.id)
         if setting is None:
-            self._send(update, context, messages.NEED_SETUP)
+            self.send(update, context, messages.NEED_SETUP)
             return
         setting.do_remind = False
         settings.update(setting)
-        self._send(update, context, messages.REMINDME_OFF)
+        self.send(update, context, messages.REMINDME_OFF)
 
     def daily_schedule(self, context):
         settings_repo = self.user_settings()
@@ -111,6 +110,5 @@ class Bot:
         self.daily_schedule_last_run = now
         logging.info("Done sending daily schedule")
 
-
-    def _send(self, update, context, text):
+    def send(self, update, context, text):
         context.bot.send_message(chat_id=update.message.chat_id, parse_mode=ParseMode.HTML, text=text)
