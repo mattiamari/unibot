@@ -112,8 +112,10 @@ def _usersettings_factory(row):
     )
 
 def _usersettings_dict(settings):
-    d = dict(settings.__dict__)
-    d['remind_time'] = settings.remind_time.strftime(UserSettings.TIME_FORMAT)
+    d = settings.__dict__.copy()
+    d['remind_time'] = None
+    if isinstance(settings.remind_time, str):
+        d['remind_time'] = settings.remind_time.strftime(UserSettings.TIME_FORMAT)
     return d
 
 def _parse_remind_time(time_str):
