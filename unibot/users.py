@@ -115,7 +115,7 @@ def _usersettings_factory(row):
 def _usersettings_dict(settings):
     d = settings.__dict__.copy()
     d['remind_time'] = None
-    if isinstance(settings.remind_time, str):
+    if settings.remind_time is not None:
         d['remind_time'] = settings.remind_time.strftime(UserSettings.TIME_FORMAT)
     return d
 
