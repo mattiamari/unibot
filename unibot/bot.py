@@ -96,6 +96,7 @@ class Bot:
         settings_repo = self.user_settings()
         now = datetime.now()
         users = settings_repo.get_to_remind()
+        users = [u for u in users if u.remind_time is not None]
         users = [u for u in users if self.daily_schedule_last_run.time() < u.remind_time <= now.time()]
         logging.info('Sending todays schedule to {} users'.format(len(users)))
         for user in users:
