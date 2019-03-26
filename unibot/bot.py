@@ -71,6 +71,8 @@ class Bot:
         if settings is None:
             self._send(update, context, messages.NEED_SETUP)
             return
+        logging.info("REQUEST schedule_today course_id={} year={} curricula={}".format(
+            settings.course_id, settings.year, settings.curricula))
         schedule = class_schedule.get_schedule(settings.course_id, settings.year, settings.curricula).today()
         self._send(update, context, schedule.tostring(with_date=True))
 
@@ -79,6 +81,8 @@ class Bot:
         if settings is None:
             self._send(update, context, messages.NEED_SETUP)
             return
+        logging.info("REQUEST schedule_tomorrow course_id={} year={} curricula={}".format(
+            settings.course_id, settings.year, settings.curricula))
         schedule = class_schedule.get_schedule(settings.course_id, settings.year, settings.curricula).tomorrow()
         self._send(update, context, schedule.tostring(with_date=True))
 
