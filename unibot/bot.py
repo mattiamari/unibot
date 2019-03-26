@@ -43,7 +43,7 @@ class Bot:
     def run(self):
         self.register_handlers()
         self.dispatcher.job_queue.run_daily(self.daily_schedule, time(hour=7, minute=30))
-        self.dispatcher.job_queue.run_once(self.daily_schedule, 3)
+        # self.dispatcher.job_queue.run_once(self.daily_schedule, 3)
         self.dispatcher.job_queue.start()
         self.updater.start_polling(poll_interval=1.0)
         self.updater.idle()
