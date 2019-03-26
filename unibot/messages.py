@@ -20,7 +20,7 @@ SETUP_STEP_START = ("Devo chiederti solo un paio di cose ma puoi usare il comand
 SETUP_STEP_SEARCH = ("Quale facoltà frequenti? (basta inserire una o più parole chiave, "
                     "per esempio 'medicina' o 'ing inf'")
 
-QUERY_TOO_SMALL = "Mi servono almeno 4 caratteri per fare una ricerca. Prova di nuovo."
+QUERY_TOO_SHORT = "Mi servono almeno 4 caratteri (punteggiatura esclusa) per fare una ricerca. Prova di nuovo."
 
 COURSE_SEARCH_RESULTS = "Ho trovato questi corsi:"
 

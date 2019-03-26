@@ -56,11 +56,12 @@ def setup_step_start(update, context):
     return SETUP_SEARCH
 
 def setup_step_search(update, context):
-    if len(update.message.text) < 4:
-        send(update, context, messages.QUERY_TOO_SMALL)
+    try:
+        matches = courses.search(update.message.text)
+    except courses.QueryTooShortError:
+        send(update, context, messages.QUERY_TOO_SHORT)
         return SETUP_SEARCH
 
-    matches = courses.search(update.message.text)
     if len(matches) == 0:
         send(update, context, messages.COURSE_SEARCH_NO_RESULT)
         return SETUP_SEARCH
