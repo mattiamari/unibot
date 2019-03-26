@@ -8,8 +8,6 @@ from telegram import ParseMode
 import unibot.messages as messages
 import unibot.users as users
 
-import pprint
-
 STEP_TIME_SELECT, STEP_TIME_INVALID = range(0,2)
 TIME_FORMAT='%H:%M'
 

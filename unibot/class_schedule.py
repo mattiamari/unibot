@@ -1,15 +1,11 @@
 from datetime import datetime, date, timedelta
 import logging
-import pprint
 
 from unibot.urlfetch import fetch
 from unibot.cache import cache_for
 from unibot.courses import get_url_schedule
 
 DAY_NAMES = ['Lunedì', 'Martedì', 'Mercoledì', 'Giovedì', 'Venerdì', 'Sabato', 'Domenica']
-STR_TODAY = 'Oggi'
-STR_TOMORROW = 'Domani'
-STR_NO_LESSONS = 'Nessuna lezione'
 
 class InvalidSourceDataError(Exception):
     def __init__(self, url):
