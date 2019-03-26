@@ -71,7 +71,7 @@ migrations.append({
         curricula text,
         do_remind int default 0,
         remind_time text,
-        deleted int,
+        deleted int default 0,
         primary key (chat_id));"""
 })
 
