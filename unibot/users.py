@@ -80,6 +80,10 @@ class UserSettingsRepo(Repo):
         res = self.db.execute("select * from user_settings where do_remind=1 and deleted=0")
         return [_usersettings_factory(x) for x in res]
 
+    def get_all_chat_id(self):
+        res = self.db.execute("select chat_id from user_settings where deleted=0")
+        return [row['chat_id'] for row in res]
+
 class UserSettings:
     TIME_FORMAT = '%H:%M'
 

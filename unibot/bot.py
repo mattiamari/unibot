@@ -10,6 +10,7 @@ import unibot.messages as messages
 import unibot.users
 import unibot.courses as courses
 import unibot.class_schedule as class_schedule
+import unibot.announcements as announcements
 import unibot.conversations.setup
 import unibot.conversations.remindme
 
@@ -35,6 +36,7 @@ class Bot:
     def run(self):
         self.register_handlers()
         self.dispatcher.job_queue.run_repeating(self.daily_schedule, self.daily_schedule_repeat_every)
+        self.dispatcher.job_queue.run_once(self.send_announcements, 5)
         # self.dispatcher.job_queue.run_once(self.daily_schedule, 3)
         self.dispatcher.job_queue.start()
         self.updater.start_polling(poll_interval=1.0)
@@ -109,6 +111,18 @@ class Bot:
             os_time.sleep(0.1)
         self.daily_schedule_last_run = now
         logging.info("Done sending daily schedule")
+
+    def send_announcements(self, context):
+        anns = announcements.get_announcements()
+        if len(anns) == 0:
+            return
+        chats = self.user_settings().get_all_chat_id()
+        logging.info('Sending announcements to {} chats'.format(len(chats)))
+        for ann in anns:
+            for chatid in chats:
+                context.bot.send_message(chat_id=chatid, parse_mode=ParseMode.HTML, text=ann['msg'])
+            announcements.set_sent(ann)
+        announcements.save_sent()
 
     def send(self, update, context, text):
         context.bot.send_message(chat_id=update.message.chat_id, parse_mode=ParseMode.HTML, text=text)
