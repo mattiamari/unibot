@@ -55,11 +55,11 @@ class UserSettingsRepo(Repo):
         self.db.row_factory = sqlite3.Row
 
     def has(self, user_id, chat_id):
-        res = self.db.execute("select count(*) from user_settings where user_id=? and chat_id=?", (user_id, chat_id)).fetchone()[0]
+        res = self.db.execute("select count(*) from user_settings where user_id=? and chat_id=? and deleted=0", (user_id, chat_id)).fetchone()[0]
         return True if res > 0 else False
 
     def get(self, user_id, chat_id):
-        res = self.db.execute("select * from user_settings where user_id=? and chat_id=?", (user_id, chat_id)).fetchone()
+        res = self.db.execute("select * from user_settings where user_id=? and chat_id=? and deleted=0", (user_id, chat_id)).fetchone()
         if isinstance(res, sqlite3.Row):
             return _usersettings_factory(res)
         return None
@@ -69,8 +69,13 @@ class UserSettingsRepo(Repo):
             db.execute("insert or replace into user_settings (user_id, chat_id, course_id, year, curricula, do_remind) "
                 "values (:user_id, :chat_id, :course_id, :year, :curricula, :do_remind)", settings.__dict__)
 
+    def delete(self, settings):
+        with self.db as db:
+            db.execute("update user_settings set deleted=1 where user_id=:user_id and chat_id=:chat_id", settings.__dict__)
+        logging.info("Deleted user chat '{}'".format(settings.chat_id))
+
     def get_to_remind(self):
-        res = self.db.execute("select * from user_settings where do_remind=1")
+        res = self.db.execute("select * from user_settings where do_remind=1 and deleted=0")
         return [_usersettings_factory(x) for x in res]
 
 class UserSettings:

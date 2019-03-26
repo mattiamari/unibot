@@ -1,6 +1,7 @@
 import logging
 from os import environ as env
 from datetime import date, time
+import time as os_time
 
 from telegram.ext import Updater, CommandHandler, MessageHandler, ConversationHandler, Filters, BaseFilter
 from telegram import ParseMode
@@ -42,7 +43,7 @@ class Bot:
     def run(self):
         self.register_handlers()
         self.dispatcher.job_queue.run_daily(self.daily_schedule, time(hour=7, minute=30))
-        # self.dispatcher.job_queue.run_once(self.daily_schedule, 3)
+        self.dispatcher.job_queue.run_once(self.daily_schedule, 3)
         self.dispatcher.job_queue.start()
         self.updater.start_polling(poll_interval=1.0)
         self.updater.idle()
@@ -98,13 +99,21 @@ class Bot:
         self._send(update, context, messages.REMINDME_OFF)
 
     def daily_schedule(self, context):
-        users = self.user_settings().get_to_remind()
+        settings_repo = self.user_settings()
+        users = settings_repo.get_to_remind()
         logging.info('Sending todays schedule to {} users'.format(len(users)))
         for user in users:
             schedule = class_schedule.get_schedule(user.course_id, user.year, user.curricula)
             if not schedule.week_has_lessons():
                 continue
-            context.bot.send_message(chat_id=user.chat_id, parse_mode=ParseMode.HTML, text=schedule.today().tostring(with_date=True))
+            try:
+                context.bot.send_message(chat_id=user.chat_id, parse_mode=ParseMode.HTML, text=schedule.today().tostring(with_date=True))
+            except Exception as e:
+                logging.warning(e)
+                settings_repo.delete(user)
+            os_time.sleep(0.1)
+        logging.info("Done sending daily schedule")
+
 
     def _send(self, update, context, text):
         context.bot.send_message(chat_id=update.message.chat_id, parse_mode=ParseMode.HTML, text=text)

@@ -2,7 +2,7 @@ import logging
 import sys
 import os
 from datetime import datetime, time
-from unibot import bot, create_db
+from unibot import bot, db
 
 if __name__ == '__main__':
     logging.basicConfig(format='%(asctime)s - %(levelname)s - %(message)s',
@@ -14,5 +14,5 @@ if __name__ == '__main__':
     logging.info("Current mode is {}".format(mode))
     logging.info('Server time is {}'.format(datetime.now()))
 
-    create_db.create()
+    db.migrate()
     bot.Bot().run()
