@@ -56,12 +56,12 @@ class UserSettingsRepo(Repo):
         super().__init__()
         self.db.row_factory = sqlite3.Row
 
-    def has(self, user_id, chat_id):
-        res = self.db.execute("select count(*) from user_settings where user_id=? and chat_id=? and deleted=0", (user_id, chat_id)).fetchone()[0]
+    def has(self, chat_id):
+        res = self.db.execute("select count(*) from user_settings where chat_id=? and deleted=0", (chat_id,)).fetchone()[0]
         return True if res > 0 else False
 
-    def get(self, user_id, chat_id):
-        res = self.db.execute("select * from user_settings where user_id=? and chat_id=? and deleted=0", (user_id, chat_id)).fetchone()
+    def get(self, chat_id):
+        res = self.db.execute("select * from user_settings where chat_id=? and deleted=0", (chat_id,)).fetchone()
         if isinstance(res, sqlite3.Row):
             return _usersettings_factory(res)
         return None
@@ -72,7 +72,7 @@ class UserSettingsRepo(Repo):
         self.db.commit()
 
     def delete(self, settings):
-        self.db.execute("update user_settings set deleted=1 where user_id=:user_id and chat_id=:chat_id", _usersettings_dict(settings))
+        self.db.execute("update user_settings set deleted=1 where chat_id=:chat_id", _usersettings_dict(settings))
         self.db.commit()
         logging.info("Deleted user chat '{}'".format(settings.chat_id))
 

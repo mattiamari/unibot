@@ -25,7 +25,7 @@ def get_handler():
 
 def step_start(update, context):
     settings = users.UserSettingsRepo()
-    setting = settings.get(update.effective_user.id, update.effective_chat.id)
+    setting = settings.get(update.effective_chat.id)
     if setting is None:
         send(update, context, messages.NEED_SETUP)
         return ConversationHandler.END
@@ -41,7 +41,7 @@ def step_time_select(update, context):
         return STEP_TIME_SELECT
 
     settings = users.UserSettingsRepo()
-    setting = settings.get(update.effective_user.id, update.effective_chat.id)
+    setting = settings.get(update.effective_chat.id)
     setting.do_remind = True
     setting.remind_time = time
     settings.update(setting)

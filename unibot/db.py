@@ -44,7 +44,49 @@ migrations.append({
 migrations.append({
     'seq': 2,
     'desc': 'add remind_time colummn to user_settings',
-    'query': "alter table user_settings add column remind_time text default '7:30';"
+    'query': "alter table user_settings add column remind_time text;"
+})
+
+migrations.append({
+    'seq': 3,
+    'desc': 'set default remind_time',
+    'query': "update user_settings set remind_time='7:30' where do_remind=1;"
+})
+
+migrations.append({
+    'seq': 4,
+    'desc': 'delete settings for groups with more than one config',
+    'query': ("delete from user_settings where chat_id in "
+              "(select chat_id as cnt from user_settings group by chat_id having count(*) > 1);")
+})
+
+migrations.append({
+    'seq': 5,
+    'desc': 'create new user_settings table',
+    'query': """create table if not exists user_settings_new (
+        user_id int,
+        chat_id int,
+        course_id text,
+        year int,
+        curricula text,
+        do_remind int default 0,
+        remind_time text,
+        deleted int,
+        primary key (chat_id));"""
+})
+
+migrations.append({
+    'seq': 6,
+    'desc': 'migrate data to the new user_settings table, cleaning deleted',
+    'query': ("insert into user_settings_new (user_id, chat_id, course_id, year, curricula, do_remind, remind_time, deleted) "
+              "select user_id, chat_id, course_id, year, curricula, do_remind, remind_time, deleted from user_settings where deleted=0;")
+})
+
+migrations.append({
+    'seq': 7,
+    'desc': 'delete old user_settings table',
+    'query': ("drop table user_settings; "
+              "alter table user_settings_new rename to user_settings;")
 })
 
 def migrate():
