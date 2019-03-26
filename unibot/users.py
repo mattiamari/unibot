@@ -12,7 +12,8 @@ class Repo:
         self.db.close()
 
     def __del__(self):
-        self.shutdown()
+        self.db.commit()
+        self.db.close()
 
 class UserRepo(Repo):
     def __init__(self):
@@ -30,9 +31,9 @@ class UserRepo(Repo):
         return None
 
     def update(self, user):
-        with self.db as db:
-            db.execute("insert or replace into user (user_id, chat_id, first_name, last_name, username) "
-                "values (:user_id, :chat_id, :first_name, :last_name, :username)", user.__dict__)
+        self.db.execute("insert or replace into user (user_id, chat_id, first_name, last_name, username) "
+            "values (:user_id, :chat_id, :first_name, :last_name, :username)", user.__dict__)
+        self.db.commit()
         logging.info('New or updated user: @{}'.format(user.username))
 
 class User:
@@ -66,13 +67,13 @@ class UserSettingsRepo(Repo):
         return None
 
     def update(self, settings):
-        with self.db as db:
-            db.execute("insert or replace into user_settings (user_id, chat_id, course_id, year, curricula, do_remind, remind_time) "
-                "values (:user_id, :chat_id, :course_id, :year, :curricula, :do_remind, :remind_time)", _usersettings_dict(settings))
+        self.db.execute("insert or replace into user_settings (user_id, chat_id, course_id, year, curricula, do_remind, remind_time) "
+            "values (:user_id, :chat_id, :course_id, :year, :curricula, :do_remind, :remind_time)", _usersettings_dict(settings))
+        self.db.commit()
 
     def delete(self, settings):
-        with self.db as db:
-            db.execute("update user_settings set deleted=1 where user_id=:user_id and chat_id=:chat_id", _usersettings_dict(settings))
+        self.db.execute("update user_settings set deleted=1 where user_id=:user_id and chat_id=:chat_id", _usersettings_dict(settings))
+        self.db.commit()
         logging.info("Deleted user chat '{}'".format(settings.chat_id))
 
     def get_to_remind(self):
