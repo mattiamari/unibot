@@ -46,6 +46,9 @@ class EventList:
     def __len__(self):
         return len(self.items)
 
+    def has_events(self):
+        return len(self.items) > 0
+
     def tostring(self, with_date=False):
         out = ''
         last_day = None

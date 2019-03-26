@@ -54,3 +54,6 @@ REMINDME_START = "A che ora vuoi essere avvisato? (inserisci un orario, ad esemp
 REMINDME_TIME_INVALID = "L'orario che hai inserito non è valido. Inserisci un orario 00:00 - 23:59 o /annulla"
 REMINDME_END = "Perfetto, ti avviserò ogni giorno alle {} (ora italiana)"
 REMINDME_OFF = "Smetterò di inviarti l'orario ogni mattina"
+
+NO_LESSONS_TODAY = "Oggi non hai lezioni"
+NO_LESSONS_TOMORROW = "Domani non avrai lezioni"

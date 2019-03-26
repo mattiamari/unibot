@@ -63,6 +63,9 @@ class Bot:
         logging.info("REQUEST schedule_today course_id={} year={} curricula={}".format(
             settings.course_id, settings.year, settings.curricula))
         schedule = class_schedule.get_schedule(settings.course_id, settings.year, settings.curricula).today()
+        if not schedule.has_events():
+            self._send(update, context, messages.NO_LESSONS_TODAY)
+            return
         self._send(update, context, schedule.tostring(with_date=True))
 
     def cmd_schedule_tomorrow(self, update, context):
@@ -73,6 +76,9 @@ class Bot:
         logging.info("REQUEST schedule_tomorrow course_id={} year={} curricula={}".format(
             settings.course_id, settings.year, settings.curricula))
         schedule = class_schedule.get_schedule(settings.course_id, settings.year, settings.curricula).tomorrow()
+        if not schedule.has_events():
+            self._send(update, context, messages.NO_LESSONS_TOMORROW)
+            return
         self._send(update, context, schedule.tostring(with_date=True))
 
     def cmd_remindme_off(self, update, context):
