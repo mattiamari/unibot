@@ -1,6 +1,6 @@
 import logging
 from os import environ as env
-from datetime import date, time
+from datetime import datetime, date, time, timedelta
 import time as os_time
 
 from telegram.ext import Updater, CommandHandler, MessageHandler, ConversationHandler, Filters, BaseFilter
@@ -11,6 +11,7 @@ import unibot.users
 import unibot.courses as courses
 import unibot.class_schedule as class_schedule
 import unibot.conversations.setup
+import unibot.conversations.remindme
 
 import pprint
 
@@ -34,15 +35,18 @@ class Bot:
             CommandHandler('orario', self.cmd_schedule_today),
             CommandHandler('oggi', self.cmd_schedule_today),
             CommandHandler('domani', self.cmd_schedule_tomorrow),
-            CommandHandler('ricordami', self.cmd_remindme_on),
+            #CommandHandler('ricordami', self.cmd_remindme_on),
             CommandHandler('nonricordarmi', self.cmd_remindme_off),
-            unibot.conversations.setup.get_handler()
+            unibot.conversations.setup.get_handler(),
+            unibot.conversations.remindme.get_handler()
         ]
         self.context = {}
+        self.daily_schedule_repeat_every = timedelta(minutes=5)
+        self.daily_schedule_last_run = datetime.now()
 
     def run(self):
         self.register_handlers()
-        self.dispatcher.job_queue.run_daily(self.daily_schedule, time(hour=7, minute=30))
+        self.dispatcher.job_queue.run_repeating(self.daily_schedule, self.daily_schedule_repeat_every)
         # self.dispatcher.job_queue.run_once(self.daily_schedule, 3)
         self.dispatcher.job_queue.start()
         self.updater.start_polling(poll_interval=1.0)
@@ -78,16 +82,6 @@ class Bot:
         schedule = class_schedule.get_schedule(settings.course_id, settings.year, settings.curricula).tomorrow()
         self._send(update, context, schedule.tostring(with_date=True))
 
-    def cmd_remindme_on(self, update, context):
-        settings = self.user_settings()
-        setting = settings.get(update.effective_user.id, update.effective_chat.id)
-        if setting is None:
-            self._send(update, context, messages.NEED_SETUP)
-            return
-        setting.do_remind = True
-        settings.update(setting)
-        self._send(update, context, messages.REMINDME_ON)
-
     def cmd_remindme_off(self, update, context):
         settings = self.user_settings()
         setting = settings.get(update.effective_user.id, update.effective_chat.id)
@@ -100,7 +94,9 @@ class Bot:
 
     def daily_schedule(self, context):
         settings_repo = self.user_settings()
+        now = datetime.now()
         users = settings_repo.get_to_remind()
+        users = [u for u in users if self.daily_schedule_last_run.time() < u.remind_time <= now.time()]
         logging.info('Sending todays schedule to {} users'.format(len(users)))
         for user in users:
             schedule = class_schedule.get_schedule(user.course_id, user.year, user.curricula)
@@ -112,6 +108,7 @@ class Bot:
                 logging.warning(e)
                 settings_repo.delete(user)
             os_time.sleep(0.1)
+        self.daily_schedule_last_run = now
         logging.info("Done sending daily schedule")
 
 

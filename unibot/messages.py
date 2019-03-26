@@ -14,7 +14,8 @@ COMMAND_LIST = ("<b>Lista comandi</b>\n"
 NEED_SETUP = ("Come faccio a dirti il tuo orario se non so quale facoltà frequenti?\n"
             "Psss... usa il comando /setup")
 
-SETUP_STEP_START = "Devo chiederti solo un paio di cose"
+SETUP_STEP_START = ("Devo chiederti solo un paio di cose ma puoi usare il comando /annulla "
+                    "per uscire in qualsiasi momento")
 
 SETUP_STEP_SEARCH = ("Quale facoltà frequenti? (basta inserire una o più parole chiave, "
                     "per esempio 'medicina' o 'ing inf'")
@@ -49,3 +50,9 @@ REMINDME_ON = "Ti invierò l'orario del giorno ogni mattina intorno alle ore 7.0
 REMINDME_OFF = "Smetterò di inviarti l'orario ogni mattina"
 
 INVALID_SELECTION = "Devi darmi un numero della lista. Riprova."
+
+CANCELED = "Annullato"
+
+REMINDME_START = "A che ora vuoi essere avvisato? (inserisci un orario, ad esempio 7.10 o 11)"
+REMINDME_TIME_INVALID = "L'orario che hai inserito non è valido. Inserisci un orario 00:00 - 23:59 o /annulla"
+REMINDME_END = "Perfetto, ti avviserò ogni giorno alle {}"

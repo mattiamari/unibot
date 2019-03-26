@@ -38,7 +38,13 @@ migrations.append({
 migrations.append({
     'seq': 1,
     'desc': 'add deleted colummn to user_settings',
-    'query': "alter table user_settings add column deleted int default 0"
+    'query': "alter table user_settings add column deleted int default 0;"
+})
+
+migrations.append({
+    'seq': 2,
+    'desc': 'add remind_time colummn to user_settings',
+    'query': "alter table user_settings add column remind_time text default '7:30';"
 })
 
 def migrate():

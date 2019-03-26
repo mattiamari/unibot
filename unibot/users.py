@@ -1,5 +1,6 @@
 import sqlite3
 from os import environ as env
+from datetime import datetime
 import logging
 
 class Repo:
@@ -66,12 +67,12 @@ class UserSettingsRepo(Repo):
 
     def update(self, settings):
         with self.db as db:
-            db.execute("insert or replace into user_settings (user_id, chat_id, course_id, year, curricula, do_remind) "
-                "values (:user_id, :chat_id, :course_id, :year, :curricula, :do_remind)", settings.__dict__)
+            db.execute("insert or replace into user_settings (user_id, chat_id, course_id, year, curricula, do_remind, remind_time) "
+                "values (:user_id, :chat_id, :course_id, :year, :curricula, :do_remind, :remind_time)", _usersettings_dict(settings))
 
     def delete(self, settings):
         with self.db as db:
-            db.execute("update user_settings set deleted=1 where user_id=:user_id and chat_id=:chat_id", settings.__dict__)
+            db.execute("update user_settings set deleted=1 where user_id=:user_id and chat_id=:chat_id", _usersettings_dict(settings))
         logging.info("Deleted user chat '{}'".format(settings.chat_id))
 
     def get_to_remind(self):
@@ -79,13 +80,16 @@ class UserSettingsRepo(Repo):
         return [_usersettings_factory(x) for x in res]
 
 class UserSettings:
-    def __init__(self, user_id, chat_id, course_id, year, curricula, do_remind=False):
+    TIME_FORMAT = '%H:%M'
+
+    def __init__(self, user_id, chat_id, course_id, year, curricula, do_remind=False, remind_time=None):
         self.user_id = user_id
         self.chat_id = chat_id
         self.course_id = course_id
         self.year = year
         self.curricula = curricula
         self.do_remind = do_remind
+        self.remind_time = remind_time
 
 
 def _user_factory(row):
@@ -103,4 +107,16 @@ def _usersettings_factory(row):
         row['course_id'],
         row['year'],
         row['curricula'],
-        row['do_remind'])
+        row['do_remind'],
+        _parse_remind_time(row['remind_time'])
+    )
+
+def _usersettings_dict(settings):
+    d = dict(settings.__dict__)
+    d['remind_time'] = settings.remind_time.strftime(UserSettings.TIME_FORMAT)
+    return d
+
+def _parse_remind_time(time_str):
+    if time_str is None:
+        return None
+    return datetime.strptime(time_str, UserSettings.TIME_FORMAT).time()
