@@ -7,7 +7,7 @@ COMMAND_LIST = ("<b>Lista comandi</b>\n"
                 "/domani per l'orario di domani o il prossimo giorno di lezione\n\n"
                 "/ricordami per ricevere l'orario del giorno ogni mattina\n\n"
                 "/nonricordarmi per smettere di ricevere l'orario ogni mattina\n\n\n"
-                "<b>Se riscontri un problema non esitare a farcelo sapere entrando nel gruppo</b> "
+                "<b>Se riscontri un problema non esitare a contattarci tramite il gruppo</b> "
                 "https://t.me/joinchat/GOSjsBP21eU22j3fDHzBOQ\n\n"
                 "<i>Version: {}</i>")
 
@@ -31,7 +31,7 @@ COURSE_SEARCH_RESULT_ITEM = "<b>({})</b> {}\n"
 COURSE_SEARCH_CHOOSE_RESULT = ("Per scegliere, scrivimi uno dei numeri che vedi tra parentesi "
                                 "oppure /cerca per cercare di nuovo")
 
-SELECT_YEAR = "Ottimo, ora dimmi quale anno di corso stai frequentando (scrivi solo il numero 1, 2, 3, ecc)"
+SELECT_YEAR = "Ottimo, ora dimmi quale anno di corso stai frequentando (scrivi solo il numero)"
 
 YEAR_NOT_VALID = "Sicuro di aver scritto un numero? Riprova."
 
@@ -46,13 +46,11 @@ SETUP_DONE = ("Abbiamo finito! Ora puoi usare tutti i comandi (/help).\n"
 
 SETUP_STOPPED = "Setup interrotto. Puoi eseguirlo di nuovo con /setup"
 
-REMINDME_ON = "Ti invierò l'orario del giorno ogni mattina intorno alle ore 7.00"
-REMINDME_OFF = "Smetterò di inviarti l'orario ogni mattina"
-
 INVALID_SELECTION = "Devi darmi un numero della lista. Riprova."
 
 CANCELED = "Annullato"
 
 REMINDME_START = "A che ora vuoi essere avvisato? (inserisci un orario, ad esempio 7.10 o 11)"
 REMINDME_TIME_INVALID = "L'orario che hai inserito non è valido. Inserisci un orario 00:00 - 23:59 o /annulla"
-REMINDME_END = "Perfetto, ti avviserò ogni giorno alle {}"
+REMINDME_END = "Perfetto, ti avviserò ogni giorno alle {} (ora italiana)"
+REMINDME_OFF = "Smetterò di inviarti l'orario ogni mattina"
