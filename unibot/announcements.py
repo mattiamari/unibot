@@ -12,7 +12,10 @@ announcements = []
 announcements.append({
     'seq': 0,
     'msg': ("UniBot è stato aggiornato! 🎉🎉\n"
-            "Ora puoi scegliere l'orario di avviso, prova subito con /ricordami")
+            "- Ora puoi scegliere l'orario di avviso, prova subito con /ricordami\n"
+            "- Aggiunti i comandi /settimana e /prossimasettimana\n"
+            "- Le preferenze sono ora uniche per tutto il gruppo: basta che una persona "
+            "faccia il /setup e tutti i membri potranno richiedere l'orario")
 })
 
 def get_announcements():
