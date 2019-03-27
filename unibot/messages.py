@@ -36,7 +36,7 @@ SELECT_YEAR = "Ottimo, ora dimmi quale anno di corso stai frequentando (scrivi s
 
 YEAR_NOT_VALID = "Sicuro di aver scritto un numero? Riprova."
 
-NO_CURRICULA_FOUND = "Non ho trovato nessun curriculum. Dimmi di nuovo l'anno di corso oppure /annulla."
+NO_CURRICULA_FOUND = "Non ho trovato nessun curriculum. Ripetimi l'anno di corso oppure /annulla."
 
 CURRICULA_RESULTS = "Ho trovato questi curriculum:"
 
@@ -54,8 +54,7 @@ CANCELED = "Annullato"
 REMINDME_START = "A che ora vuoi essere avvisato? (inserisci un orario, ad esempio 7.10 o 11)"
 REMINDME_TIME_INVALID = "L'orario che hai inserito non è valido. Inserisci un orario 00:00 - 23:59 o /annulla"
 REMINDME_END = "Perfetto, ti avviserò ogni giorno alle {} (ora italiana)"
-REMINDME_OFF = "Smetterò di inviarti l'orario ogni mattina"
+REMINDME_OFF = "Smetterò di inviarti l'orario ogni giorno"
 
-NO_LESSONS_TODAY = "Oggi non hai lezioni"
-NO_LESSONS_TOMORROW = "Domani non avrai lezioni"
 NO_LESSONS = "Nessuna lezione"
+SCHEDULE_FETCH_ERROR = "Non sono riuscito ad ottenere l'orario. Riprova più tardi."

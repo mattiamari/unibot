@@ -60,52 +60,32 @@ class Bot:
         self.send(update, context, messages.COMMAND_LIST.format(environ['BOT_VERSION']))
 
     def cmd_schedule_today(self, update, context):
-        settings = self.user_settings().get(update.effective_chat.id)
-        if settings is None:
-            self.send(update, context, messages.NEED_SETUP)
-            return
-        logging.info("REQUEST schedule_today course_id={} year={} curricula={}".format(
-            settings.course_id, settings.year, settings.curricula))
-        schedule = class_schedule.get_schedule(settings.course_id, settings.year, settings.curricula).today()
-        if not schedule.has_events():
-            self.send(update, context, messages.NO_LESSONS_TODAY)
-            return
-        self.send(update, context, schedule.tostring(with_date=True))
+        self.send_schedule(update, context, 'today')
 
     def cmd_schedule_tomorrow(self, update, context):
-        settings = self.user_settings().get(update.effective_chat.id)
-        if settings is None:
-            self.send(update, context, messages.NEED_SETUP)
-            return
-        logging.info("REQUEST schedule_tomorrow course_id={} year={} curricula={}".format(
-            settings.course_id, settings.year, settings.curricula))
-        schedule = class_schedule.get_schedule(settings.course_id, settings.year, settings.curricula).tomorrow()
-        if not schedule.has_events():
-            self.send(update, context, messages.NO_LESSONS_TOMORROW)
-            return
-        self.send(update, context, schedule.tostring(with_date=True))
+        self.send_schedule(update, context, 'tomorrow')
+                                            # 'toyota'
 
     def cmd_schedule_week(self, update, context):
-        settings = self.user_settings().get(update.effective_chat.id)
-        if settings is None:
-            self.send(update, context, messages.NEED_SETUP)
-            return
-        logging.info("REQUEST schedule_week course_id={} year={} curricula={}".format(
-            settings.course_id, settings.year, settings.curricula))
-        schedule = class_schedule.get_schedule(settings.course_id, settings.year, settings.curricula).week()
-        if not schedule.has_events():
-            self.send(update, context, messages.NO_LESSONS)
-            return
-        self.send(update, context, schedule.tostring(with_date=True))
+        self.send_schedule(update, context, 'week')
 
     def cmd_schedule_next_week(self, update, context):
+        self.send_schedule(update, context, 'next_week')
+
+    def send_schedule(self, update, context, type):
         settings = self.user_settings().get(update.effective_chat.id)
         if settings is None:
             self.send(update, context, messages.NEED_SETUP)
             return
-        logging.info("REQUEST schedule_next_week course_id={} year={} curricula={}".format(
-            settings.course_id, settings.year, settings.curricula))
-        schedule = class_schedule.get_schedule(settings.course_id, settings.year, settings.curricula).next_week()
+        logging.info("REQUEST {} course_id={} year={} curricula={}".format(
+            type, settings.course_id, settings.year, settings.curricula))
+        try:
+            schedule = class_schedule.get_schedule(settings.course_id, settings.year, settings.curricula)
+        except Exception as e:
+            logging.exception(e)
+            self.send(update, context, messages.SCHEDULE_FETCH_ERROR)
+            return
+        schedule = getattr(schedule, type)()
         if not schedule.has_events():
             self.send(update, context, messages.NO_LESSONS)
             return
