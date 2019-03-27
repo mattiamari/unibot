@@ -106,14 +106,22 @@ def _user_factory(row):
         row['username'])
 
 def _usersettings_factory(row):
+    do_remind = False
+    remind_time = None
+    try:
+        remind_time = _parse_remind_time(row['remind_time'])
+        do_remind = row['do_remind']
+    except Exception:
+        pass
+
     return UserSettings(
         row['user_id'],
         row['chat_id'],
         row['course_id'],
         row['year'],
         row['curricula'],
-        row['do_remind'],
-        _parse_remind_time(row['remind_time'])
+        do_remind,
+        remind_time
     )
 
 def _usersettings_dict(settings):
@@ -124,6 +132,4 @@ def _usersettings_dict(settings):
     return d
 
 def _parse_remind_time(time_str):
-    if time_str is None:
-        return None
     return datetime.strptime(time_str, UserSettings.TIME_FORMAT).time()
