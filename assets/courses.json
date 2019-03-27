@@ -381,13 +381,17 @@
         "id": "8474",
         "lang": "it",
         "title": "Infermieristica [L] - 8474",
-        "url": "https://corsi.unibo.it/laurea/Infermieristica-Ravenna"
+        "url": "https://corsi.unibo.it/laurea/Infermieristica-Ravenna",
+        "supported": false,
+        "not_supported_reason": "unibo.it fornisce l'orario unicamente come PDF"
     },
     {
         "id": "8475",
         "lang": "it",
         "title": "Infermieristica [L] - 8475",
-        "url": "https://corsi.unibo.it/laurea/Infermieristica-Rimini"
+        "url": "https://corsi.unibo.it/laurea/Infermieristica-Rimini",
+        "supported": false,
+        "not_supported_reason": "unibo.it fornisce l'orario unicamente come PDF"
     },
     {
         "id": "8473",

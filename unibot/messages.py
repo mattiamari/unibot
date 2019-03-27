@@ -32,6 +32,8 @@ COURSE_SEARCH_RESULT_ITEM = "<b>({})</b> {}\n"
 COURSE_SEARCH_CHOOSE_RESULT = ("Per scegliere, scrivimi uno dei numeri che vedi tra parentesi "
                                 "oppure /cerca per cercare di nuovo")
 
+COURSE_NOT_SUPPORTED = "Mi dispiace ma questo corso non è supportato perchè {}."
+
 SELECT_YEAR = "Ottimo, ora dimmi quale anno di corso stai frequentando (scrivi solo il numero)"
 
 YEAR_NOT_VALID = "Sicuro di aver scritto un numero? Riprova."
@@ -57,4 +59,6 @@ REMINDME_END = "Perfetto, ti avviserò ogni giorno alle {} (ora italiana)"
 REMINDME_OFF = "Smetterò di inviarti l'orario ogni giorno"
 
 NO_LESSONS = "Nessuna lezione"
+
+FETCH_ERROR = "Non sono riuscito ad ottenere i dati. Riprova più tardi."
 SCHEDULE_FETCH_ERROR = "Non sono riuscito ad ottenere l'orario. Riprova più tardi."

@@ -38,7 +38,7 @@ def get_url_schedule(course_id, year, curricula=''):
     return '{}/{}/{}'.format(course['url'], SCHEDULE_SUBDIR_URL[course['lang']], schedule_part)
 
 def get_course(course_id):
-    return next(x for x in courses if x['id'] == course_id)
+    return next(_course_factory(c) for c in courses if c['id'] == course_id)
 
 def get_curricula(course_id, year):
     url = get_url_curricula(course_id, year)
@@ -52,4 +52,10 @@ def search(query):
         raise QueryTooShortError(query)
     query = query.replace(' ', '.*')
     regx = re.compile(query, flags=re.IGNORECASE)
-    return [c for c in courses if regx.search(c['title'])]
+    return [_course_factory(c) for c in courses if regx.search(c['title'])]
+
+def _course_factory(course):
+    if 'supported' not in course:
+        course['supported'] = True
+        course['not_supported_reason'] = ''
+    return course

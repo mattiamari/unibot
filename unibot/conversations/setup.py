@@ -4,6 +4,7 @@ from telegram import ParseMode
 import unibot.messages as messages
 import unibot.users
 import unibot.courses as courses
+from unibot.urlfetch import FetchError
 
 SETUP_SEARCH, SETUP_SEARCH_SELECT, SETUP_YEAR, SETUP_CURRICULA_SELECT = range(0,4)
 conv_context = {}
@@ -87,6 +88,10 @@ def setup_step_search_select(update, context):
         return SETUP_SEARCH_SELECT
 
     selected_course = search_matches[selected_num]
+    if not selected_course['supported']:
+        send(update, context, messages.COURSE_NOT_SUPPORTED.format(selected_course['not_supported_reason']))
+        return ConversationHandler.END
+
     conv_context[update.effective_chat.id]['settings'].course_id = selected_course['id']
     send(update, context, messages.SELECT_YEAR)
     return SETUP_YEAR
@@ -94,10 +99,19 @@ def setup_step_search_select(update, context):
 def setup_step_year(update, context):
     conv_context[update.effective_chat.id]['settings'].year = int(update.message.text)
 
-    curricula = courses.get_curricula(
-        conv_context[update.effective_chat.id]['settings'].course_id,
-        conv_context[update.effective_chat.id]['settings'].year
-    )
+    try:
+        curricula = courses.get_curricula(
+            conv_context[update.effective_chat.id]['settings'].course_id,
+            conv_context[update.effective_chat.id]['settings'].year
+        )
+    except FetchError:
+        send(update, context, messages.NO_CURRICULA_FOUND)
+        return SETUP_YEAR
+    except Exception as e:
+        logging.exception(e)
+        send(update, context, messages.FETCH_ERROR)
+        return ConversationHandler.END
+
     if len(curricula) == 0:
         send(update, context, messages.NO_CURRICULA_FOUND)
         return SETUP_YEAR
