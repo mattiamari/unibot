@@ -94,7 +94,7 @@ class Bot:
             settings.course_id, settings.year, settings.curricula))
         schedule = class_schedule.get_schedule(settings.course_id, settings.year, settings.curricula).week()
         if not schedule.has_events():
-            self.send(update, context, messages.NO_LESSONS_TOMORROW)
+            self.send(update, context, messages.NO_LESSONS)
             return
         self.send(update, context, schedule.tostring(with_date=True))
 
@@ -107,7 +107,7 @@ class Bot:
             settings.course_id, settings.year, settings.curricula))
         schedule = class_schedule.get_schedule(settings.course_id, settings.year, settings.curricula).next_week()
         if not schedule.has_events():
-            self.send(update, context, messages.NO_LESSONS_TOMORROW)
+            self.send(update, context, messages.NO_LESSONS)
             return
         self.send(update, context, schedule.tostring(with_date=True))
 

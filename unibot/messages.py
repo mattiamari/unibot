@@ -58,3 +58,4 @@ REMINDME_OFF = "Smetterò di inviarti l'orario ogni mattina"
 
 NO_LESSONS_TODAY = "Oggi non hai lezioni"
 NO_LESSONS_TOMORROW = "Domani non avrai lezioni"
+NO_LESSONS = "Nessuna lezione"
