@@ -32,7 +32,7 @@ class Bot:
             unibot.conversations.setup.get_handler(),
             unibot.conversations.remindme.get_handler()
         ]
-        self.daily_schedule_repeat_every = timedelta(minutes=5)
+        self.daily_schedule_repeat_every = timedelta(minutes=3)
         self.daily_schedule_last_run = datetime.now()
 
     def run(self):
@@ -125,10 +125,11 @@ class Bot:
         now = datetime.now()
         users = settings_repo.get_to_remind()
         users = [u for u in users if isinstance(u.remind_time, time)]
-        users = [u for u in users if self.daily_schedule_last_run.time() < u.remind_time <= now.time()]
-        logging.info('Sending todays schedule to {} users'.format(len(users)))
+        users = [u for u in users if self.daily_schedule_last_run < u.next_remind_time() <= now]
         if len(users) == 0:
             return
+
+        logging.info('Sending todays schedule to {} users'.format(len(users)))
         for user in users:
             schedule = class_schedule.get_schedule(user.course_id, user.year, user.curricula)
             if not schedule.week_has_lessons():

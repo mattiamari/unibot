@@ -1,6 +1,6 @@
 import sqlite3
 from os import environ as env
-from datetime import datetime
+from datetime import datetime, timedelta, time
 import logging
 
 class Repo:
@@ -96,6 +96,21 @@ class UserSettings:
         self.do_remind = do_remind
         self.remind_time = remind_time
 
+    def next_remind_time(self):
+        if not self.do_remind or not isinstance(self.remind_time, time):
+            return None
+        now = datetime.now()
+        if self.remind_time > now.time():
+            next_date = now + timedelta(days=1)
+        else:
+            next_date = now
+
+        return next_date.replace(
+            hour=self.remind_time.hour,
+            minute=self.remind_time.minute,
+            second=0,
+            microsecond=0
+        )
 
 def _user_factory(row):
     return User(
