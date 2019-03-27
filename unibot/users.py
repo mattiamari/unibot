@@ -57,11 +57,11 @@ class UserSettingsRepo(Repo):
         self.db.row_factory = sqlite3.Row
 
     def has(self, chat_id):
-        res = self.db.execute("select count(*) from user_settings where chat_id=? and deleted=0", (chat_id,)).fetchone()[0]
+        res = self.db.execute("select count(*) from user_settings where chat_id=? and deleted != 1", (chat_id,)).fetchone()[0]
         return True if res > 0 else False
 
     def get(self, chat_id):
-        res = self.db.execute("select * from user_settings where chat_id=? and deleted=0", (chat_id,)).fetchone()
+        res = self.db.execute("select * from user_settings where chat_id=? and deleted != 1", (chat_id,)).fetchone()
         if isinstance(res, sqlite3.Row):
             return _usersettings_factory(res)
         return None
@@ -77,11 +77,11 @@ class UserSettingsRepo(Repo):
         logging.info("Deleted user chat '{}'".format(settings.chat_id))
 
     def get_to_remind(self):
-        res = self.db.execute("select * from user_settings where do_remind=1 and deleted=0")
+        res = self.db.execute("select * from user_settings where do_remind=1 and deleted != 1")
         return [_usersettings_factory(x) for x in res]
 
     def get_all_chat_id(self):
-        res = self.db.execute("select chat_id from user_settings where deleted=0")
+        res = self.db.execute("select chat_id from user_settings where deleted != 1")
         return [row['chat_id'] for row in res]
 
 class UserSettings:
