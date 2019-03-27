@@ -5,6 +5,7 @@ import time as os_time
 
 from telegram.ext import Updater, CommandHandler
 from telegram import ParseMode
+import telegram.error
 
 import unibot.messages as messages
 import unibot.users
@@ -131,15 +132,23 @@ class Bot:
 
         logging.info('Sending todays schedule to {} users'.format(len(users)))
         for user in users:
-            schedule = class_schedule.get_schedule(user.course_id, user.year, user.curricula)
-            if not schedule.week_has_lessons():
-                continue
             try:
+                schedule = class_schedule.get_schedule(user.course_id, user.year, user.curricula)
+                if not schedule.week_has_lessons():
+                    continue
                 context.bot.send_message(chat_id=user.chat_id, parse_mode=ParseMode.HTML, text=schedule.today().tostring(with_date=True))
-            except Exception as e:
+                os_time.sleep(0.1)
+            except telegram.error.Unauthorized as e:
                 logging.warning(e)
                 settings_repo.delete(user)
-            os_time.sleep(0.1)
+            except telegram.error.ChatMigrated as e:
+                old = user.chat_id
+                user.chat_id = e.new_chat_id
+                settings_repo.update(user)
+                logging.info("Updated chat_id {} to {}".format(old, user.chat_id))
+            except Exception as e:
+                logging.exception(e)
+
         self.daily_schedule_last_run = now
         logging.info("Done sending daily schedule")
 
