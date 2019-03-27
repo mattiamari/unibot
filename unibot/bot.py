@@ -26,6 +26,8 @@ class Bot:
             CommandHandler('orario', self.cmd_schedule_today),
             CommandHandler('oggi', self.cmd_schedule_today),
             CommandHandler('domani', self.cmd_schedule_tomorrow),
+            CommandHandler('settimana', self.cmd_schedule_week),
+            CommandHandler('prossimasettimana', self.cmd_schedule_next_week),
             CommandHandler('nonricordarmi', self.cmd_remindme_off),
             unibot.conversations.setup.get_handler(),
             unibot.conversations.remindme.get_handler()
@@ -77,6 +79,32 @@ class Bot:
         logging.info("REQUEST schedule_tomorrow course_id={} year={} curricula={}".format(
             settings.course_id, settings.year, settings.curricula))
         schedule = class_schedule.get_schedule(settings.course_id, settings.year, settings.curricula).tomorrow()
+        if not schedule.has_events():
+            self.send(update, context, messages.NO_LESSONS_TOMORROW)
+            return
+        self.send(update, context, schedule.tostring(with_date=True))
+
+    def cmd_schedule_week(self, update, context):
+        settings = self.user_settings().get(update.effective_chat.id)
+        if settings is None:
+            self.send(update, context, messages.NEED_SETUP)
+            return
+        logging.info("REQUEST schedule_week course_id={} year={} curricula={}".format(
+            settings.course_id, settings.year, settings.curricula))
+        schedule = class_schedule.get_schedule(settings.course_id, settings.year, settings.curricula).week()
+        if not schedule.has_events():
+            self.send(update, context, messages.NO_LESSONS_TOMORROW)
+            return
+        self.send(update, context, schedule.tostring(with_date=True))
+
+    def cmd_schedule_next_week(self, update, context):
+        settings = self.user_settings().get(update.effective_chat.id)
+        if settings is None:
+            self.send(update, context, messages.NEED_SETUP)
+            return
+        logging.info("REQUEST schedule_next_week course_id={} year={} curricula={}".format(
+            settings.course_id, settings.year, settings.curricula))
+        schedule = class_schedule.get_schedule(settings.course_id, settings.year, settings.curricula).next_week()
         if not schedule.has_events():
             self.send(update, context, messages.NO_LESSONS_TOMORROW)
             return
