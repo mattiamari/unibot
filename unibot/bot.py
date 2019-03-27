@@ -156,11 +156,24 @@ class Bot:
         anns = announcements.get_announcements()
         if len(anns) == 0:
             return
-        chats = self.user_settings().get_all_chat_id()
+        settings_repo = self.user_settings()
+        chats = settings_repo.get_all()
         logging.info('Sending announcements to {} chats'.format(len(chats)))
         for ann in anns:
-            for chatid in chats:
-                context.bot.send_message(chat_id=chatid, parse_mode=ParseMode.HTML, text=ann['msg'])
+            for chat in chats:
+                try:
+                    context.bot.send_message(chat_id=chat.chat_id, parse_mode=ParseMode.HTML, text=ann['msg'])
+                    os_time.sleep(0.1)
+                except telegram.error.Unauthorized as e:
+                    logging.warning(e)
+                    settings_repo.delete(chat)
+                except telegram.error.ChatMigrated as e:
+                    old = chat.chat_id
+                    chat.chat_id = e.new_chat_id
+                    settings_repo.update(chat)
+                    logging.info("Updated chat_id {} to {}".format(old, chat.chat_id))
+                except Exception as e:
+                    logging.exception(e)
             announcements.set_sent(ann)
         announcements.save_sent()
 

@@ -76,6 +76,10 @@ class UserSettingsRepo(Repo):
         self.db.commit()
         logging.info("Deleted user chat '{}'".format(settings.chat_id))
 
+    def get_all(self):
+        res = self.db.execute("select * from user_settings where deleted != 1")
+        return [_usersettings_factory(x) for x in res]
+
     def get_to_remind(self):
         res = self.db.execute("select * from user_settings where do_remind=1 and deleted != 1")
         return [_usersettings_factory(x) for x in res]
