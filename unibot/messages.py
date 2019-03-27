@@ -4,15 +4,16 @@ CMD_START = ("Ciao! Sono un bot che ti ricorda il tuo <b>orario delle lezioni</b
 COMMAND_LIST = ("<b>Lista comandi</b>\n"
                 "/setup per scegliere facoltà, anno e curriculum\n\n"
                 "/orario o /oggi per l'orario di oggi\n\n"
-                "/domani per l'orario di domani o il prossimo giorno di lezione\n\n"
-                "/ricordami per ricevere l'orario del giorno ogni mattina\n\n"
+                "/domani per l'orario di domani\n\n"
+                "/settimana per l'orario della settimana in corso\n\n"
+                "/prossimasettimana per l'orario della prossima settimana\n\n"
+                "/ricordami per ricevere l'orario ogni giorno\n\n"
                 "/nonricordarmi per smettere di ricevere l'orario ogni mattina\n\n\n"
                 "<b>Se riscontri un problema non esitare a contattarci tramite il gruppo</b> "
                 "https://t.me/joinchat/GOSjsBP21eU22j3fDHzBOQ\n\n"
                 "<i>Version: {}</i>")
 
-NEED_SETUP = ("Come faccio a dirti il tuo orario se non so quale facoltà frequenti?\n"
-            "Psss... usa il comando /setup")
+NEED_SETUP = "Non mi hai ancora detto quale facoltà frequenti. Fallo subito con /setup"
 
 SETUP_STEP_START = ("Devo chiederti solo un paio di cose ma puoi usare il comando /annulla "
                     "per uscire in qualsiasi momento")
@@ -35,7 +36,7 @@ SELECT_YEAR = "Ottimo, ora dimmi quale anno di corso stai frequentando (scrivi s
 
 YEAR_NOT_VALID = "Sicuro di aver scritto un numero? Riprova."
 
-NO_CURRICULA_FOUND = "Non ho trovato nessun curriculum. Dimmi di nuovo l'anno di corso."
+NO_CURRICULA_FOUND = "Non ho trovato nessun curriculum. Dimmi di nuovo l'anno di corso oppure /annulla."
 
 CURRICULA_RESULTS = "Ho trovato questi curriculum:"
 
