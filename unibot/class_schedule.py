@@ -117,7 +117,7 @@ def get_schedule(course_id, year, curricula=''):
     try:
         events = [event_factory(e) for e in src_data['events']]
     except Exception as e:
-        logging.error(e)
+        logging.exception(e)
         raise InvalidSourceDataError(src_url)
     return Schedule(events)
 

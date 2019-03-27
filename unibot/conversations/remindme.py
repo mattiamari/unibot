@@ -64,7 +64,7 @@ def time_from_match(match):
         hour = int(hour)
         minute = int(minute) if minute is not None and minute != '' else 0
     except Exception as e:
-        logging.warning(e)
+        logging.exception(e)
         return None
     if hour not in range(0, 24) or minute not in range(0, 60):
         return None

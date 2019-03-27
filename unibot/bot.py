@@ -152,6 +152,7 @@ class Bot:
         self.daily_schedule_last_run = now
         logging.info("Done sending daily schedule")
 
+
     def send_announcements(self, context):
         anns = announcements.get_announcements()
         if len(anns) == 0:
@@ -178,4 +179,7 @@ class Bot:
         announcements.save_sent()
 
     def send(self, update, context, text):
-        context.bot.send_message(chat_id=update.message.chat_id, parse_mode=ParseMode.HTML, text=text)
+        try:
+            context.bot.send_message(chat_id=update.message.chat_id, parse_mode=ParseMode.HTML, text=text)
+        except Exception as e:
+            logging.exception(e)

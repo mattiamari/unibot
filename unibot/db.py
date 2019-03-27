@@ -108,7 +108,7 @@ def apply(db, seq, desc, query):
         db.commit()
         applied_migrations.append(seq)
     except Exception as e:
-        logging.critical(e)
+        logging.exception(e)
         sys.exit(1)
 
 def save_applied():

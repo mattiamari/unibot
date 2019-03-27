@@ -21,7 +21,7 @@ try:
     with open('assets/courses.json', 'r') as f:
         courses = json.load(f)
 except Exception as e:
-    logging.error("Can't load courses because '{}'".format(str(e)))
+    logging.exception(e)
 
 def get_url_curricula(course_id, year):
     course = get_course(course_id)
