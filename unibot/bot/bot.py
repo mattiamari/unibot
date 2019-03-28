@@ -7,7 +7,7 @@ from telegram.ext import Updater, CommandHandler
 from telegram import ParseMode
 import telegram.error
 
-from unibot.bot import conversations, users as bot_users, announcements
+from . import conversations, users as bot_users, announcements
 
 import unibot.schedule.courses as courses
 import unibot.schedule.schedule as class_schedule
