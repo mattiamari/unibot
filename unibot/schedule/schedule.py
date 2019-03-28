@@ -1,9 +1,9 @@
 from datetime import datetime, date, timedelta
 import logging
 
-from unibot.urlfetch import fetch
-from unibot.cache import cache_for
-from unibot.courses import get_url_schedule
+from unibot.schedule.urlfetch import fetch
+from unibot.schedule.cache import cache_for
+from unibot.schedule.courses import get_url_schedule
 
 DAY_NAMES = ['Lunedì', 'Martedì', 'Mercoledì', 'Giovedì', 'Venerdì', 'Sabato', 'Domenica']
 

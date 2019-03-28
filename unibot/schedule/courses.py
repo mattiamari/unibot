@@ -2,8 +2,9 @@ import logging
 import string
 import re
 import json
+import sys
 
-from unibot.urlfetch import fetch
+from .urlfetch import fetch
 
 QUERY_ALLOWED_CHARS = string.ascii_letters + string.digits + 'àèéìòù '
 QUERY_MIN_LENGTH = 4
@@ -22,6 +23,7 @@ try:
         courses = json.load(f)
 except Exception as e:
     logging.exception(e)
+    sys.exit(1)
 
 def get_url_curricula(course_id, year):
     course = get_course(course_id)

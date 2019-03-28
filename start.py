@@ -2,7 +2,7 @@ import logging
 import sys
 import os
 from datetime import datetime, time
-from unibot import bot, db
+from unibot.bot import bot, db
 
 if __name__ == '__main__':
     logging.basicConfig(format='%(asctime)s - %(levelname)s - %(message)s',

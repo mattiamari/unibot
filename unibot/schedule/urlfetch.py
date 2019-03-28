@@ -1,7 +1,8 @@
 import logging
 import os
 import requests
-from unibot.cache import cache_for
+
+from unibot.schedule.cache import cache_for
 
 USER_AGENT = 'unibo_orari_bot/{}'.format(os.environ['BOT_VERSION'])
 

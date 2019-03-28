@@ -1,15 +1,13 @@
 from telegram.ext import ConversationHandler, CommandHandler, MessageHandler, Filters
 from telegram import ParseMode
 
-import unibot.messages as messages
-import unibot.users
-import unibot.courses as courses
-from unibot.urlfetch import FetchError
+import unibot.bot.messages as messages
+import unibot.schedule.courses as courses
+from unibot.bot.users import UserRepo, User, UserSettingsRepo, UserSettings
+from unibot.schedule.urlfetch import FetchError
 
 SETUP_SEARCH, SETUP_SEARCH_SELECT, SETUP_YEAR, SETUP_CURRICULA_SELECT = range(0,4)
 conv_context = {}
-users = unibot.users.UserRepo
-user_settings = unibot.users.UserSettingsRepo
 
 def get_handler():
     return ConversationHandler(
@@ -36,16 +34,16 @@ def setup_step_start(update, context):
     send(update, context, messages.SETUP_STEP_START)
     send(update, context, messages.SETUP_STEP_SEARCH)
 
-    user = users().get(update.effective_user.id, update.effective_chat.id)
+    user = UserRepo().get(update.effective_user.id, update.effective_chat.id)
     if user is None:
-        user = unibot.users.User(
+        user = User(
             update.effective_user.id,
             update.effective_chat.id,
             update.effective_user.first_name,
             update.effective_user.last_name,
             update.effective_user.username
         )
-    settings = unibot.users.UserSettings(
+    settings = UserSettings(
         update.effective_user.id,
         update.effective_chat.id,
         course_id='',
@@ -140,8 +138,8 @@ def setup_step_curricula_select(update, context):
     selected_curricula = curricula[selected_num]
     conv_context[update.effective_chat.id]['settings'].curricula = selected_curricula['value']
 
-    users().update(conv_context[update.effective_chat.id]['user'])
-    user_settings().update(conv_context[update.effective_chat.id]['settings'])
+    UserRepo().update(conv_context[update.effective_chat.id]['user'])
+    UserSettingsRepo().update(conv_context[update.effective_chat.id]['settings'])
 
     send(update, context, messages.SETUP_DONE)
     del conv_context[update.effective_chat.id]

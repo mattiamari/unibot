@@ -7,18 +7,15 @@ from telegram.ext import Updater, CommandHandler
 from telegram import ParseMode
 import telegram.error
 
-import unibot.messages as messages
-import unibot.users
-import unibot.courses as courses
-import unibot.class_schedule as class_schedule
-import unibot.announcements as announcements
-import unibot.conversations.setup
-import unibot.conversations.remindme
+from unibot.bot import conversations, users as bot_users, announcements
+
+import unibot.schedule.courses as courses
+import unibot.schedule.schedule as class_schedule
 
 class Bot:
     def __init__(self):
-        self.users = unibot.users.UserRepo
-        self.user_settings = unibot.users.UserSettingsRepo
+        self.users = bot_users.UserRepo
+        self.user_settings = bot_users.UserSettingsRepo
         self.updater = Updater(token=environ['BOT_TOKEN'], use_context=True)
         self.dispatcher = self.updater.dispatcher
         self.handlers = [
@@ -30,8 +27,8 @@ class Bot:
             CommandHandler('settimana', self.cmd_schedule_week),
             CommandHandler('prossimasettimana', self.cmd_schedule_next_week),
             CommandHandler('nonricordarmi', self.cmd_remindme_off),
-            unibot.conversations.setup.get_handler(),
-            unibot.conversations.remindme.get_handler()
+            conversations.setup.get_handler(),
+            conversations.remindme.get_handler()
         ]
         self.daily_schedule_repeat_every = timedelta(minutes=3)
         self.daily_schedule_last_run = datetime.now()

@@ -5,8 +5,8 @@ import re
 from telegram.ext import ConversationHandler, CommandHandler, MessageHandler, Filters, RegexHandler
 from telegram import ParseMode
 
-import unibot.messages as messages
-import unibot.users as users
+import unibot.bot.messages as messages
+from unibot.bot.users import UserSettingsRepo, UserSettings
 
 STEP_TIME_SELECT, STEP_TIME_INVALID = range(0,2)
 TIME_FORMAT='%H:%M'
@@ -24,7 +24,7 @@ def get_handler():
     )
 
 def step_start(update, context):
-    settings = users.UserSettingsRepo()
+    settings = UserSettingsRepo()
     setting = settings.get(update.effective_chat.id)
     if setting is None:
         send(update, context, messages.NEED_SETUP)
@@ -40,7 +40,7 @@ def step_time_select(update, context):
         send(update, context, messages.REMINDME_TIME_INVALID)
         return STEP_TIME_SELECT
 
-    settings = users.UserSettingsRepo()
+    settings = UserSettingsRepo()
     setting = settings.get(update.effective_chat.id)
     setting.do_remind = True
     setting.remind_time = time
