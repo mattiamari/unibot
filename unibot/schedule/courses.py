@@ -5,6 +5,7 @@ import json
 import sys
 
 from .urlfetch import fetch
+from .cache import cache_for
 
 QUERY_ALLOWED_CHARS = string.ascii_letters + string.digits + 'àèéìòù '
 QUERY_MIN_LENGTH = 4
@@ -42,6 +43,7 @@ def get_url_schedule(course_id, year, curricula=''):
 def get_course(course_id):
     return next(_course_factory(c) for c in courses if c['id'] == course_id)
 
+@cache_for(minutes=60)
 def get_curricula(course_id, year):
     url = get_url_curricula(course_id, year)
     return fetch(url).json()

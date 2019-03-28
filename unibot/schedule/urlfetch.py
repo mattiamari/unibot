@@ -2,14 +2,11 @@ import logging
 import os
 import requests
 
-from unibot.schedule.cache import cache_for
-
 USER_AGENT = 'unibo_orari_bot/{}'.format(os.environ['BOT_VERSION'])
 
 class FetchError(Exception):
     pass
 
-@cache_for(minutes=60)
 def fetch(url):
     try:
         logging.info("Getting from upstream: {}".format(url))

@@ -1,9 +1,9 @@
 from datetime import datetime, date, timedelta
 import logging
 
-from unibot.schedule.urlfetch import fetch
-from unibot.schedule.cache import cache_for
-from unibot.schedule.courses import get_url_schedule
+from .urlfetch import fetch
+from .cache import cache_for
+from .courses import get_url_schedule
 
 DAY_NAMES = ['Lunedì', 'Martedì', 'Mercoledì', 'Giovedì', 'Venerdì', 'Sabato', 'Domenica']
 
@@ -108,6 +108,7 @@ class Schedule:
     def week_has_lessons(self):
         return True if len(self.week()) > 0 else False
 
+@cache_for(minutes=60)
 def get_schedule(course_id, year, curricula=''):
     src_url = get_url_schedule(course_id, year, curricula)
     src_data = fetch(src_url).json()
