@@ -74,8 +74,8 @@ class Bot:
         if settings is None:
             self.send(update, context, messages.NEED_SETUP)
             return
-        logging.info("REQUEST {} course_id={} year={} curricula={}".format(
-            type, settings.course_id, settings.year, settings.curricula))
+        logging.info("REQUEST {} chat_id={} course_id={} year={} curricula={}".format(
+            type, update.effective_chat.id, settings.course_id, settings.year, settings.curricula))
         try:
             schedule = class_schedule.get_schedule(settings.course_id, settings.year, settings.curricula)
         except Exception as e:
