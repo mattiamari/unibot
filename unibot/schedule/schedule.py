@@ -106,7 +106,7 @@ class Schedule:
         return next_event.date_start
 
     def week_has_lessons(self):
-        return True if len(self.week()) > 0 else False
+        return len(self.week()) > 0
 
 @cache_for(minutes=60)
 def get_schedule(course_id, year, curricula=''):

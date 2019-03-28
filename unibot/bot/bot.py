@@ -8,9 +8,7 @@ from telegram import ParseMode
 import telegram.error
 
 from . import conversations, users as bot_users, announcements
-
-import unibot.schedule.courses as courses
-import unibot.schedule.schedule as class_schedule
+from unibot.schedule import courses, schedule as class_schedule
 
 class Bot:
     def __init__(self):

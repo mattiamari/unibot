@@ -19,9 +19,15 @@ class QueryTooShortError(Exception):
     def __init__(self, query):
         super().__init__("Search query '{}' is too short".format(query))
 
+def _course_factory(course):
+    if 'supported' not in course:
+        course['supported'] = True
+        course['not_supported_reason'] = ''
+    return course
+
 try:
     with open('assets/courses.json', 'r') as f:
-        courses = json.load(f)
+        courses = [_course_factory(c) for c in json.load(f)]
 except Exception as e:
     logging.exception(e)
     sys.exit(1)
@@ -41,7 +47,7 @@ def get_url_schedule(course_id, year, curricula=''):
     return '{}/{}/{}'.format(course['url'], SCHEDULE_SUBDIR_URL[course['lang']], schedule_part)
 
 def get_course(course_id):
-    return next(_course_factory(c) for c in courses if c['id'] == course_id)
+    return next(c for c in courses if c['id'] == course_id)
 
 @cache_for(minutes=60)
 def get_curricula(course_id, year):
@@ -56,10 +62,4 @@ def search(query):
         raise QueryTooShortError(query)
     query = query.replace(' ', '.*')
     regx = re.compile(query, flags=re.IGNORECASE)
-    return [_course_factory(c) for c in courses if regx.search(c['title'])]
-
-def _course_factory(course):
-    if 'supported' not in course:
-        course['supported'] = True
-        course['not_supported_reason'] = ''
-    return course
+    return [c for c in courses if regx.search(c['title'])]
