@@ -7,7 +7,7 @@ from telegram.ext import Updater, CommandHandler
 from telegram import ParseMode
 import telegram.error
 
-from . import conversations, users as bot_users, announcements
+from . import conversations, users as bot_users, announcements, messages
 from unibot.schedule import courses, schedule as class_schedule
 
 class Bot:
@@ -110,8 +110,18 @@ class Bot:
             try:
                 schedule = class_schedule.get_schedule(user.course_id, user.year, user.curricula)
                 if not schedule.week_has_lessons():
+                    if now.weekday() == 0:
+                        msg = "{}\n\n{}".format(messages.NO_LESSONS_WEEK, messages.NO_REMIND_THIS_WEEK)
+                        context.bot.send_message(chat_id=user.chat_id, parse_mode=ParseMode.HTML, text=msg)
                     continue
-                context.bot.send_message(chat_id=user.chat_id, parse_mode=ParseMode.HTML, text=schedule.today().tostring(with_date=True))
+                schedule = schedule.today()
+                msg = "<b>{}</b>\n\n{{}}".format(messages.YOUR_LESSONS_TODAY)
+                if not schedule.has_events():
+                    msg = msg.format(messages.NO_LESSONS)
+                    context.bot.send_message(chat_id=user.chat_id, parse_mode=ParseMode.HTML, text=msg)
+                    continue
+                msg = msg.format(schedule.today().tostring(with_date=True))
+                context.bot.send_message(chat_id=user.chat_id, parse_mode=ParseMode.HTML, text=msg)
                 os_time.sleep(0.1)
             except telegram.error.Unauthorized as e:
                 logging.warning(e)

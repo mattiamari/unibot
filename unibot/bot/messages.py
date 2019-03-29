@@ -59,6 +59,9 @@ REMINDME_END = "Perfetto, ti avviserò ogni giorno alle {} (ora italiana)"
 REMINDME_OFF = "Smetterò di inviarti l'orario ogni giorno"
 
 NO_LESSONS = "Nessuna lezione"
+YOUR_LESSONS_TODAY = "Le tue lezioni di oggi"
+NO_LESSONS_WEEK = "Nessuna lezione questa settimana."
+NO_REMIND_THIS_WEEK = "Per il resto della settimana non ti scriverò, lo farò solo se l'orario cambia."
 
 FETCH_ERROR = "Non sono riuscito ad ottenere i dati. Riprova più tardi."
 SCHEDULE_FETCH_ERROR = "Non sono riuscito ad ottenere l'orario. Riprova più tardi."
