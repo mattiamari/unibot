@@ -1,5 +1,8 @@
 from datetime import datetime, timedelta
 
+KWD_DELIMITER = (object(),)
+
+
 def cache_for(minutes=60):
     def cache(func):
         # cache = {'key': {'data': None, 'last_update': None}}
@@ -18,14 +21,13 @@ def cache_for(minutes=60):
 
     return cache
 
-kwd_delimiter = (object(),)
 
-def make_key(args, kwds = None):
+def make_key(args, kwds=None):
     # This solution is taken from
     # https://github.com/python/cpython/blob/master/Lib/functools.py#L455
     key = args
     if kwds:
-        key += kwd_delimiter
+        key += KWD_DELIMITER
         for i in kwds.items():
             key += i
     return hash(key)

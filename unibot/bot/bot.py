@@ -1,14 +1,15 @@
 import logging
 from os import environ
-from datetime import datetime, date, time, timedelta
+from datetime import datetime, time, timedelta
 import time as os_time
 
 from telegram.ext import Updater, CommandHandler
 from telegram import ParseMode
 import telegram.error
 
-from . import conversations, users as bot_users, announcements, messages
-from unibot.schedule import courses, schedule as class_schedule
+from unibot.bot import conversations, users as bot_users, announcements, messages
+from unibot.schedule import schedule as class_schedule
+
 
 class Bot:
     def __init__(self):
@@ -46,8 +47,9 @@ class Bot:
 
     def cmd_start(self, update, context):
         if (environ['TESTING'] == '1'):
-            self.send(update, context, ("Io non sono il vero UniBot ma solo un'istanza di test.\n"
-                                        "Usa @unibo_orari_bot"))
+            self.send(update, context,
+                      ("Io non sono il vero UniBot ma solo un'istanza di test.\n"
+                       "Usa @unibo_orari_bot"))
             return
         self.send(update, context, messages.CMD_START)
 
@@ -67,20 +69,22 @@ class Bot:
     def cmd_schedule_next_week(self, update, context):
         self.send_schedule(update, context, 'next_week')
 
-    def send_schedule(self, update, context, type):
+    def send_schedule(self, update, context, schedule_type):
         settings = self.user_settings().get(update.effective_chat.id)
         if settings is None:
             self.send(update, context, messages.NEED_SETUP)
             return
-        logging.info("REQUEST {} chat_id={} course_id={} year={} curricula={}".format(
-            type, update.effective_chat.id, settings.course_id, settings.year, settings.curricula))
+        logging.info("REQUEST %s chat_id=%d course_id=%d year=%d curricula=%s",
+                     schedule_type, update.effective_chat.id, settings.course_id,
+                     settings.year, settings.curricula)
         try:
-            schedule = class_schedule.get_schedule(settings.course_id, settings.year, settings.curricula)
+            schedule = class_schedule.get_schedule(
+                settings.course_id, settings.year, settings.curricula)
         except Exception as e:
             logging.exception(e)
             self.send(update, context, messages.SCHEDULE_FETCH_ERROR)
             return
-        schedule = getattr(schedule, type)()
+        schedule = getattr(schedule, schedule_type)()
         if not schedule.has_events():
             self.send(update, context, messages.NO_LESSONS)
             return
@@ -108,7 +112,9 @@ class Bot:
         logging.info('Sending todays schedule to {} users'.format(len(users)))
         for user in users:
             try:
-                schedule = class_schedule.get_schedule(user.course_id, user.year, user.curricula)
+                schedule = class_schedule.get_schedule(user.course_id,
+                                                       user.year,
+                                                       user.curricula)
                 if not schedule.week_has_lessons():
                     if now.weekday() == 0:
                         msg = "{}\n\n{}".format(messages.NO_LESSONS_WEEK, messages.NO_REMIND_THIS_WEEK)
@@ -120,7 +126,7 @@ class Bot:
                     msg = msg.format(messages.NO_LESSONS)
                     context.bot.send_message(chat_id=user.chat_id, parse_mode=ParseMode.HTML, text=msg)
                     continue
-                msg = msg.format(schedule.tostring(with_date=True))
+                msg = msg.format(schedule.today().tostring(with_date=True))
                 context.bot.send_message(chat_id=user.chat_id, parse_mode=ParseMode.HTML, text=msg)
                 os_time.sleep(0.1)
             except telegram.error.Unauthorized as e:
@@ -136,7 +142,6 @@ class Bot:
 
         self.daily_schedule_last_run = now
         logging.info("Done sending daily schedule")
-
 
     def send_announcements(self, context):
         anns = announcements.get_announcements()

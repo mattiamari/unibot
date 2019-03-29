@@ -3,6 +3,7 @@ from os import environ as env
 from datetime import datetime, timedelta, time
 import logging
 
+
 class Repo:
     def __init__(self):
         self.db = sqlite3.connect(env['DB_PATH'])
@@ -15,13 +16,15 @@ class Repo:
         self.db.commit()
         self.db.close()
 
+
 class UserRepo(Repo):
     def __init__(self):
         super().__init__()
         self.db.row_factory = sqlite3.Row
 
     def has(self, user_id, chat_id):
-        res = self.db.execute("select count(*) from user where user_id=? and chat_id=?", (user_id, chat_id)).fetchone()[0]
+        res = self.db.execute("select count(*) from user where user_id=? and chat_id=?",
+                              (user_id, chat_id)).fetchone()[0]
         return True if res > 0 else False
 
     def get(self, user_id, chat_id):
@@ -36,20 +39,20 @@ class UserRepo(Repo):
         self.db.commit()
         logging.info('New or updated user: @{}'.format(user.username))
 
+
 class User:
-    def __init__(
-        self,
-        user_id,
-        chat_id,
-        first_name,
-        last_name,
-        username
-    ):
+    def __init__(self,
+                 user_id,
+                 chat_id,
+                 first_name,
+                 last_name,
+                 username):
         self.user_id = user_id
         self.chat_id = chat_id
         self.first_name = first_name
         self.last_name = last_name
         self.username = username
+
 
 class UserSettingsRepo(Repo):
     def __init__(self):
@@ -88,6 +91,7 @@ class UserSettingsRepo(Repo):
         res = self.db.execute("select chat_id from user_settings where deleted != 1")
         return [row['chat_id'] for row in res]
 
+
 class UserSettings:
     TIME_FORMAT = '%H:%M'
 
@@ -116,6 +120,7 @@ class UserSettings:
             microsecond=0
         )
 
+
 def _user_factory(row):
     return User(
         row['user_id'],
@@ -123,6 +128,7 @@ def _user_factory(row):
         row['first_name'],
         row['last_name'],
         row['username'])
+
 
 def _usersettings_factory(row):
     do_remind = False
@@ -143,12 +149,14 @@ def _usersettings_factory(row):
         remind_time
     )
 
+
 def _usersettings_dict(settings):
     d = settings.__dict__.copy()
     d['remind_time'] = None
     if settings.remind_time is not None:
         d['remind_time'] = settings.remind_time.strftime(UserSettings.TIME_FORMAT)
     return d
+
 
 def _parse_remind_time(time_str):
     return datetime.strptime(time_str, UserSettings.TIME_FORMAT).time()

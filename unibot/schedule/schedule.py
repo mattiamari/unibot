@@ -1,18 +1,21 @@
 from datetime import datetime, date, timedelta
 import logging
 
-from .urlfetch import fetch
-from .cache import cache_for
-from .courses import get_url_schedule
+from unibot.schedule.urlfetch import fetch
+from unibot.schedule.cache import cache_for
+from unibot.schedule.courses import get_url_schedule
+
 
 DAY_NAMES = ['Lunedì', 'Martedì', 'Mercoledì', 'Giovedì', 'Venerdì', 'Sabato', 'Domenica']
+
 
 class InvalidSourceDataError(Exception):
     def __init__(self, url):
         super().__init__("Invalid input data for url '{}'".format(url))
 
+
 class Event:
-    TIME_FORMAT='%H:%M'
+    TIME_FORMAT = '%H:%M'
 
     def __init__(self, title, date_start, date_end, room):
         self.title = title
@@ -33,6 +36,7 @@ class Event:
 
     def __eq__(self, other):
         return hash(self) == hash(other)
+
 
 class EventList:
     DATE_FORMAT = '%d/%m/%Y'
@@ -58,15 +62,16 @@ class EventList:
     def tostring(self, with_date=False):
         out = ''
         last_day = None
-        for e in self.items:
-            if with_date and (last_day is None or last_day != e.date_start.date()):
+        for event in self.items:
+            if with_date and (last_day is None or last_day != event.date_start.date()):
                 out += '<b>{} {}</b>\n'.format(
-                    DAY_NAMES[e.date_start.date().weekday()],
-                    e.date_start.date().strftime(self.DATE_FORMAT)
+                    DAY_NAMES[event.date_start.date().weekday()],
+                    event.date_start.date().strftime(self.DATE_FORMAT)
                 )
-                last_day = e.date_start.date()
-            out += str(e) + '\n\n'
+                last_day = event.date_start.date()
+            out += str(event) + '\n\n'
         return out
+
 
 class Schedule:
     def __init__(self, events):
@@ -92,7 +97,7 @@ class Schedule:
 
     def next_class_day(self):
         next_date = self.next_lesson_date()
-        if next_date == None:
+        if next_date is None:
             return None
         return self.of_day(next_date)
 
@@ -114,6 +119,7 @@ class Schedule:
     def week_has_lessons(self):
         return len(self.week()) > 0
 
+
 @cache_for(minutes=60)
 def get_schedule(course_id, year, curricula=''):
     src_url = get_url_schedule(course_id, year, curricula)
@@ -129,13 +135,11 @@ def get_schedule(course_id, year, curricula=''):
         raise InvalidSourceDataError(src_url)
     return Schedule(events)
 
+
 def remove_duplicates(events):
     seen = set()
     return [e for e in events if not (e in seen or seen.add(e))]
 
-#
-# private stuff
-#
 
 def event_factory(e):
     event = Event(
@@ -149,6 +153,7 @@ def event_factory(e):
     except Exception:
         pass
     return event
+
 
 def parse_date(date):
     return datetime.strptime(date, '%Y-%m-%dT%H:%M:%S')
