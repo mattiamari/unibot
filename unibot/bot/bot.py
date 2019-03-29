@@ -46,7 +46,7 @@ class Bot:
             self.dispatcher.add_handler(h)
 
     def cmd_start(self, update, context):
-        if (environ['TESTING'] == '1'):
+        if environ['TESTING'] == '1':
             self.send(update, context,
                       ("Io non sono il vero UniBot ma solo un'istanza di test.\n"
                        "Usa @unibo_orari_bot"))
@@ -106,10 +106,10 @@ class Bot:
         users = settings_repo.get_to_remind()
         users = [u for u in users if isinstance(u.remind_time, time)]
         users = [u for u in users if self.daily_schedule_last_run < u.next_remind_time() <= now]
-        if len(users) == 0:
+        if not users:
             return
 
-        logging.info('Sending todays schedule to {} users'.format(len(users)))
+        logging.info('Sending todays schedule to %d users', len(users))
         for user in users:
             try:
                 schedule = class_schedule.get_schedule(user.course_id,
@@ -136,7 +136,7 @@ class Bot:
                 old = user.chat_id
                 user.chat_id = e.new_chat_id
                 settings_repo.update(user)
-                logging.info("Updated chat_id {} to {}".format(old, user.chat_id))
+                logging.info("Updated chat_id %d to %d", old, user.chat_id)
             except Exception as e:
                 logging.exception(e)
 
@@ -145,11 +145,11 @@ class Bot:
 
     def send_announcements(self, context):
         anns = announcements.get_announcements()
-        if len(anns) == 0:
+        if not anns:
             return
         settings_repo = self.user_settings()
         chats = settings_repo.get_all()
-        logging.info('Sending announcements to {} chats'.format(len(chats)))
+        logging.info('Sending announcements to %d chats', len(chats))
         for ann in anns:
             for chat in chats:
                 try:
@@ -162,7 +162,7 @@ class Bot:
                     old = chat.chat_id
                     chat.chat_id = e.new_chat_id
                     settings_repo.update(chat)
-                    logging.info("Updated chat_id {} to {}".format(old, chat.chat_id))
+                    logging.info("Updated chat_id %d to %d", old, chat.chat_id)
                 except Exception as e:
                     logging.exception(e)
             announcements.set_sent(ann)

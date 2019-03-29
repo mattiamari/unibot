@@ -1,3 +1,5 @@
+import logging
+
 from telegram.ext import ConversationHandler, CommandHandler, MessageHandler, Filters
 from telegram import ParseMode
 
@@ -6,8 +8,10 @@ import unibot.schedule.courses as courses
 from unibot.bot.users import UserRepo, User, UserSettingsRepo, UserSettings
 from unibot.schedule.urlfetch import FetchError
 
-SETUP_SEARCH, SETUP_SEARCH_SELECT, SETUP_YEAR, SETUP_CURRICULA_SELECT = range(0,4)
+
+SETUP_SEARCH, SETUP_SEARCH_SELECT, SETUP_YEAR, SETUP_CURRICULA_SELECT = range(0, 4)
 conv_context = {}
+
 
 def get_handler():
     return ConversationHandler(
@@ -15,20 +19,21 @@ def get_handler():
         states={
             SETUP_SEARCH: [MessageHandler(Filters.text, setup_step_search)],
             SETUP_SEARCH_SELECT: [
-                MessageHandler(Filters.regex('^\d+$'), setup_step_search_select),
+                MessageHandler(Filters.regex(r'^\d+$'), setup_step_search_select),
                 CommandHandler('cerca', setup_search_again)
             ],
             SETUP_YEAR: [
-                MessageHandler(Filters.regex('^\d+$'), setup_step_year),
+                MessageHandler(Filters.regex(r'^\d+$'), setup_step_year),
                 MessageHandler(Filters.text, setup_step_year_invalid)
             ],
             SETUP_CURRICULA_SELECT: [
-                MessageHandler(Filters.regex('^\d+$'), setup_step_curricula_select),
+                MessageHandler(Filters.regex(r'^\d+$'), setup_step_curricula_select),
                 CommandHandler('cerca', setup_search_again)
             ],
         },
         fallbacks=[CommandHandler('annulla', setup_step_cancel)]
     )
+
 
 def setup_step_start(update, context):
     send(update, context, messages.SETUP_STEP_START)
@@ -54,6 +59,7 @@ def setup_step_start(update, context):
 
     return SETUP_SEARCH
 
+
 def setup_step_search(update, context):
     try:
         matches = courses.search(update.message.text)
@@ -61,22 +67,25 @@ def setup_step_search(update, context):
         send(update, context, messages.QUERY_TOO_SHORT)
         return SETUP_SEARCH
 
-    if len(matches) == 0:
+    if not matches:
         send(update, context, messages.COURSE_SEARCH_NO_RESULT)
         return SETUP_SEARCH
 
     matches = dict(enumerate(matches, start=1))
     conv_context[update.effective_chat.id]['search_matches'] = matches
-    matches_list = ''.join(
-        messages.COURSE_SEARCH_RESULT_ITEM.format(n, c['title']) for (n,c) in matches.items())
+    matches_list = ''.join(messages.COURSE_SEARCH_RESULT_ITEM.format(n, c['title'])
+                           for (n, c) in matches.items())
 
-    send(update, context,
-        '{}\n\n{}\n{}'.format(messages.COURSE_SEARCH_RESULTS, matches_list, messages.COURSE_SEARCH_CHOOSE_RESULT))
+    send(update, context, '{}\n\n{}\n{}'.format(messages.COURSE_SEARCH_RESULTS,
+                                                matches_list,
+                                                messages.COURSE_SEARCH_CHOOSE_RESULT))
 
     return SETUP_SEARCH_SELECT
 
+
 def setup_search_again(update, context):
     return SETUP_SEARCH
+
 
 def setup_step_search_select(update, context):
     search_matches = conv_context[update.effective_chat.id]['search_matches']
@@ -94,6 +103,7 @@ def setup_step_search_select(update, context):
     send(update, context, messages.SELECT_YEAR)
     return SETUP_YEAR
 
+
 def setup_step_year(update, context):
     conv_context[update.effective_chat.id]['settings'].year = int(update.message.text)
 
@@ -110,12 +120,13 @@ def setup_step_year(update, context):
         send(update, context, messages.FETCH_ERROR)
         return ConversationHandler.END
 
-    if len(curricula) == 0:
+    if not curricula:
         send(update, context, messages.NO_CURRICULA_FOUND)
         return SETUP_YEAR
 
     curricula = dict(enumerate(curricula, start=1))
-    curricula_list = ''.join(messages.CURRICULA_RESULT_ITEM.format(n, c['label']) for (n,c) in curricula.items())
+    curricula_list = ''.join(messages.CURRICULA_RESULT_ITEM.format(n, c['label'])
+                             for (n, c) in curricula.items())
     conv_context[update.effective_chat.id]['curricula'] = curricula
 
     send(update, context, '{}\n\n{}\n{}'.format(
@@ -124,9 +135,11 @@ def setup_step_year(update, context):
         messages.COURSE_SEARCH_CHOOSE_RESULT))
     return SETUP_CURRICULA_SELECT
 
+
 def setup_step_year_invalid(update, context):
     send(update, context, messages.YEAR_NOT_VALID)
     return SETUP_YEAR
+
 
 def setup_step_curricula_select(update, context):
     curricula = conv_context[update.effective_chat.id]['curricula']
@@ -145,9 +158,11 @@ def setup_step_curricula_select(update, context):
     del conv_context[update.effective_chat.id]
     return ConversationHandler.END
 
+
 def setup_step_cancel(update, context):
     send(update, context, messages.SETUP_STOPPED)
     return ConversationHandler.END
+
 
 def send(update, context, text):
     context.bot.send_message(chat_id=update.message.chat_id, parse_mode=ParseMode.HTML, text=text)

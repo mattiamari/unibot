@@ -4,8 +4,8 @@ from os import environ, path
 sent = []
 sent_file = path.join(path.dirname(environ['DB_PATH']), 'sent_announcements.json')
 if path.isfile(sent_file):
-    with open(sent_file, 'r') as f:
-        sent = json.load(f)
+    with open(sent_file, 'r') as fp:
+        sent = json.load(fp)
 
 announcements = []
 
@@ -18,13 +18,16 @@ announcements.append({
             "faccia il /setup e tutti i membri potranno richiedere l'orario")
 })
 
+
 def get_announcements():
     announcements.sort(key=lambda a: a['seq'])
     return [a for a in announcements if a['seq'] not in sent]
 
+
 def set_sent(msg):
     sent.append(msg['seq'])
 
+
 def save_sent():
-    with open(sent_file, 'w') as f:
-        json.dump(sent, f)
+    with open(sent_file, 'w') as fp:
+        json.dump(sent, fp)

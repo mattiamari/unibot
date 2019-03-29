@@ -2,16 +2,18 @@ import logging
 import datetime
 import re
 
-from telegram.ext import ConversationHandler, CommandHandler, MessageHandler, Filters, RegexHandler
+from telegram.ext import ConversationHandler, CommandHandler, MessageHandler, Filters
 from telegram import ParseMode
 
 import unibot.bot.messages as messages
-from unibot.bot.users import UserSettingsRepo, UserSettings
+from unibot.bot.users import UserSettingsRepo
 
-STEP_TIME_SELECT, STEP_TIME_INVALID = range(0,2)
-TIME_FORMAT='%H:%M'
 
-regex_time = re.compile(r'^(\d?\d)[.,:]*(\d?\d?)$')
+STEP_TIME_SELECT, STEP_TIME_INVALID = range(0, 2)
+TIME_FORMAT = '%H:%M'
+
+REGEX_TIME = re.compile(r'^(\d?\d)[.,:]*(\d?\d?)$')
+
 
 def get_handler():
     return ConversationHandler(
@@ -23,6 +25,7 @@ def get_handler():
         fallbacks=[CommandHandler('annulla', step_cancel)]
     )
 
+
 def step_start(update, context):
     settings = UserSettingsRepo()
     setting = settings.get(update.effective_chat.id)
@@ -33,8 +36,9 @@ def step_start(update, context):
     send(update, context, messages.REMINDME_START)
     return STEP_TIME_SELECT
 
+
 def step_time_select(update, context):
-    match = regex_time.match(update.message.text)
+    match = REGEX_TIME.match(update.message.text)
     time = time_from_match(match)
     if time is None:
         send(update, context, messages.REMINDME_TIME_INVALID)
@@ -48,13 +52,16 @@ def step_time_select(update, context):
     send(update, context, messages.REMINDME_END.format(time.strftime(TIME_FORMAT)))
     return ConversationHandler.END
 
+
 def step_time_invalid(update, context):
     send(update, context, messages.REMINDME_TIME_INVALID)
     return STEP_TIME_SELECT
 
+
 def step_cancel(update, context):
     send(update, context, messages.CANCELED)
     return ConversationHandler.END
+
 
 def time_from_match(match):
     if not match:
@@ -69,6 +76,7 @@ def time_from_match(match):
     if hour not in range(0, 24) or minute not in range(0, 60):
         return None
     return datetime.time(hour, minute)
+
 
 def send(update, context, text):
     context.bot.send_message(chat_id=update.message.chat_id, parse_mode=ParseMode.HTML, text=text)

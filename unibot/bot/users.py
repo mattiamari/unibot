@@ -1,7 +1,7 @@
+import logging
 import sqlite3
 from os import environ as env
 from datetime import datetime, timedelta, time
-import logging
 
 
 class Repo:
@@ -37,7 +37,7 @@ class UserRepo(Repo):
         self.db.execute("insert or replace into user (user_id, chat_id, first_name, last_name, username) "
             "values (:user_id, :chat_id, :first_name, :last_name, :username)", user.__dict__)
         self.db.commit()
-        logging.info('New or updated user: @{}'.format(user.username))
+        logging.info('New or updated user: %s %s @%s', user.first_name, user.last_name, user.username)
 
 
 class User:
@@ -71,13 +71,14 @@ class UserSettingsRepo(Repo):
 
     def update(self, settings):
         self.db.execute("insert or replace into user_settings (user_id, chat_id, course_id, year, curricula, do_remind, remind_time) "
-            "values (:user_id, :chat_id, :course_id, :year, :curricula, :do_remind, :remind_time)", _usersettings_dict(settings))
+                        "values (:user_id, :chat_id, :course_id, :year, :curricula, :do_remind, :remind_time)",
+                        _usersettings_dict(settings))
         self.db.commit()
 
     def delete(self, settings):
         self.db.execute("update user_settings set deleted=1 where chat_id=:chat_id", _usersettings_dict(settings))
         self.db.commit()
-        logging.info("Deleted user chat '{}'".format(settings.chat_id))
+        logging.info("Deleted user chat '%d'", settings.chat_id)
 
     def get_all(self):
         res = self.db.execute("select * from user_settings where deleted != 1")

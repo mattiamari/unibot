@@ -9,13 +9,13 @@ class FetchError(Exception):
 
 def fetch(url):
     try:
-        logging.info("Getting from upstream: {}".format(url))
+        logging.info("Getting from upstream: %s", url)
         res = requests.get(url, timeout=10, headers={'user-agent': USER_AGENT})
     except requests.Timeout:
-        logging.warning("Cannot get '{}'. Request timed out".format(url))
+        logging.warning("Cannot get '%s'. Request timed out", url)
         raise FetchError()
 
     if res.status_code != requests.codes.ok:
-        logging.warning("Cannot get '{}'. Request returned {}".format(url, res.status_code))
+        logging.warning("Cannot get '%s'. Request returned %s", url, res.status_code)
         raise FetchError()
     return res

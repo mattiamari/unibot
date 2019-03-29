@@ -1,6 +1,6 @@
+import logging
 import sqlite3
 import json
-import logging
 import sys
 from os import environ, path
 
@@ -89,20 +89,22 @@ migrations.append({
               "alter table user_settings_new rename to user_settings;")
 })
 
+
 def migrate():
     logging.info('Applying migrations')
     db = sqlite3.connect(environ['DB_PATH'])
     migrations.sort(key=lambda e: e['seq'])
     for m in migrations:
         if m['seq'] in applied_migrations:
-            logging.info("* SKIPPED '{}'".format(m['desc']))
+            logging.info("* SKIPPED '%s'", m['desc'])
             continue
         apply(db=db, seq=m['seq'], desc=m['desc'], query=m['query'])
     save_applied()
     db.close()
 
+
 def apply(db, seq, desc, query):
-    logging.info("* applying '{}'".format(desc))
+    logging.info("* applying '%s'", desc)
     try:
         db.executescript(query)
         db.commit()
@@ -111,6 +113,7 @@ def apply(db, seq, desc, query):
         logging.exception(e)
         sys.exit(1)
 
+
 def save_applied():
-    with open(applied_migrations_file, 'w') as f:
-        json.dump(applied_migrations, f)
+    with open(applied_migrations_file, 'w') as fp:
+        json.dump(applied_migrations, fp)

@@ -1,5 +1,5 @@
-from datetime import datetime, date, timedelta
 import logging
+from datetime import datetime, date, timedelta
 
 from unibot.schedule.urlfetch import fetch
 from unibot.schedule.cache import cache_for
@@ -32,7 +32,10 @@ class Event:
         )
 
     def __hash__(self):
-        return hash((self.title, self.date_start.timestamp(), self.date_end.timestamp(), self.room))
+        return hash((self.title,
+                     self.date_start.timestamp(),
+                     self.date_end.timestamp(),
+                     self.room))
 
     def __eq__(self, other):
         return hash(self) == hash(other)
@@ -63,7 +66,8 @@ class EventList:
         out = ''
         last_day = None
         for event in self.items:
-            if with_date and (last_day is None or last_day != event.date_start.date()):
+            if (with_date and (last_day is None or last_day != event.date_start.date())):
+                # write date for each day
                 out += '<b>{} {}</b>\n'.format(
                     DAY_NAMES[event.date_start.date().weekday()],
                     event.date_start.date().strftime(self.DATE_FORMAT)
@@ -125,7 +129,7 @@ def get_schedule(course_id, year, curricula=''):
     src_url = get_url_schedule(course_id, year, curricula)
     src_data = fetch(src_url).json()
     if 'events' not in src_data:
-        logging.error("'events' key not found for url '{}'".format(src_url))
+        logging.error("'events' key not found for url '%s'", src_url)
         raise InvalidSourceDataError(src_url)
     try:
         events = [event_factory(e) for e in src_data['events']]
@@ -155,5 +159,5 @@ def event_factory(e):
     return event
 
 
-def parse_date(date):
-    return datetime.strptime(date, '%Y-%m-%dT%H:%M:%S')
+def parse_date(date_str):
+    return datetime.strptime(date_str, '%Y-%m-%dT%H:%M:%S')
