@@ -21,12 +21,18 @@ class Event:
         self.room = room
 
     def __str__(self):
-        return "{} - {}  {}  ({})".format(
+        return "<i>{} - {}</i>    {}  ({})".format(
             self.date_start.time().strftime(self.TIME_FORMAT),
             self.date_end.time().strftime(self.TIME_FORMAT),
             self.title,
             self.room
         )
+
+    def __hash__(self):
+        return hash((self.title, self.date_start.timestamp(), self.date_end.timestamp(), self.room))
+
+    def __eq__(self, other):
+        return hash(self) == hash(other)
 
 class EventList:
     DATE_FORMAT = '%d/%m/%Y'
@@ -117,11 +123,15 @@ def get_schedule(course_id, year, curricula=''):
         raise InvalidSourceDataError(src_url)
     try:
         events = [event_factory(e) for e in src_data['events']]
+        events = remove_duplicates(events)
     except Exception as e:
         logging.exception(e)
         raise InvalidSourceDataError(src_url)
     return Schedule(events)
 
+def remove_duplicates(events):
+    seen = set()
+    return [e for e in events if not (e in seen or seen.add(e))]
 
 #
 # private stuff
