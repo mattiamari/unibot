@@ -101,8 +101,12 @@ class Bot:
         self.send(update, context, messages.REMINDME_OFF)
 
     def daily_schedule(self, context):
-        settings_repo = self.user_settings()
         now = datetime.now()
+        if now.weekday() in [5, 6]:
+            # don't send reminders on the weekend
+            self.daily_schedule_last_run = now
+            return
+        settings_repo = self.user_settings()
         users = settings_repo.get_to_remind()
         users = [u for u in users if isinstance(u.remind_time, time)]
         users = [u for u in users if self.daily_schedule_last_run < u.next_remind_time() <= now]
