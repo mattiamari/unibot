@@ -70,8 +70,9 @@ class Bot:
         self.send_schedule(update, context, 'next_week')
 
     def send_schedule(self, update, context, schedule_type):
-        settings = self.user_settings().get(update.effective_chat.id)
-        if settings is None:
+        try:
+            settings = self.user_settings().get(update.effective_chat.id)
+        except bot_users.ChatNotFoundError:
             self.send(update, context, messages.NEED_SETUP)
             return
         logging.info("REQUEST %s chat_id=%d course_id=%d year=%d curricula=%s",
@@ -92,8 +93,9 @@ class Bot:
 
     def cmd_remindme_off(self, update, context):
         settings = self.user_settings()
-        setting = settings.get(update.effective_chat.id)
-        if setting is None:
+        try:
+            setting = settings.get(update.effective_chat.id)
+        except bot_users.ChatNotFoundError:
             self.send(update, context, messages.NEED_SETUP)
             return
         setting.do_remind = False

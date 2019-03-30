@@ -6,7 +6,7 @@ from telegram.ext import ConversationHandler, CommandHandler, MessageHandler, Fi
 from telegram import ParseMode
 
 import unibot.bot.messages as messages
-from unibot.bot.users import UserSettingsRepo
+from unibot.bot.users import UserSettingsRepo, ChatNotFoundError
 
 
 STEP_TIME_SELECT, STEP_TIME_INVALID = range(0, 2)
@@ -27,12 +27,9 @@ def get_handler():
 
 
 def step_start(update, context):
-    settings = UserSettingsRepo()
-    setting = settings.get(update.effective_chat.id)
-    if setting is None:
+    if not UserSettingsRepo().has(update.effective_chat.id):
         send(update, context, messages.NEED_SETUP)
         return ConversationHandler.END
-
     send(update, context, messages.REMINDME_START)
     return STEP_TIME_SELECT
 

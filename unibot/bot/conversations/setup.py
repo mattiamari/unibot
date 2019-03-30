@@ -5,7 +5,7 @@ from telegram import ParseMode
 
 import unibot.bot.messages as messages
 import unibot.unibo.courses as courses
-from unibot.bot.users import UserRepo, User, UserSettingsRepo, UserSettings
+from unibot.bot.users import UserRepo, User, UserSettingsRepo, UserSettings, UserNotFoundError
 from unibot.unibo.urlfetch import FetchError
 
 
@@ -39,8 +39,9 @@ def setup_step_start(update, context):
     send(update, context, messages.SETUP_STEP_START)
     send(update, context, messages.SETUP_STEP_SEARCH)
 
-    user = UserRepo().get(update.effective_user.id, update.effective_chat.id)
-    if user is None:
+    try:
+        user = UserRepo().get(update.effective_user.id, update.effective_chat.id)
+    except UserNotFoundError:
         user = User(
             update.effective_user.id,
             update.effective_chat.id,
