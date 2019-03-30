@@ -1,608 +1,608 @@
 [
     {
-        "id": "8834",
+        "id": 8834,
         "title": "Acquacoltura e igiene delle produzioni ittiche [L]",
         "lang": "it",
         "campus": "Cesenatico",
         "url": "https://corsi.unibo.it/laurea/acquacoltura"
     },
     {
-        "id": "9238",
+        "id": 9238,
         "title": "Advanced automotive electronic engineering [LM]",
         "lang": "en",
         "campus": "Bologna",
         "url": "https://corsi.unibo.it/2cycle/AutomotiveElectronicEngineering"
     },
     {
-        "id": "9239",
+        "id": 9239,
         "title": "Advanced automotive engineering [LM]",
         "lang": "en",
         "campus": "",
         "url": "https://corsi.unibo.it/2cycle/AutomotiveEngineering"
     },
     {
-        "id": "9225",
+        "id": 9225,
         "title": "Advanced cosmetic sciences [LM]",
         "lang": "en",
         "campus": "Rimini",
         "url": "https://corsi.unibo.it/2cycle/AdvancedCosmeticSciences"
     },
     {
-        "id": "9256",
+        "id": 9256,
         "title": "Advanced design [LM]",
         "lang": "it",
         "campus": "Bologna",
         "url": "https://corsi.unibo.it/magistrale/AdvancedDesign"
     },
     {
-        "id": "8769",
+        "id": 8769,
         "title": "Aerospace engineering  [LM]",
         "lang": "en",
         "campus": "Forlì",
         "url": "https://corsi.unibo.it/2cycle/AerospaceEngineering"
     },
     {
-        "id": "8842",
+        "id": 8842,
         "title": "Amministrazione e gestione d'impresa [LM]",
         "lang": "it",
         "campus": "Rimini",
         "url": "https://corsi.unibo.it/magistrale/aegi"
     },
     {
-        "id": "8418",
+        "id": 8418,
         "title": "Analisi e gestione dell'ambiente [LM]",
         "lang": "it",
         "campus": "Ravenna",
         "url": "https://corsi.unibo.it/magistrale/AnalisiGestioneAmbiente"
     },
     {
-        "id": "0964",
+        "id": 964,
         "title": "Antropologia culturale ed etnologia [LM]",
         "lang": "it",
         "campus": "Bologna",
         "url": "https://corsi.unibo.it/magistrale/AntropologiaCulturaleEtnologia"
     },
     {
-        "id": "8493",
+        "id": 8493,
         "title": "Antropologia, religioni, civilta' orientali [L]",
         "lang": "it",
         "campus": "Bologna",
         "url": "https://corsi.unibo.it/laurea/ScienzeAntropologiche"
     },
     {
-        "id": "8855",
+        "id": 8855,
         "title": "Archeologia e culture del mondo antico [LM]",
         "lang": "it",
         "campus": "Bologna",
         "url": "https://corsi.unibo.it/magistrale/archeologia"
     },
     {
-        "id": "0881",
+        "id": 881,
         "title": "Architettura [LMCU]",
         "lang": "it",
         "campus": "Cesena",
         "url": "https://corsi.unibo.it/magistralecu/architettura"
     },
     {
-        "id": "0977",
+        "id": 977,
         "title": "Arti visive [LM]",
         "lang": "it",
         "campus": "Bologna",
         "url": "https://corsi.unibo.it/magistrale/artivisive"
     },
     {
-        "id": "8879",
+        "id": 8879,
         "title": "Assistenza sanitaria (abilitante alla professione sanitaria di assistente sanitario) [L]",
         "lang": "it",
         "campus": "Rimini",
         "url": "https://corsi.unibo.it/laurea/AssistenzaSanitaria"
     },
     {
-        "id": "8018",
+        "id": 8018,
         "title": "Astrofisica e cosmologia [LM]",
         "lang": "it",
         "campus": "Bologna",
         "url": "https://corsi.unibo.it/magistrale/Astrofisica"
     },
     {
-        "id": "8004",
+        "id": 8004,
         "title": "Astronomia [L]",
         "lang": "it",
         "campus": "Bologna",
         "url": "https://corsi.unibo.it/laurea/Astronomia"
     },
     {
-        "id": "8891",
+        "id": 8891,
         "title": "Automation engineering  [LM]",
         "lang": "en",
         "campus": "Bologna",
         "url": "https://corsi.unibo.it/2cycle/AutomationEngineering"
     },
     {
-        "id": "9218",
+        "id": 9218,
         "title": "Beni archeologici, artistici e del paesaggio: storia, tutela e valorizzazione [LM]",
         "lang": "it",
         "campus": "Ravenna",
         "url": "https://corsi.unibo.it/magistrale/BeniArcheologiciArtisticiPaesaggio"
     },
     {
-        "id": "8849",
+        "id": 8849,
         "title": "Beni culturali [L]",
         "lang": "it",
         "campus": "Ravenna",
         "url": "https://corsi.unibo.it/laurea/BeniCulturali"
     },
     {
-        "id": "8419",
+        "id": 8419,
         "title": "Biodiversita' ed evoluzione [LM]",
         "lang": "it",
         "campus": "Bologna",
         "url": "https://corsi.unibo.it/magistrale/evoluzione"
     },
     {
-        "id": "8020",
+        "id": 8020,
         "title": "Bioinformatics [LM]",
         "lang": "en",
         "campus": "Bologna",
         "url": "https://corsi.unibo.it/2cycle/Bioinformatics"
     },
     {
-        "id": "9212",
+        "id": 9212,
         "title": "Biologia della salute [LM]",
         "lang": "it",
         "campus": "Bologna",
         "url": "https://corsi.unibo.it/magistrale/BiologiaSalute"
     },
     {
-        "id": "8857",
+        "id": 8857,
         "title": "Biologia marina [LM]",
         "lang": "it",
         "campus": "Ravenna",
         "url": "https://corsi.unibo.it/magistrale/BiologiaMarina"
     },
     {
-        "id": "8021",
+        "id": 8021,
         "title": "Biologia molecolare e cellulare [LM]",
         "lang": "it",
         "campus": "Bologna",
         "url": "https://corsi.unibo.it/magistrale/BiologiaMolecolareCellulare"
     },
     {
-        "id": "8005",
+        "id": 8005,
         "title": "Biotecnologie [L]",
         "lang": "it",
         "campus": "Bologna",
         "url": "https://corsi.unibo.it/laurea/Biotecnologie"
     },
     {
-        "id": "8522",
+        "id": 8522,
         "title": "Biotecnologie animali [LM]",
         "lang": "it",
         "campus": "Ozzano",
         "url": "https://corsi.unibo.it/magistrale/BiotecnologieAnimali"
     },
     {
-        "id": "8519",
+        "id": 8519,
         "title": "Biotecnologie farmaceutiche [LM]",
         "lang": "it",
         "campus": "Bologna",
         "url": "https://corsi.unibo.it/magistrale/BiotecnologieFarmaceutiche"
     },
     {
-        "id": "8859",
+        "id": 8859,
         "title": "Biotecnologie mediche [LM]",
         "lang": "it",
         "campus": "Bologna",
         "url": "https://corsi.unibo.it/magistrale/BiotecnologieMediche"
     },
     {
-        "id": "9213",
+        "id": 9213,
         "title": "Biotecnologie molecolari e industriali [LM]",
         "lang": "it",
         "campus": "Bologna",
         "url": "https://corsi.unibo.it/magistrale/BiotecnologieMolecolarieIndustriali"
     },
     {
-        "id": "8965",
+        "id": 8965,
         "title": "Business and economics [L]",
         "lang": "en",
         "campus": "Bologna",
         "url": "https://corsi.unibo.it/1cycle/CLaBE"
     },
     {
-        "id": "8856",
+        "id": 8856,
         "title": "Chimica [LM]",
         "lang": "it",
         "campus": "Bologna",
         "url": "https://corsi.unibo.it/magistrale/Chimica"
     },
     {
-        "id": "8006",
+        "id": 8006,
         "title": "Chimica e chimica dei materiali [L]",
         "lang": "it",
         "campus": "Bologna",
         "url": "https://corsi.unibo.it/laurea/chimica"
     },
     {
-        "id": "8412",
+        "id": 8412,
         "title": "Chimica e tecnologia farmaceutiche [LMCU]",
         "lang": "it",
         "campus": "Bologna",
         "url": "https://corsi.unibo.it/magistralecu/CTF"
     },
     {
-        "id": "8514",
+        "id": 8514,
         "title": "Chimica e tecnologie per l'ambiente e per i materiali [L]",
         "lang": "it",
         "campus": "Rimini",
         "url": "https://corsi.unibo.it/laurea/ChimicaAmbiente"
     },
     {
-        "id": "8515",
+        "id": 8515,
         "title": "Chimica e tecnologie per l'ambiente e per i materiali [L]",
         "lang": "it",
         "campus": "Faenza",
         "url": "https://corsi.unibo.it/laurea/ChimicaMateriali"
     },
     {
-        "id": "0884",
+        "id": 884,
         "title": "Chimica industriale [LM]",
         "lang": "it",
         "campus": "Bologna",
         "url": "https://corsi.unibo.it/magistrale/ChimicaIndustriale"
     },
     {
-        "id": "8513",
+        "id": 8513,
         "title": "Chimica industriale [L]",
         "lang": "it",
         "campus": "Bologna",
         "url": "https://corsi.unibo.it/laurea/ChimicaIndustriale"
     },
     {
-        "id": "0966",
+        "id": 966,
         "title": "Cinema, televisione e produzione multimediale [LM]",
         "lang": "it",
         "campus": "Bologna",
         "url": "https://corsi.unibo.it/magistrale/Cinema"
     },
     {
-        "id": "8895",
+        "id": 8895,
         "title": "Civil engineering [LM]",
         "lang": "en",
         "campus": "Bologna",
         "url": "https://corsi.unibo.it/2cycle/CivilEngineering"
     },
     {
-        "id": "8840",
+        "id": 8840,
         "title": "Comunicazione pubblica e d'impresa [LM]",
         "lang": "it",
         "campus": "Bologna",
         "url": "https://corsi.unibo.it/magistrale/ComunicazionePubblicaImpresa"
     },
     {
-        "id": "8616",
+        "id": 8616,
         "title": "Conservazione e restauro dei beni culturali (abilitante ai sensi del d. lgs n. 42 [LMCU]",
         "lang": "it",
         "campus": "Ravenna",
         "url": "https://corsi.unibo.it/magistralecu/ConservazioneRestauroBeniculturali"
     },
     {
-        "id": "9230",
+        "id": 9230,
         "title": "Consulente del lavoro e delle relazioni aziendali [L]",
         "lang": "it",
         "campus": "Bologna",
         "url": "https://corsi.unibo.it/laurea/ConsulenteLavoroRelazioniAziendali"
     },
     {
-        "id": "8772",
+        "id": 8772,
         "title": "Culture e tecniche della moda [L]",
         "lang": "it",
         "campus": "Rimini",
         "url": "https://corsi.unibo.it/laurea/CultureTecnicheModa"
     },
     {
-        "id": "0956",
+        "id": 956,
         "title": "Dams - discipline delle arti, della musica  e dello spettacolo [L]",
         "lang": "it",
         "campus": "Bologna",
         "url": "https://corsi.unibo.it/laurea/DAMS"
     },
     {
-        "id": "8182",
+        "id": 8182,
         "title": "Design del prodotto industriale [L]",
         "lang": "it",
         "campus": "Bologna",
         "url": "https://corsi.unibo.it/laurea/DesignProdottoIndustriale"
     },
     {
-        "id": "8470",
+        "id": 8470,
         "title": "Dietistica (abilitante alla professione sanitaria di dietista) [L]",
         "lang": "it",
         "campus": "Bologna",
         "url": "https://corsi.unibo.it/laurea/Dietistica"
     },
     {
-        "id": "9224",
+        "id": 9224,
         "title": "Digital humanities and digital knowledge [LM]",
         "lang": "en",
         "campus": "Bologna",
         "url": "https://corsi.unibo.it/2cycle/DigitalHumanitiesKnowledge"
     },
     {
-        "id": "0897",
+        "id": 897,
         "title": "Direzione aziendale [LM]",
         "lang": "it",
         "campus": "Bologna",
         "url": "https://corsi.unibo.it/magistrale/DirezioneAziendale"
     },
     {
-        "id": "8837",
+        "id": 8837,
         "title": "Discipline della musica e del teatro [LM]",
         "lang": "it",
         "campus": "Bologna",
         "url": "https://corsi.unibo.it/magistrale/DisciplineMusicaTeatro"
     },
     {
-        "id": "8871",
+        "id": 8871,
         "title": "Economia aziendale [L]",
         "lang": "it",
         "campus": "Bologna",
         "url": "https://corsi.unibo.it/laurea/EconomiaAziendale"
     },
     {
-        "id": "8847",
+        "id": 8847,
         "title": "Economia del turismo [L]",
         "lang": "it",
         "campus": "Rimini",
         "url": "https://corsi.unibo.it/laurea/clet"
     },
     {
-        "id": "8848",
+        "id": 8848,
         "title": "Economia dell'impresa [L]",
         "lang": "it",
         "campus": "Rimini",
         "url": "https://corsi.unibo.it/laurea/clei"
     },
     {
-        "id": "0905",
+        "id": 905,
         "title": "Economia e commercio [LM]",
         "lang": "it",
         "campus": "Forlì",
         "url": "https://corsi.unibo.it/magistrale/EconomiaCommercio"
     },
     {
-        "id": "9202",
+        "id": 9202,
         "title": "Economia e commercio [L]",
         "lang": "it",
         "campus": "Forlì",
         "url": "https://corsi.unibo.it/laurea/EconomiaCommercio"
     },
     {
-        "id": "9221",
+        "id": 9221,
         "title": "Economia e diritto [LM]",
         "lang": "it",
         "campus": "Bologna",
         "url": "https://corsi.unibo.it/magistrale/EconomiaDiritto"
     },
     {
-        "id": "9203",
+        "id": 9203,
         "title": "Economia e management [LM]",
         "lang": "it",
         "campus": "Forlì",
         "url": "https://corsi.unibo.it/magistrale/EconomiaManagement"
     },
     {
-        "id": "8526",
+        "id": 8526,
         "title": "Economia e marketing nel sistema agro-industriale [L]",
         "lang": "it",
         "campus": "Bologna",
         "url": "https://corsi.unibo.it/laurea/EconomiaMarketingAgroIndustriale"
     },
     {
-        "id": "8420",
+        "id": 8420,
         "title": "Economia e politica economica [LM]",
         "lang": "it",
         "campus": "Bologna",
         "url": "https://corsi.unibo.it/magistrale/EconomiaPoliticaEconomica"
     },
     {
-        "id": "0900",
+        "id": 900,
         "title": "Economia e professione [LM]",
         "lang": "it",
         "campus": "Bologna",
         "url": "https://corsi.unibo.it/magistrale/EconomiaProfessione"
     },
     {
-        "id": "8038",
+        "id": 8038,
         "title": "Economia, mercati e istituzioni [L]",
         "lang": "it",
         "campus": "Bologna",
         "url": "https://corsi.unibo.it/laurea/EconomiaMercatiIstituzioni"
     },
     {
-        "id": "8408",
+        "id": 8408,
         "title": "Economics [LM]",
         "lang": "en",
         "campus": "Bologna",
         "url": "https://corsi.unibo.it/2cycle/lmec"
     },
     {
-        "id": "8835",
+        "id": 8835,
         "title": "Economics and finance  [L]",
         "lang": "en",
         "campus": "Bologna",
         "url": "https://corsi.unibo.it/1cycle/EconomicsFinance"
     },
     {
-        "id": "8775",
+        "id": 8775,
         "title": "Educatore nei servizi per l'infanzia [L]",
         "lang": "it",
         "campus": "Bologna",
         "url": "https://corsi.unibo.it/laurea/EducatoreServiziInfanzia"
     },
     {
-        "id": "8776",
+        "id": 8776,
         "title": "Educatore sociale e culturale [L]",
         "lang": "it",
         "campus": "Bologna",
         "url": "https://corsi.unibo.it/laurea/EducatoreSocialeCulturaleBologna"
     },
     {
-        "id": "8777",
+        "id": 8777,
         "title": "Educatore sociale e culturale [L]",
         "lang": "it",
         "campus": "Rimini",
         "url": "https://corsi.unibo.it/laurea/EducatoreSocialeCulturale-Rimini"
     },
     {
-        "id": "8477",
+        "id": 8477,
         "title": "Educazione professionale (abilitante alla professione sanitaria di educatore professionale) [L]",
         "lang": "it",
         "campus": "Imola",
         "url": "https://corsi.unibo.it/laurea/EducazioneProfessionale"
     },
     {
-        "id": "9219",
+        "id": 9219,
         "title": "Farmacia [LMCU]",
         "lang": "it",
         "campus": "Bologna",
         "url": "https://corsi.unibo.it/magistralecu/Farmacia-Bologna"
     },
     {
-        "id": "9223",
+        "id": 9223,
         "title": "Farmacia [LMCU]",
         "lang": "it",
         "campus": "Rimini",
         "url": "https://corsi.unibo.it/magistralecu/Farmacia-Rimini"
     },
     {
-        "id": "9022",
+        "id": 9022,
         "title": "Fashion culture and management [LM]",
         "lang": "en",
         "campus": "Rimini",
         "url": "https://corsi.unibo.it/2cycle/FashionCultureManagement"
     },
     {
-        "id": "0970",
+        "id": 970,
         "title": "Filologia, letteratura e tradizione classica [LM]",
         "lang": "it",
         "campus": "Bologna",
         "url": "https://corsi.unibo.it/magistrale/FilologiaClassica"
     },
     {
-        "id": "9216",
+        "id": 9216,
         "title": "Filosofia [L]",
         "lang": "it",
         "campus": "Bologna",
         "url": "https://corsi.unibo.it/laurea/Filosofia"
     },
     {
-        "id": "8872",
+        "id": 8872,
         "title": "Finanza, assicurazioni e impresa [L]",
         "lang": "it",
         "campus": "Rimini",
         "url": "https://corsi.unibo.it/laurea/FinanzaAssicurazioniImpresa"
     },
     {
-        "id": "0901",
+        "id": 901,
         "title": "Finanza, intermediari e mercati [LM]",
         "lang": "it",
         "campus": "Bologna",
         "url": "https://corsi.unibo.it/magistrale/FinanzaIntermediariMercati"
     },
     {
-        "id": "9244",
+        "id": 9244,
         "title": "Fisica [L]",
         "lang": "it",
         "campus": "Bologna",
         "url": "https://corsi.unibo.it/laurea/fisica"
     },
     {
-        "id": "8626",
+        "id": 8626,
         "title": "Fisica del sistema terra [LM]",
         "lang": "it",
         "campus": "Bologna",
         "url": "https://corsi.unibo.it/magistrale/FisicaSistemaTerra"
     },
     {
-        "id": "8476",
+        "id": 8476,
         "title": "Fisioterapia (abilitante alla professione sanitaria di fisioterapista) [L]",
         "lang": "it",
         "campus": "Bologna",
         "url": "https://corsi.unibo.it/laurea/fisioterapia"
     },
     {
-        "id": "8026",
+        "id": 8026,
         "title": "Fotochimica e materiali molecolari [LM]",
         "lang": "it",
         "campus": "Bologna",
         "url": "https://corsi.unibo.it/magistrale/FotochimicaMaterialiMolecolari"
     },
     {
-        "id": "9211",
+        "id": 9211,
         "title": "Genomics [L]",
         "lang": "en",
         "campus": "Bologna",
         "url": "https://corsi.unibo.it/1cycle/Genomics"
     },
     {
-        "id": "0971",
+        "id": 971,
         "title": "Geografia e processi territoriali [LM]",
         "lang": "it",
         "campus": "Bologna",
         "url": "https://corsi.unibo.it/magistrale/GeografiaProcessiTerritoriali"
     },
     {
-        "id": "8027",
+        "id": 8027,
         "title": "Geologia e territorio [LM]",
         "lang": "it",
         "campus": "Bologna",
         "url": "https://corsi.unibo.it/magistrale/GeologiaTerritorio"
     },
     {
-        "id": "9232",
+        "id": 9232,
         "title": "Giurisprudenza [LMCU]",
         "lang": "it",
         "campus": "Bologna",
         "url": "https://corsi.unibo.it/magistralecu/Giurisprudenza-Bologna"
     },
     {
-        "id": "9233",
+        "id": 9233,
         "title": "Giurisprudenza [LMCU]",
         "lang": "it",
         "campus": "Ravenna",
         "url": "https://corsi.unibo.it/magistralecu/Giurisprudenza-Ravenna"
     },
     {
-        "id": "9242",
+        "id": 9242,
         "title": "Giurista per le imprese e per la pubblica amministrazione [L]",
         "lang": "",
         "campus": "Ravenna",
         "url": "https://corsi.unibo.it/laurea/GiuristaImpresa"
     },
     {
-        "id": "8880",
+        "id": 8880,
         "title": "Health economics and management  [LM]",
         "lang": "en",
         "campus": "Bologna",
         "url": "https://corsi.unibo.it/2cycle/euHealthEconomicsManagement"
     },
     {
-        "id": "8481",
+        "id": 8481,
         "title": "Igiene dentale (abilitante alla professione sanitaria di igienista dentale) [L]",
         "lang": "it",
         "campus": "Bologna",
         "url": "https://corsi.unibo.it/laurea/IgieneDentale"
     },
     {
-        "id": "8473",
+        "id": 8473,
         "title": "Infermieristica (abilitante alla professione sanitaria di infermiere) [L]",
         "lang": "it",
         "campus": "Bologna",
         "url": "https://corsi.unibo.it/laurea/Infermieristica"
     },
     {
-        "id": "8474",
+        "id": 8474,
         "title": "Infermieristica (abilitante alla professione sanitaria di infermiere) [L]",
         "lang": "it",
         "campus": "Faenza",
@@ -611,7 +611,7 @@
         "not_supported_reason": "unibo.it fornisce l'orario unicamente come PDF"
     },
     {
-        "id": "8475",
+        "id": 8475,
         "title": "Infermieristica (abilitante alla professione sanitaria di infermiere) [L]",
         "lang": "it",
         "campus": "Rimini",
@@ -620,917 +620,917 @@
         "not_supported_reason": "unibo.it fornisce l'orario unicamente come PDF"
     },
     {
-        "id": "8028",
+        "id": 8028,
         "title": "Informatica [LM]",
         "lang": "it",
         "campus": "Bologna",
         "url": "https://corsi.unibo.it/magistrale/informatica"
     },
     {
-        "id": "8009",
+        "id": 8009,
         "title": "Informatica [L]",
         "lang": "it",
         "campus": "Bologna",
         "url": "https://corsi.unibo.it/laurea/informatica"
     },
     {
-        "id": "8014",
+        "id": 8014,
         "title": "Informatica per il management [L]",
         "lang": "it",
         "campus": "Bologna",
         "url": "https://corsi.unibo.it/laurea/InformaticaManagement"
     },
     {
-        "id": "9234",
+        "id": 9234,
         "title": "Ingegneria aerospaziale [L]",
         "lang": "it",
         "campus": "Forlì",
         "url": "https://corsi.unibo.it/laurea/IngegneriaAerospaziale"
     },
     {
-        "id": "9243",
+        "id": 9243,
         "title": "Ingegneria biomedica [LM]",
         "lang": "it",
         "campus": "Cesena",
         "url": "https://corsi.unibo.it/magistrale/IngegneriaBiomedica"
     },
     {
-        "id": "0946",
+        "id": 946,
         "title": "Ingegneria biomedica [L]",
         "lang": "it",
         "campus": "Cesena",
         "url": "https://corsi.unibo.it/laurea/IngegneriaBiomedica"
     },
     {
-        "id": "8887",
+        "id": 8887,
         "title": "Ingegneria chimica e biochimica [L]",
         "lang": "it",
         "campus": "Bologna",
         "url": "https://corsi.unibo.it/laurea/IngegneriaChimicaBiochimica"
     },
     {
-        "id": "8896",
+        "id": 8896,
         "title": "Ingegneria chimica e di processo [LM]",
         "lang": "it",
         "campus": "Bologna",
         "url": "https://corsi.unibo.it/magistrale/IngegneriaChimicaProcesso"
     },
     {
-        "id": "0930",
+        "id": 930,
         "title": "Ingegneria civile [LM]",
         "lang": "it",
         "campus": "Bologna",
         "url": "https://corsi.unibo.it/magistrale/civile"
     },
     {
-        "id": "8888",
+        "id": 8888,
         "title": "Ingegneria civile [L]",
         "lang": "it",
         "campus": "Bologna",
         "url": "https://corsi.unibo.it/laurea/IngegneriaCivile"
     },
     {
-        "id": "8829",
+        "id": 8829,
         "title": "Ingegneria dei processi e dei sistemi edilizi [LM]",
         "lang": "it",
         "campus": "Ravenna",
         "url": "https://corsi.unibo.it/magistrale/IngegneriaSistemiProcessiEdilizi"
     },
     {
-        "id": "8611",
+        "id": 8611,
         "title": "Ingegneria dell'energia elettrica [LM]",
         "lang": "it",
         "campus": "Bologna",
         "url": "https://corsi.unibo.it/magistrale/elettrica"
     },
     {
-        "id": "9255",
+        "id": 9255,
         "title": "Ingegneria dell'energia elettrica [L]",
         "lang": "it",
         "campus": "Bologna",
         "url": "https://corsi.unibo.it/laurea/elettrica"
     },
     {
-        "id": "9217",
+        "id": 9217,
         "title": "Ingegneria dell’automazione [L]",
         "lang": "it",
         "campus": "Bologna",
         "url": "https://corsi.unibo.it/laurea/IngegneriaAutomazione"
     },
     {
-        "id": "8614",
+        "id": 8614,
         "title": "Ingegneria e scienze informatiche [LM]",
         "lang": "it",
         "campus": "Cesena",
         "url": "https://corsi.unibo.it/magistrale/IngegneriaScienzeInformatiche"
     },
     {
-        "id": "8615",
+        "id": 8615,
         "title": "Ingegneria e scienze informatiche [L]",
         "lang": "it",
         "campus": "Cesena",
         "url": "https://corsi.unibo.it/laurea/IngegneriaScienzeInformatiche"
     },
     {
-        "id": "0940",
+        "id": 940,
         "title": "Ingegneria edile - architettura [LMCU]",
         "lang": "it",
         "campus": "Bologna",
         "url": "https://corsi.unibo.it/magistralecu/IngegneriaEdileArchitettura"
     },
     {
-        "id": "9199",
+        "id": 9199,
         "title": "Ingegneria edile [L]",
         "lang": "it",
         "campus": "Ravenna",
         "url": "https://corsi.unibo.it/laurea/IngegneriaEdile"
     },
     {
-        "id": "0934",
+        "id": 934,
         "title": "Ingegneria elettronica [LM]",
         "lang": "it",
         "campus": "Bologna",
         "url": "https://corsi.unibo.it/magistrale/elettronica"
     },
     {
-        "id": "0923",
+        "id": 923,
         "title": "Ingegneria elettronica e telecomunicazioni [L]",
         "lang": "it",
         "campus": "Bologna",
         "url": "https://corsi.unibo.it/laurea/ElettronicaTelecomunicazioni"
     },
     {
-        "id": "8770",
+        "id": 8770,
         "title": "Ingegneria elettronica e telecomunicazioni per l’energia [LM]",
         "lang": "it",
         "campus": "Cesena",
         "url": "https://corsi.unibo.it/magistrale/IngegneriaElettronicaTelecomunicazioniEnergia"
     },
     {
-        "id": "8767",
+        "id": 8767,
         "title": "Ingegneria elettronica per l'energia e l'informazione [L]",
         "lang": "it",
         "campus": "Cesena",
         "url": "https://corsi.unibo.it/laurea/IngegneriaElettronicaEnergiaInformazione"
     },
     {
-        "id": "0935",
+        "id": 935,
         "title": "Ingegneria energetica [LM]",
         "lang": "it",
         "campus": "Bologna",
         "url": "https://corsi.unibo.it/magistrale/IngegneriaEnergetica"
     },
     {
-        "id": "0924",
+        "id": 924,
         "title": "Ingegneria energetica [L]",
         "lang": "it",
         "campus": "Bologna",
         "url": "https://corsi.unibo.it/laurea/IngegneriaEnergetica"
     },
     {
-        "id": "0936",
+        "id": 936,
         "title": "Ingegneria gestionale [LM]",
         "lang": "it",
         "campus": "Bologna",
         "url": "https://corsi.unibo.it/magistrale/IngegneriaGestionale"
     },
     {
-        "id": "0925",
+        "id": 925,
         "title": "Ingegneria gestionale [L]",
         "lang": "it",
         "campus": "Bologna",
         "url": "https://corsi.unibo.it/laurea/IngegneriaGestionale"
     },
     {
-        "id": "0937",
+        "id": 937,
         "title": "Ingegneria informatica [LM]",
         "lang": "it",
         "campus": "Bologna",
         "url": "https://corsi.unibo.it/magistrale/ingegneriainformatica"
     },
     {
-        "id": "9254",
+        "id": 9254,
         "title": "Ingegneria informatica [L]",
         "lang": "it",
         "campus": "Bologna",
         "url": "https://corsi.unibo.it/laurea/IngegneriaInformatica"
     },
     {
-        "id": "0938",
+        "id": 938,
         "title": "Ingegneria meccanica [LM]",
         "lang": "it",
         "campus": "Bologna",
         "url": "https://corsi.unibo.it/magistrale/IngegneriaMeccanica-Bologna"
     },
     {
-        "id": "8771",
+        "id": 8771,
         "title": "Ingegneria meccanica [LM]",
         "lang": "it",
         "campus": "Forlì",
         "url": "https://corsi.unibo.it/magistrale/IngegneriaMeccanica-Forli"
     },
     {
-        "id": "0927",
+        "id": 927,
         "title": "Ingegneria meccanica [L]",
         "lang": "it",
         "campus": "Bologna",
         "url": "https://corsi.unibo.it/laurea/IngegneriaMeccanica-Bologna"
     },
     {
-        "id": "0949",
+        "id": 949,
         "title": "Ingegneria meccanica [L]",
         "lang": "it",
         "campus": "Forlì",
         "url": "https://corsi.unibo.it/laurea/IngegneriaMeccanicaForli"
     },
     {
-        "id": "9250",
+        "id": 9250,
         "title": "Ingegneria meccatronica [L]",
         "lang": "it",
         "campus": "Bologna",
         "url": "https://corsi.unibo.it/laurea/IngegneriaMeccatronica"
     },
     {
-        "id": "8894",
+        "id": 8894,
         "title": "Ingegneria per l'ambiente e il territorio [LM]",
         "lang": "it",
         "campus": "Bologna",
         "url": "https://corsi.unibo.it/magistrale/IngegneriAmbienteTerritorio"
     },
     {
-        "id": "9198",
+        "id": 9198,
         "title": "Ingegneria per l'ambiente e il territorio [L]",
         "lang": "it",
         "campus": "Bologna",
         "url": "https://corsi.unibo.it/laurea/IngegneriAmbienTerritorio"
     },
     {
-        "id": "0902",
+        "id": 902,
         "title": "Innovation and organization of culture and the arts [LM]",
         "lang": "en",
         "campus": "Bologna",
         "url": "https://corsi.unibo.it/2cycle/gioca"
     },
     {
-        "id": "8049",
+        "id": 8049,
         "title": "Interdisciplinary research and studies on eastern europe [LM]",
         "lang": "en",
         "campus": "Forlì",
         "url": "https://corsi.unibo.it/2cycle/mirees"
     },
     {
-        "id": "9237",
+        "id": 9237,
         "title": "International cooperation on human rights and intercultural heritage [LM]",
         "lang": "en",
         "campus": "Ravenna",
         "url": "https://corsi.unibo.it/2cycle/InternationalCooperation"
     },
     {
-        "id": "8883",
+        "id": 8883,
         "title": "International horticultural science  [LM]",
         "lang": "en",
         "campus": "Bologna",
         "url": "https://corsi.unibo.it/2cycle/InternationalHorticulturalScience"
     },
     {
-        "id": "9226",
+        "id": 9226,
         "title": "International politics and markets [LM]",
         "lang": "en",
         "campus": "Forlì",
         "url": "https://corsi.unibo.it/2cycle/InternationalPoliticsMarkets"
     },
     {
-        "id": "8060",
+        "id": 8060,
         "title": "Interpretazione [LM]",
         "lang": "it",
         "campus": "Forlì",
         "url": "https://corsi.unibo.it/magistrale/Interpretazione"
     },
     {
-        "id": "9220",
+        "id": 9220,
         "title": "Italianistica, culture letterarie europee, scienze linguistiche [LM]",
         "lang": "it",
         "campus": "Bologna",
         "url": "https://corsi.unibo.it/magistrale/ItalianisticaCultureLetterarieLinguistica"
     },
     {
-        "id": "8874",
+        "id": 8874,
         "title": "Language, society and communication  [LM]",
         "lang": "en",
         "campus": "Bologna",
         "url": "https://corsi.unibo.it/2cycle/LanguageSocietyCommunication"
     },
     {
-        "id": "0981",
+        "id": 981,
         "title": "Letterature moderne, comparate e postcoloniali [LM]",
         "lang": "it",
         "campus": "Bologna",
         "url": "https://corsi.unibo.it/magistrale/LetteratureModerneComparatePostcoloniali"
     },
     {
-        "id": "8850",
+        "id": 8850,
         "title": "Lettere [L]",
         "lang": "it",
         "campus": "Bologna",
         "url": "https://corsi.unibo.it/laurea/lettere"
     },
     {
-        "id": "0983",
+        "id": 983,
         "title": "Lingua e cultura italiane per stranieri [LM]",
         "lang": "it",
         "campus": "Bologna",
         "url": "https://corsi.unibo.it/magistrale/LinguaCulturaItalianePerStranieri"
     },
     {
-        "id": "0979",
+        "id": 979,
         "title": "Lingue e letterature straniere [L]",
         "lang": "it",
         "campus": "Bologna",
         "url": "https://corsi.unibo.it/laurea/LingueLetteratureStraniere"
     },
     {
-        "id": "0980",
+        "id": 980,
         "title": "Lingue, mercati e culture dell'asia [L]",
         "lang": "it",
         "campus": "Bologna",
         "url": "https://corsi.unibo.it/laurea/LingueMercatiCultureAsia"
     },
     {
-        "id": "8478",
+        "id": 8478,
         "title": "Logopedia (abilitante alla professione sanitaria di logopedista) [L]",
         "lang": "it",
         "campus": "Faenza",
         "url": "https://corsi.unibo.it/laurea/Logopedia"
     },
     {
-        "id": "9246",
+        "id": 9246,
         "title": "Low carbon technologies and sustainable chemistry [LM]",
         "lang": "en",
         "campus": "Bologna",
         "url": "https://corsi.unibo.it/2cycle/LowCarbonTechnologiesChemistry"
     },
     {
-        "id": "9214",
+        "id": 9214,
         "title": "Management delle attività motorie e sportive [LM]",
         "lang": "it",
         "campus": "Bologna",
         "url": "https://corsi.unibo.it/magistrale/ManagementSport-Bologna"
     },
     {
-        "id": "8843",
+        "id": 8843,
         "title": "Management dell’economia sociale [LM]",
         "lang": "it",
         "campus": "Forlì",
         "url": "https://corsi.unibo.it/magistrale/EconomiaSociale"
     },
     {
-        "id": "8406",
+        "id": 8406,
         "title": "Management e marketing [L]",
         "lang": "it",
         "campus": "Bologna",
         "url": "https://corsi.unibo.it/laurea/ManagementMarketing"
     },
     {
-        "id": "8051",
+        "id": 8051,
         "title": "Mass media e politica [LM]",
         "lang": "it",
         "campus": "Forlì",
         "url": "https://corsi.unibo.it/magistrale/MassMediaPolitica"
     },
     {
-        "id": "8208",
+        "id": 8208,
         "title": "Matematica [LM]",
         "lang": "it",
         "campus": "Bologna",
         "url": "https://corsi.unibo.it/magistrale/matematica"
     },
     {
-        "id": "8010",
+        "id": 8010,
         "title": "Matematica [L]",
         "lang": "it",
         "campus": "Bologna",
         "url": "https://corsi.unibo.it/laurea/matematica"
     },
     {
-        "id": "8059",
+        "id": 8059,
         "title": "Mediazione linguistica interculturale [L]",
         "lang": "it",
         "campus": "Forlì",
         "url": "https://corsi.unibo.it/laurea/MediazioneLinguisticaInterculturale"
     },
     {
-        "id": "8415",
+        "id": 8415,
         "title": "Medicina e chirurgia [LMCU]",
         "lang": "it",
         "campus": "Bologna",
         "url": "https://corsi.unibo.it/magistralecu/MedicinaChirurgia"
     },
     {
-        "id": "8617",
+        "id": 8617,
         "title": "Medicina veterinaria [LMCU]",
         "lang": "it",
         "campus": "Ozzano",
         "url": "https://corsi.unibo.it/magistralecu/MedicinaVeterinaria"
     },
     {
-        "id": "9210",
+        "id": 9210,
         "title": "Medicine and surgery [LMCU]",
         "lang": "en",
         "campus": "Bologna",
         "url": "https://corsi.unibo.it/singlecycle/MedicineAndSurgery"
     },
     {
-        "id": "0989",
+        "id": 989,
         "title": "Neuroscienze e riabilitazione neuropsicologica [LM]",
         "lang": "it",
         "campus": "Cesena",
         "url": "https://corsi.unibo.it/magistrale/Neuroscienze"
     },
     {
-        "id": "8204",
+        "id": 8204,
         "title": "Odontoiatria e protesi dentaria [LMCU]",
         "lang": "it",
         "campus": "Bologna",
         "url": "https://corsi.unibo.it/magistralecu/Odontoiatria"
     },
     {
-        "id": "9249",
+        "id": 9249,
         "title": "Offshore engineering [LM]",
         "lang": "en",
         "campus": "Ravenna",
         "url": "https://corsi.unibo.it/2cycle/OffshoreEngineering"
     },
     {
-        "id": "9201",
+        "id": 9201,
         "title": "Ostetricia (abilitante alla professione sanitaria di ostetrica [L]",
         "lang": "it",
         "campus": "Bologna",
         "url": "https://corsi.unibo.it/laurea/ostetricia"
     },
     {
-        "id": "9206",
+        "id": 9206,
         "title": "Pedagogia [LM]",
         "lang": "it",
         "campus": "Bologna",
         "url": "https://corsi.unibo.it/magistrale/Pedagogia"
     },
     {
-        "id": "9245",
+        "id": 9245,
         "title": "Physics [LM]",
         "lang": "it",
         "campus": "Bologna",
         "url": "https://corsi.unibo.it/magistrale/Physics"
     },
     {
-        "id": "8479",
+        "id": 8479,
         "title": "Podologia (abilitante alla professione sanitaria di podologo) [L]",
         "lang": "it",
         "campus": "Bologna",
         "url": "https://corsi.unibo.it/laurea/Podologia"
     },
     {
-        "id": "8784",
+        "id": 8784,
         "title": "Politica, amministrazione e organizzazione [LM]",
         "lang": "it",
         "campus": "Bologna",
         "url": "https://corsi.unibo.it/magistrale/PoliticaAmministrazioneOrganizzazione"
     },
     {
-        "id": "8882",
+        "id": 8882,
         "title": "Produzioni animali [L]",
         "lang": "it",
         "campus": "Bologna",
         "url": "https://corsi.unibo.it/laurea/ProduzioniAnimali"
     },
     {
-        "id": "8532",
+        "id": 8532,
         "title": "Progettazione e gestione degli ecosistemi agro-territoriali, forestali e del paesaggio [LM]",
         "lang": "it",
         "campus": "Bologna",
         "url": "https://corsi.unibo.it/magistrale/ProgettazioneGestioneEcosistemi"
     },
     {
-        "id": "9228",
+        "id": 9228,
         "title": "Progettazione e gestione dell'intervento educativo nel disagio sociale [LM]",
         "lang": "it",
         "campus": "Bologna",
         "url": "https://corsi.unibo.it/magistrale/InterventoEducativoDisagioSociale"
     },
     {
-        "id": "9229",
+        "id": 9229,
         "title": "Progettazione e gestione dell'intervento educativo nel disagio sociale [LM]",
         "lang": "it",
         "campus": "Rimini",
         "url": "https://corsi.unibo.it/magistrale/InterventoEducativoDisagioSocialeRimini"
     },
     {
-        "id": "0990",
+        "id": 990,
         "title": "Psicologia clinica [LM]",
         "lang": "it",
         "campus": "Cesena",
         "url": "https://corsi.unibo.it/magistrale/PsicologiaClinica"
     },
     {
-        "id": "0991",
+        "id": 991,
         "title": "Psicologia cognitiva applicata [LM]",
         "lang": "it",
         "campus": "Bologna",
         "url": "https://corsi.unibo.it/magistrale/PsicologiaCognitivaApplicata"
     },
     {
-        "id": "0993",
+        "id": 993,
         "title": "Psicologia scolastica e di comunita' [LM]",
         "lang": "it",
         "campus": "Cesena",
         "url": "https://corsi.unibo.it/magistrale/PsicologiaScolasticaComunita"
     },
     {
-        "id": "8854",
+        "id": 8854,
         "title": "Quantitative finance [LM]",
         "lang": "en",
         "campus": "Bologna",
         "url": "https://corsi.unibo.it/2cycle/Qfinance"
     },
     {
-        "id": "8782",
+        "id": 8782,
         "title": "Relazioni internazionali [LM]",
         "lang": "it",
         "campus": "Bologna",
         "url": "https://corsi.unibo.it/magistrale/RelazioniInternazionali"
     },
     {
-        "id": "8839",
+        "id": 8839,
         "title": "Resource economics and sustainable development  [LM]",
         "lang": "en",
         "campus": "Rimini",
         "url": "https://corsi.unibo.it/2cycle/ResourceEconomicsSustainableDevelopment"
     },
     {
-        "id": "8537",
+        "id": 8537,
         "title": "Science for the conservation - restoration of cultural heritage [LM]",
         "lang": "en",
         "campus": "Ravenna",
         "url": "https://corsi.unibo.it/2cycle/ScienceForConservation"
     },
     {
-        "id": "8011",
+        "id": 8011,
         "title": "Scienze ambientali [L]",
         "lang": "it",
         "campus": "Ravenna",
         "url": "https://corsi.unibo.it/laurea/ScienzeAmbientali"
     },
     {
-        "id": "8012",
+        "id": 8012,
         "title": "Scienze biologiche [L]",
         "lang": "it",
         "campus": "Bologna",
         "url": "https://corsi.unibo.it/laurea/ScienzeBiologiche"
     },
     {
-        "id": "8491",
+        "id": 8491,
         "title": "Scienze criminologiche per l'investigazione e la sicurezza [LM]",
         "lang": "it",
         "campus": "Forlì",
         "url": "https://corsi.unibo.it/magistrale/ScienzeCriminologiche"
     },
     {
-        "id": "8838",
+        "id": 8838,
         "title": "Scienze del libro e del documento [LM]",
         "lang": "it",
         "campus": "Ravenna",
         "url": "https://corsi.unibo.it/magistrale/ScienzeLibro"
     },
     {
-        "id": "8525",
+        "id": 8525,
         "title": "Scienze del territorio e dell'ambiente agro-forestale [L]",
         "lang": "it",
         "campus": "Bologna",
         "url": "https://corsi.unibo.it/laurea/ScienzeTerritorioAmbiente"
     },
     {
-        "id": "8885",
+        "id": 8885,
         "title": "Scienze della comunicazione [L]",
         "lang": "it",
         "campus": "Bologna",
         "url": "https://corsi.unibo.it/laurea/ScienzeComunicazione"
     },
     {
-        "id": "8540",
+        "id": 8540,
         "title": "Scienze della formazione primaria [LMCU]",
         "lang": "it",
         "campus": "Bologna",
         "url": "https://corsi.unibo.it/magistralecu/ScienzeFormazionePrimaria"
     },
     {
-        "id": "8512",
+        "id": 8512,
         "title": "Scienze delle attivita' motorie e sportive [L]",
         "lang": "it",
         "campus": "Bologna",
         "url": "https://corsi.unibo.it/laurea/ScienzeMotorieSportive"
     },
     {
-        "id": "8766",
+        "id": 8766,
         "title": "Scienze delle attivita' motorie e sportive [L]",
         "lang": "it",
         "campus": "Rimini",
         "url": "https://corsi.unibo.it/laurea/ScienzeMotorieSportive-Rimini"
     },
     {
-        "id": "8878",
+        "id": 8878,
         "title": "Scienze delle professioni sanitarie della prevenzione [LM]",
         "lang": "it",
         "campus": "Imola",
         "url": "https://corsi.unibo.it/magistrale/ScienzePrevenzione"
     },
     {
-        "id": "8780",
+        "id": 8780,
         "title": "Scienze dell’educazione permanente e della formazione continua [LM]",
         "lang": "it",
         "campus": "Bologna",
         "url": "https://corsi.unibo.it/magistrale/ScienzeEducazionePermanente"
     },
     {
-        "id": "9257",
+        "id": 9257,
         "title": "Scienze e gestione della natura [LM]",
         "lang": "it",
         "campus": "Bologna",
         "url": "https://corsi.unibo.it/magistrale/ScienzeGestioneNatura"
     },
     {
-        "id": "9215",
+        "id": 9215,
         "title": "Scienze e tecniche dell'attivita' motoria preventiva e adattata [LM]",
         "lang": "it",
         "campus": "Rimini",
         "url": "https://corsi.unibo.it/magistrale/AttivitaMotoriaPreventivaAdattata-Rimini"
     },
     {
-        "id": "8037",
+        "id": 8037,
         "title": "Scienze e tecniche dell'attivita' sportiva [LM]",
         "lang": "it",
         "campus": "Bologna",
         "url": "https://corsi.unibo.it/magistrale/ScienzeTecnicheAttivitaSportiva"
     },
     {
-        "id": "8774",
+        "id": 8774,
         "title": "Scienze e tecniche psicologiche [L]",
         "lang": "it",
         "campus": "Cesena",
         "url": "https://corsi.unibo.it/laurea/ScienzeTecnichePsicologiche"
     },
     {
-        "id": "9235",
+        "id": 9235,
         "title": "Scienze e tecnologie agrarie [LM]",
         "lang": "it",
         "campus": "Bologna",
         "url": "https://corsi.unibo.it/magistrale/ScienzeTecnologieAgrarie"
     },
     {
-        "id": "8531",
+        "id": 8531,
         "title": "Scienze e tecnologie alimentari [LM]",
         "lang": "it",
         "campus": "Cesena",
         "url": "https://corsi.unibo.it/magistrale/ScienzeTecnologieAlimentari"
     },
     {
-        "id": "8518",
+        "id": 8518,
         "title": "Scienze farmaceutiche applicate [L]",
         "lang": "it",
         "campus": "Imola",
         "url": "https://corsi.unibo.it/laurea/ScienzeFarmaceutiche"
     },
     {
-        "id": "8773",
+        "id": 8773,
         "title": "Scienze filosofiche [LM]",
         "lang": "it",
         "campus": "Bologna",
         "url": "https://corsi.unibo.it/magistrale/ScienzeFilosofiche"
     },
     {
-        "id": "8015",
+        "id": 8015,
         "title": "Scienze geologiche [L]",
         "lang": "it",
         "campus": "Bologna",
         "url": "https://corsi.unibo.it/laurea/ScienzeGeologiche"
     },
     {
-        "id": "8488",
+        "id": 8488,
         "title": "Scienze infermieristiche e ostetriche [LM]",
         "lang": "it",
         "campus": "Bologna",
         "url": "https://corsi.unibo.it/magistrale/ScienzeInfermieristicheOstetriche"
     },
     {
-        "id": "9247",
+        "id": 9247,
         "title": "Scienze internazionali e diplomatiche [LM]",
         "lang": "it",
         "campus": "Forlì",
         "url": "https://corsi.unibo.it/magistrale/ScienzeInternazionaliDiplomatiche"
     },
     {
-        "id": "8048",
+        "id": 8048,
         "title": "Scienze internazionali e diplomatiche [L]",
         "lang": "it",
         "campus": "Forlì",
         "url": "https://corsi.unibo.it/laurea/ScienzeInternazionaliDiplomatiche"
     },
     {
-        "id": "8016",
+        "id": 8016,
         "title": "Scienze naturali [L]",
         "lang": "it",
         "campus": "Bologna",
         "url": "https://corsi.unibo.it/laurea/ScienzeNaturali"
     },
     {
-        "id": "8853",
+        "id": 8853,
         "title": "Scienze politiche, sociali e internazionali [L]",
         "lang": "it",
         "campus": "Bologna",
         "url": "https://corsi.unibo.it/laurea/ScienzePoliticheSocialiInternazionali"
     },
     {
-        "id": "8873",
+        "id": 8873,
         "title": "Scienze statistiche [L]",
         "lang": "it",
         "campus": "Bologna",
         "url": "https://corsi.unibo.it/laurea/ScienzeStatistiche"
     },
     {
-        "id": "8877",
+        "id": 8877,
         "title": "Scienze statistiche, finanziarie e attuariali [LM]",
         "lang": "it",
         "campus": "Rimini",
         "url": "https://corsi.unibo.it/magistrale/ScienzeStatisticheFinanziarieAttuariali"
     },
     {
-        "id": "8845",
+        "id": 8845,
         "title": "Scienze storiche e orientalistiche [LM]",
         "lang": "it",
         "campus": "Bologna",
         "url": "https://corsi.unibo.it/magistrale/ScienzeStoricheOrientalistiche"
     },
     {
-        "id": "8886",
+        "id": 8886,
         "title": "Semiotica [LM]",
         "lang": "it",
         "campus": "Bologna",
         "url": "https://corsi.unibo.it/magistrale/semiotica"
     },
     {
-        "id": "8040",
+        "id": 8040,
         "title": "Servizio sociale [L]",
         "lang": "it",
         "campus": "Bologna",
         "url": "https://corsi.unibo.it/laurea/ServizioSociale"
     },
     {
-        "id": "8521",
+        "id": 8521,
         "title": "Sicurezza e qualita' delle produzioni animali [LM]",
         "lang": "it",
         "campus": "Ozzano",
         "url": "https://corsi.unibo.it/magistrale/ProduzioniAnimali"
     },
     {
-        "id": "8495",
+        "id": 8495,
         "title": "Sociologia [L]",
         "lang": "it",
         "campus": "Forlì",
         "url": "https://corsi.unibo.it/laurea/SociologiaForli"
     },
     {
-        "id": "8786",
+        "id": 8786,
         "title": "Sociologia e servizio sociale [LM]",
         "lang": "it",
         "campus": "Bologna",
         "url": "https://corsi.unibo.it/magistrale/SociologiaServizioSociale"
     },
     {
-        "id": "9174",
+        "id": 9174,
         "title": "Specialized translation [LM]",
         "lang": "en",
         "campus": "Forlì",
         "url": "https://corsi.unibo.it/2cycle/SpecializedTranslation"
     },
     {
-        "id": "8876",
+        "id": 8876,
         "title": "Statistica, economia e impresa [LM]",
         "lang": "it",
         "campus": "Bologna",
         "url": "https://corsi.unibo.it/magistrale/StatisticaEconomiaImpresa"
     },
     {
-        "id": "9222",
+        "id": 9222,
         "title": "Statistical sciences [LM]",
         "lang": "en",
         "campus": "Bologna",
         "url": "https://corsi.unibo.it/2cycle/StatisticalSciences"
     },
     {
-        "id": "0962",
+        "id": 962,
         "title": "Storia [L]",
         "lang": "it",
         "campus": "Bologna",
         "url": "https://corsi.unibo.it/laurea/storia"
     },
     {
-        "id": "8890",
+        "id": 8890,
         "title": "Sviluppo e cooperazione internazionale [L]",
         "lang": "it",
         "campus": "Bologna",
         "url": "https://corsi.unibo.it/laurea/SviluppoCooperazioneInternazionale"
     },
     {
-        "id": "9200",
+        "id": 9200,
         "title": "Sviluppo locale e globale [LM]",
         "lang": "it",
         "campus": "Bologna",
         "url": "https://corsi.unibo.it/magistrale/SviluppoLocaleGlobale"
     },
     {
-        "id": "8487",
+        "id": 8487,
         "title": "Tecniche della prevenzione nell'ambiente e nei luoghi di lavoro (abilitante  alla professione sanitaria di tecnico della prevenzione nell'ambiente e nei luoghi di lavoro) [L]",
         "lang": "it",
         "campus": "Imola",
         "url": "https://corsi.unibo.it/laurea/PrevenzioneAmbienteLavoro"
     },
     {
-        "id": "8484",
+        "id": 8484,
         "title": "Tecniche di laboratorio biomedico (abilitante alla professione sanitaria di tecnico di laboratorio biomedico) [L]",
         "lang": "it",
         "campus": "Bologna",
         "url": "https://corsi.unibo.it/laurea/tlb-bologna"
     },
     {
-        "id": "8482",
+        "id": 8482,
         "title": "Tecniche di neurofisiopatologia (abilitante alla professione sanitaria di tecnico di neurofisiopatologia) [L]",
         "lang": "it",
         "campus": "Bologna",
         "url": "https://corsi.unibo.it/laurea/Neurofisiopatologia"
     },
     {
-        "id": "8485",
+        "id": 8485,
         "title": "Tecniche di radiologia medica, per immagini e radioterapia (abilitante alla professione sanitaria di tecnico di radiologia medica) [L]",
         "lang": "it",
         "campus": "Bologna",
         "url": "https://corsi.unibo.it/laurea/TecnicheRadiologiaMedica"
     },
     {
-        "id": "8483",
+        "id": 8483,
         "title": "Tecniche ortopediche (abilitante alla professione sanitaria di tecnico ortopedico) [L]",
         "lang": "it",
         "campus": "Bologna",
         "url": "https://corsi.unibo.it/laurea/TecnicheOrtopediche"
     },
     {
-        "id": "8524",
+        "id": 8524,
         "title": "Tecnologie agrarie [L]",
         "lang": "it",
         "campus": "Bologna",
         "url": "https://corsi.unibo.it/laurea/TecnologieAgrarie"
     },
     {
-        "id": "8528",
+        "id": 8528,
         "title": "Tecnologie alimentari [L]",
         "lang": "it",
         "campus": "Cesena",
         "url": "https://corsi.unibo.it/laurea/TecnologieAlimentari"
     },
     {
-        "id": "9205",
+        "id": 9205,
         "title": "Telecommunications engineering [LM]",
         "lang": "en",
         "campus": "Bologna",
         "url": "https://corsi.unibo.it/2cycle/TelecommunicationsEngineering"
     },
     {
-        "id": "8609",
+        "id": 8609,
         "title": "Tourism economics and management  [LM]",
         "lang": "en",
         "campus": "Rimini",
         "url": "https://corsi.unibo.it/2cycle/team"
     },
     {
-        "id": "8523",
+        "id": 8523,
         "title": "Verde ornamentale e tutela del paesaggio [L]",
         "lang": "it",
         "campus": "Imola",
         "url": "https://corsi.unibo.it/laurea/verdepaesaggio"
     },
     {
-        "id": "8527",
+        "id": 8527,
         "title": "Viticoltura ed enologia [L]",
         "lang": "it",
         "campus": "Cesena",
         "url": "https://corsi.unibo.it/laurea/ViticolturaEnologia"
     },
     {
-        "id": "9227",
+        "id": 9227,
         "title": "Wellness culture: sport, health and tourism [LM]",
         "lang": "en",
         "campus": "Rimini",
         "url": "https://corsi.unibo.it/2cycle/WellnessCulture"
     },
     {
-        "id": "9236",
+        "id": 9236,
         "title": "Work, organizational and personnel psychology [LM]",
         "lang": "en",
         "campus": "Cesena",

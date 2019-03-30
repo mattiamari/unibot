@@ -27,10 +27,20 @@ def parse_lang(src_html):
     return LANGS[lang] if lang in LANGS else ''
 
 
+def parse_id(src_html):
+    id = match_or_blank(src_html, RE_ID)
+    out = 0
+    try:
+        out = int(id)
+    except Exception:
+        pass
+    return out
+
+
 def course_factory(src_html):
     desc = src_html.next_sibling.next_sibling
     return {
-        'id': match_or_blank(desc, RE_ID),
+        'id': parse_id(desc),
         'title': next(src_html.stripped_strings),
         'lang': parse_lang(desc),
         'campus': match_or_blank(desc, RE_CAMPUS),
