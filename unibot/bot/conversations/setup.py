@@ -3,10 +3,10 @@ import logging
 from telegram.ext import ConversationHandler, CommandHandler, MessageHandler, Filters
 from telegram import ParseMode
 
+from unibot.urlfetch import FetchError
 import unibot.bot.messages as messages
 import unibot.unibo.courses as courses
 from unibot.bot.users import UserRepo, User, UserSettingsRepo, UserSettings, UserNotFoundError
-from unibot.unibo.urlfetch import FetchError
 
 
 SETUP_SEARCH, SETUP_SEARCH_SELECT, SETUP_YEAR, SETUP_CURRICULA_SELECT = range(0, 4)

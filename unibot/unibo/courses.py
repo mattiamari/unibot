@@ -4,8 +4,8 @@ import re
 import json
 import sys
 
-from unibot.schedule.urlfetch import fetch
-from unibot.schedule.cache import cache_for
+from unibot.urlfetch import fetch
+from unibot.cache import cache_for
 
 QUERY_ALLOWED_CHARS = string.ascii_letters + string.digits + 'àèéìòù '
 QUERY_MIN_LENGTH = 4

@@ -1,8 +1,8 @@
 import logging
 from datetime import datetime, date, timedelta
 
-from unibot.schedule.urlfetch import fetch
-from unibot.schedule.cache import cache_for
+from unibot.cache import cache_for
+from unibot.urlfetch import fetch
 from unibot.schedule.courses import get_url_schedule
 
 
