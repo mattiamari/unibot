@@ -4,9 +4,9 @@ from telegram.ext import ConversationHandler, CommandHandler, MessageHandler, Fi
 from telegram import ParseMode
 
 import unibot.bot.messages as messages
-import unibot.schedule.courses as courses
+import unibot.unibo.courses as courses
 from unibot.bot.users import UserRepo, User, UserSettingsRepo, UserSettings
-from unibot.schedule.urlfetch import FetchError
+from unibot.unibo.urlfetch import FetchError
 
 
 SETUP_SEARCH, SETUP_SEARCH_SELECT, SETUP_YEAR, SETUP_CURRICULA_SELECT = range(0, 4)

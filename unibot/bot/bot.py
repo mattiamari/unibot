@@ -8,7 +8,7 @@ from telegram import ParseMode
 import telegram.error
 
 from unibot.bot import conversations, users as bot_users, announcements, messages
-from unibot.schedule import schedule as class_schedule
+from unibot.unibo import schedule as class_schedule
 
 
 class Bot:

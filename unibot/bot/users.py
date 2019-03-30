@@ -4,6 +4,16 @@ from os import environ as env
 from datetime import datetime, timedelta, time
 
 
+class UserNotFoundError(Exception):
+    def __init__(self, user_id):
+        super().__init__("User '{}' does not exist".format(user_id))
+
+
+class ChatNotFoundError(Exception):
+    def __init__(self, chat_id):
+        super().__init__("Chat '{}' does not exist".format(chat_id))
+
+
 class Repo:
     def __init__(self):
         self.db = sqlite3.connect(env['DB_PATH'])
@@ -25,13 +35,13 @@ class UserRepo(Repo):
     def has(self, user_id, chat_id):
         res = self.db.execute("select count(*) from user where user_id=? and chat_id=?",
                               (user_id, chat_id)).fetchone()[0]
-        return True if res > 0 else False
+        return res > 0
 
     def get(self, user_id, chat_id):
         res = self.db.execute("select * from user where user_id=? and chat_id=?", (user_id, chat_id)).fetchone()
-        if isinstance(res, sqlite3.Row):
-            return _user_factory(res)
-        return None
+        if not isinstance(res, sqlite3.Row):
+            raise UserNotFoundError(user_id)
+        return user_factory(res)
 
     def update(self, user):
         self.db.execute("insert or replace into user (user_id, chat_id, first_name, last_name, username) "
@@ -61,32 +71,32 @@ class UserSettingsRepo(Repo):
 
     def has(self, chat_id):
         res = self.db.execute("select count(*) from user_settings where chat_id=? and deleted != 1", (chat_id,)).fetchone()[0]
-        return True if res > 0 else False
+        return res > 0
 
     def get(self, chat_id):
         res = self.db.execute("select * from user_settings where chat_id=? and deleted != 1", (chat_id,)).fetchone()
-        if isinstance(res, sqlite3.Row):
-            return _usersettings_factory(res)
-        return None
+        if not isinstance(res, sqlite3.Row):
+            raise ChatNotFoundError(chat_id)
+        return usersettings_factory(res)
 
     def update(self, settings):
         self.db.execute("insert or replace into user_settings (user_id, chat_id, course_id, year, curricula, do_remind, remind_time) "
                         "values (:user_id, :chat_id, :course_id, :year, :curricula, :do_remind, :remind_time)",
-                        _usersettings_dict(settings))
+                        usersettings_dict(settings))
         self.db.commit()
 
     def delete(self, settings):
-        self.db.execute("update user_settings set deleted=1 where chat_id=:chat_id", _usersettings_dict(settings))
+        self.db.execute("update user_settings set deleted=1 where chat_id=:chat_id", usersettings_dict(settings))
         self.db.commit()
         logging.info("Deleted user chat '%d'", settings.chat_id)
 
     def get_all(self):
         res = self.db.execute("select * from user_settings where deleted != 1")
-        return [_usersettings_factory(x) for x in res]
+        return [usersettings_factory(x) for x in res]
 
     def get_to_remind(self):
         res = self.db.execute("select * from user_settings where do_remind=1 and deleted != 1")
-        return [_usersettings_factory(x) for x in res]
+        return [usersettings_factory(x) for x in res]
 
     def get_all_chat_id(self):
         res = self.db.execute("select chat_id from user_settings where deleted != 1")
@@ -122,7 +132,7 @@ class UserSettings:
         )
 
 
-def _user_factory(row):
+def user_factory(row):
     return User(
         row['user_id'],
         row['chat_id'],
@@ -131,11 +141,11 @@ def _user_factory(row):
         row['username'])
 
 
-def _usersettings_factory(row):
+def usersettings_factory(row):
     do_remind = False
     remind_time = None
     try:
-        remind_time = _parse_remind_time(row['remind_time'])
+        remind_time = parse_remind_time(row['remind_time'])
         do_remind = row['do_remind']
     except Exception:
         pass
@@ -151,7 +161,7 @@ def _usersettings_factory(row):
     )
 
 
-def _usersettings_dict(settings):
+def usersettings_dict(settings):
     d = settings.__dict__.copy()
     d['remind_time'] = None
     if settings.remind_time is not None:
@@ -159,5 +169,5 @@ def _usersettings_dict(settings):
     return d
 
 
-def _parse_remind_time(time_str):
+def parse_remind_time(time_str):
     return datetime.strptime(time_str, UserSettings.TIME_FORMAT).time()
