@@ -83,7 +83,7 @@ class Bot:
             schedule = class_schedule.get_schedule(
                 settings.course_id, settings.year, settings.curricula)
         except NotSupportedError as ex:
-            self.send(update, context, messages.COURSE_NOT_SUPPORTED)
+            self.send(update, context, messages.COURSE_NOT_SUPPORTED.format(ex.reason))
             return
         except Exception as ex:
             logging.exception(ex)
@@ -139,6 +139,10 @@ class Bot:
                 msg = msg.format(schedule.today().tostring(with_date=True))
                 context.bot.send_message(chat_id=user.chat_id, parse_mode=ParseMode.HTML, text=msg)
                 os_time.sleep(0.1)
+            except NotSupportedError as ex:
+                context.bot.send_message(chat_id=user.chat_id,
+                                         parse_mode=ParseMode.HTML,
+                                         text=messages.COURSE_NOT_SUPPORTED.format(ex.reason))
             except telegram.error.Unauthorized as e:
                 logging.warning(e)
                 settings_repo.delete(user)
