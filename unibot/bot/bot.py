@@ -77,7 +77,7 @@ class Bot:
         except bot_users.ChatNotFoundError:
             self.send(update, context, messages.NEED_SETUP)
             return
-        logging.info("REQUEST %s chat_id=%d course_id=%d year=%d curricula=%s",
+        logging.info("REQUEST %s chat_id=%d course_id=%s year=%d curricula=%s",
                      schedule_type, update.effective_chat.id, settings.course_id,
                      settings.year, settings.curricula)
         try:
@@ -114,7 +114,7 @@ class Bot:
         except bot_users.ChatNotFoundError:
             self.send(update, context, messages.NEED_SETUP)
             return
-        logging.info("REQUEST lastminute chat_id=%d course_id=%d year=%d curricula=%s",
+        logging.info("REQUEST lastminute chat_id=%d course_id=%s year=%d curricula=%s",
                      update.effective_chat.id, setting.course_id,
                      setting.year, setting.curricula)
         course = get_courses().get(setting.course_id)
