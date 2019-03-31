@@ -3,7 +3,7 @@ from datetime import datetime, date, timedelta
 
 from unibot.cache import cache_for
 from unibot.urlfetch import fetch
-from unibot.schedule.courses import get_url_schedule
+from unibot.unibo.courses import get_courses
 
 
 DAY_NAMES = ['Lunedì', 'Martedì', 'Mercoledì', 'Giovedì', 'Venerdì', 'Sabato', 'Domenica']
@@ -126,7 +126,8 @@ class Schedule:
 
 @cache_for(minutes=60)
 def get_schedule(course_id, year, curricula=''):
-    src_url = get_url_schedule(course_id, year, curricula)
+    courses = get_courses()
+    src_url = courses.get(course_id).get_url_schedule(year, curricula)
     src_data = fetch(src_url).json()
     if 'events' not in src_data:
         logging.error("'events' key not found for url '%s'", src_url)

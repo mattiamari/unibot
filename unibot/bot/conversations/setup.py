@@ -5,7 +5,7 @@ from telegram import ParseMode
 
 from unibot.urlfetch import FetchError
 import unibot.bot.messages as messages
-import unibot.unibo.courses as courses
+from unibot.unibo.courses import get_courses, get_curricula, CourseNotFoundError, QueryTooShortError
 from unibot.bot.users import UserRepo, User, UserSettingsRepo, UserSettings, UserNotFoundError
 
 
@@ -62,9 +62,10 @@ def setup_step_start(update, context):
 
 
 def setup_step_search(update, context):
+    courses = get_courses()
     try:
         matches = courses.search(update.message.text)
-    except courses.QueryTooShortError:
+    except QueryTooShortError:
         send(update, context, messages.QUERY_TOO_SHORT)
         return SETUP_SEARCH
 
@@ -74,7 +75,7 @@ def setup_step_search(update, context):
 
     matches = dict(enumerate(matches, start=1))
     conv_context[update.effective_chat.id]['search_matches'] = matches
-    matches_list = ''.join(messages.COURSE_SEARCH_RESULT_ITEM.format(n, c['title'])
+    matches_list = ''.join(messages.COURSE_SEARCH_RESULT_ITEM.format(n, c.search_name)
                            for (n, c) in matches.items())
 
     send(update, context, '{}\n\n{}\n{}'.format(messages.COURSE_SEARCH_RESULTS,
@@ -96,11 +97,12 @@ def setup_step_search_select(update, context):
         return SETUP_SEARCH_SELECT
 
     selected_course = search_matches[selected_num]
-    if not selected_course['supported']:
-        send(update, context, messages.COURSE_NOT_SUPPORTED.format(selected_course['not_supported_reason']))
+    if not selected_course.is_supported():
+        send(update, context, messages.COURSE_NOT_SUPPORTED.format(selected_course.not_supported_reason))
         return ConversationHandler.END
 
-    conv_context[update.effective_chat.id]['settings'].course_id = selected_course['id']
+    conv_context[update.effective_chat.id]['course'] = selected_course
+    conv_context[update.effective_chat.id]['settings'].course_id = selected_course.course_id
     send(update, context, messages.SELECT_YEAR)
     return SETUP_YEAR
 
@@ -108,11 +110,10 @@ def setup_step_search_select(update, context):
 def setup_step_year(update, context):
     conv_context[update.effective_chat.id]['settings'].year = int(update.message.text)
 
+    course = conv_context[update.effective_chat.id]['course']
+    year = conv_context[update.effective_chat.id]['settings'].year
     try:
-        curricula = courses.get_curricula(
-            conv_context[update.effective_chat.id]['settings'].course_id,
-            conv_context[update.effective_chat.id]['settings'].year
-        )
+        curricula = get_curricula(course, year)
     except FetchError:
         send(update, context, messages.NO_CURRICULA_FOUND)
         return SETUP_YEAR

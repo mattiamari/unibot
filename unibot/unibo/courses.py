@@ -7,13 +7,12 @@ import sys
 from unibot.urlfetch import fetch
 from unibot.cache import cache_for
 
+
 QUERY_ALLOWED_CHARS = string.ascii_letters + string.digits + 'àèéìòù '
 QUERY_MIN_LENGTH = 4
 SCHEDULE_SUBDIR_URL = {'it': 'orario-lezioni', 'en': 'timetable'}
 AVAILABLE_CURRICULA_URL = '@@available_curricula?anno={}&curricula='
 SCHEDULE_URL = '@@orario_reale_json?anno={}&curricula={}'
-
-courses = None
 
 
 class QueryTooShortError(Exception):
@@ -21,53 +20,77 @@ class QueryTooShortError(Exception):
         super().__init__("Search query '{}' is too short".format(query))
 
 
-def _course_factory(course):
-    if 'supported' not in course:
-        course['supported'] = True
-        course['not_supported_reason'] = ''
-    return course
+class CourseNotFoundError(Exception):
+    def __init__(self, course_id):
+        super().__init__("Course '{}' not found".format(course_id))
 
 
-try:
-    with open('assets/courses.json', 'r') as f:
-        courses = [_course_factory(c) for c in json.load(f)]
-except Exception as e:
-    logging.exception(e)
-    sys.exit(1)
+class Course:
+    def __init__(self, course_id, title, lang, campus, url, supported=True, not_supported_reason=''):
+        self.course_id = course_id
+        self.title = title
+        self.lang = lang
+        self.campus = campus
+        self.url = url
+        self.supported = supported
+        self.not_supported_reason = not_supported_reason
+
+    @property
+    def search_name(self):
+        return '{} - {} - {}'.format(self.title, self.course_id, self.campus)
+
+    def is_supported(self):
+        return self.supported
+
+    def get_url_curricula(self, year):
+        curricula_part = AVAILABLE_CURRICULA_URL.format(year)
+        return '{}/{}/{}'.format(self.url, SCHEDULE_SUBDIR_URL[self.lang], curricula_part)
+
+    def get_url_schedule(self, year, curricula=''):
+        schedule_part = SCHEDULE_URL.format(year, curricula)
+        return '{}/{}/{}'.format(self.url, SCHEDULE_SUBDIR_URL[self.lang], schedule_part)
 
 
-def get_url_curricula(course_id, year):
-    course = get_course(course_id)
-    if course is None:
-        return None
-    curricula_part = AVAILABLE_CURRICULA_URL.format(year)
-    return '{}/{}/{}'.format(course['url'], SCHEDULE_SUBDIR_URL[course['lang']], curricula_part)
+class CourseRepo:
+    def __init__(self, courses):
+        self.courses = courses
+
+    def get(self, course_id):
+        match = next((c for c in self.courses if c.course_id == course_id), None)
+        if not match:
+            raise CourseNotFoundError(course_id)
+        return match
+
+    def search(self, query):
+        query = ''.join(c if c not in string.punctuation else ' ' for c in query)
+        query = ''.join(c for c in query if c in QUERY_ALLOWED_CHARS)
+        query = ' '.join(query.split())
+        if len(query) < QUERY_MIN_LENGTH:
+            raise QueryTooShortError(query)
+        query = query.replace(' ', '.*')
+        regx = re.compile(query, flags=re.IGNORECASE)
+        return [c for c in self.courses if regx.search(c.search_name)]
 
 
-def get_url_schedule(course_id, year, curricula=''):
-    course = get_course(course_id)
-    if course is None:
-        return None
-    schedule_part = SCHEDULE_URL.format(year, curricula)
-    return '{}/{}/{}'.format(course['url'], SCHEDULE_SUBDIR_URL[course['lang']], schedule_part)
-
-
-def get_course(course_id):
-    return next(c for c in courses if c['id'] == course_id)
+@cache_for(minutes=120)
+def get_courses():
+    try:
+        with open('assets/courses.json', 'r') as fp:
+            courses = [course_factory(c) for c in json.load(fp)]
+            return CourseRepo(courses)
+    except Exception as e:
+        logging.exception(e)
+        sys.exit(1)
 
 
 @cache_for(minutes=60)
-def get_curricula(course_id, year):
-    url = get_url_curricula(course_id, year)
-    return fetch(url).json()
+def get_curricula(course, year):
+    return fetch(course.get_url_curricula(year)).json()
 
 
-def search(query):
-    query = ''.join(c if c not in string.punctuation else ' ' for c in query)
-    query = ''.join(c for c in query if c in QUERY_ALLOWED_CHARS)
-    query = ' '.join(query.split())
-    if len(query) < QUERY_MIN_LENGTH:
-        raise QueryTooShortError(query)
-    query = query.replace(' ', '.*')
-    regx = re.compile(query, flags=re.IGNORECASE)
-    return [c for c in courses if regx.search(c['title'])]
+def course_factory(course):
+    out = Course(course['id'], course['title'], course['lang'], course['campus'], course['url'])
+    if 'supported' in course:
+        out.supported = course['supported']
+        out.not_supported_reason = course['not_supported_reason']
+    return out
