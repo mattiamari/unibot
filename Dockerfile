@@ -15,7 +15,9 @@ RUN apk --no-cache add \
   git clone https://github.com/python-telegram-bot/python-telegram-bot --recursive /tmp/python-telegram-bot && \
   cd /tmp/python-telegram-bot && \
   python3 setup.py install && \
+  cd / && \
   rm -rf /tmp/python-telegram-bot && \
+  python3 -m pip install beautifulsoup4 && \
   apk --no-cache del git build-base python3-dev openssl-dev && \
   ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 

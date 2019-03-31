@@ -30,13 +30,15 @@ class NotSupportedError(Exception):
         super().__init__("Course '{}' is not supported".format(course_id))
         self.reason = reason
 
+
 class Course:
-    def __init__(self, course_id, title, lang, campus, url, supported=True, not_supported_reason=''):
+    def __init__(self, course_id, title, lang, campus, url, url_lastminute=None, supported=True, not_supported_reason=''):
         self.course_id = course_id
         self.title = title
         self.lang = lang
         self.campus = campus
         self.url = url
+        self.url_lastminute = url_lastminute
         self.supported = supported
         self.not_supported_reason = not_supported_reason
 
@@ -46,6 +48,9 @@ class Course:
 
     def is_supported(self):
         return self.supported
+
+    def has_lastminute(self):
+        return bool(self.url_lastminute)
 
     def get_url_curricula(self, year):
         if not self.supported:
@@ -98,8 +103,11 @@ def get_curricula(course, year):
 
 
 def course_factory(course):
-    out = Course(course['id'], course['title'], course['lang'], course['campus'], course['url'])
+    out = Course(course['id'], course['title'], course['lang'],
+                 course['campus'], course['url'])
     if 'supported' in course:
         out.supported = course['supported']
         out.not_supported_reason = course['not_supported_reason']
+    if 'url_lastminute' in course:
+        out.url_lastminute = course['url_lastminute']
     return out

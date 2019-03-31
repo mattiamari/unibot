@@ -65,3 +65,6 @@ NO_REMIND_THIS_WEEK = "Per il resto della settimana non ti scriverò, lo farò s
 
 FETCH_ERROR = "Non sono riuscito ad ottenere i dati. Riprova più tardi."
 SCHEDULE_FETCH_ERROR = "Non sono riuscito ad ottenere l'orario. Riprova più tardi."
+
+NOT_SUPPORTED_LASTMINUTE = "Last Minute è supportato solo dal campus di Rimini."
+NO_NEWS = "Nessuna news"

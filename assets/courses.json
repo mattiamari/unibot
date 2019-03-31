@@ -25,7 +25,8 @@
         "title": "Advanced cosmetic sciences [LM]",
         "lang": "en",
         "campus": "Rimini",
-        "url": "https://corsi.unibo.it/2cycle/AdvancedCosmeticSciences"
+        "url": "https://corsi.unibo.it/2cycle/AdvancedCosmeticSciences",
+        "url_lastminute": "http://www.rimini.unibo.it/bacheca/avvisi_farmacia.asp"
     },
     {
         "id": "9256",
@@ -46,7 +47,8 @@
         "title": "Amministrazione e gestione d'impresa [LM]",
         "lang": "it",
         "campus": "Rimini",
-        "url": "https://corsi.unibo.it/magistrale/aegi"
+        "url": "https://corsi.unibo.it/magistrale/aegi",
+        "url_lastminute": "http://www.rimini.unibo.it/bacheca/avvisi_economia.asp"
     },
     {
         "id": "8418",
@@ -95,7 +97,8 @@
         "title": "Assistenza sanitaria (abilitante alla professione sanitaria di assistente sanitario) [L]",
         "lang": "it",
         "campus": "Rimini",
-        "url": "https://corsi.unibo.it/laurea/AssistenzaSanitaria"
+        "url": "https://corsi.unibo.it/laurea/AssistenzaSanitaria",
+        "url_lastminute": "http://www.rimini.unibo.it/bacheca/avvisi_medicina.asp"
     },
     {
         "id": "8018",
@@ -235,7 +238,8 @@
         "title": "Chimica e tecnologie per l'ambiente e per i materiali [L]",
         "lang": "it",
         "campus": "Rimini",
-        "url": "https://corsi.unibo.it/laurea/ChimicaAmbiente"
+        "url": "https://corsi.unibo.it/laurea/ChimicaAmbiente",
+        "url_lastminute": "http://www.rimini.unibo.it/bacheca/avvisi_chimica.asp"
     },
     {
         "id": "8515",
@@ -298,7 +302,8 @@
         "title": "Culture e tecniche della moda [L]",
         "lang": "it",
         "campus": "Rimini",
-        "url": "https://corsi.unibo.it/laurea/CultureTecnicheModa"
+        "url": "https://corsi.unibo.it/laurea/CultureTecnicheModa",
+        "url_lastminute": "http://www.rimini.unibo.it/bacheca/avvisi_lettere.asp"
     },
     {
         "id": "0956",
@@ -354,14 +359,16 @@
         "title": "Economia del turismo [L]",
         "lang": "it",
         "campus": "Rimini",
-        "url": "https://corsi.unibo.it/laurea/clet"
+        "url": "https://corsi.unibo.it/laurea/clet",
+        "url_lastminute": "http://www.rimini.unibo.it/bacheca/avvisi_economia.asp"
     },
     {
         "id": "8848",
         "title": "Economia dell'impresa [L]",
         "lang": "it",
         "campus": "Rimini",
-        "url": "https://corsi.unibo.it/laurea/clei"
+        "url": "https://corsi.unibo.it/laurea/clei",
+        "url_lastminute": "http://www.rimini.unibo.it/bacheca/avvisi_economia.asp"
     },
     {
         "id": "0905",
@@ -452,7 +459,8 @@
         "title": "Educatore sociale e culturale [L]",
         "lang": "it",
         "campus": "Rimini",
-        "url": "https://corsi.unibo.it/laurea/EducatoreSocialeCulturale-Rimini"
+        "url": "https://corsi.unibo.it/laurea/EducatoreSocialeCulturale-Rimini",
+        "url_lastminute": "http://www.rimini.unibo.it/bacheca/avvisi_scformazione.asp"
     },
     {
         "id": "8477",
@@ -473,14 +481,16 @@
         "title": "Farmacia [LMCU]",
         "lang": "it",
         "campus": "Rimini",
-        "url": "https://corsi.unibo.it/magistralecu/Farmacia-Rimini"
+        "url": "https://corsi.unibo.it/magistralecu/Farmacia-Rimini",
+        "url_lastminute": "http://www.rimini.unibo.it/bacheca/avvisi_farmacia.asp"
     },
     {
         "id": "9022",
         "title": "Fashion culture and management [LM]",
         "lang": "en",
         "campus": "Rimini",
-        "url": "https://corsi.unibo.it/2cycle/FashionCultureManagement"
+        "url": "https://corsi.unibo.it/2cycle/FashionCultureManagement",
+        "url_lastminute": ""
     },
     {
         "id": "0970",
@@ -501,7 +511,8 @@
         "title": "Finanza, assicurazioni e impresa [L]",
         "lang": "it",
         "campus": "Rimini",
-        "url": "https://corsi.unibo.it/laurea/FinanzaAssicurazioniImpresa"
+        "url": "https://corsi.unibo.it/laurea/FinanzaAssicurazioniImpresa",
+        "url_lastminute": "http://www.rimini.unibo.it/bacheca/avvisi_statistica.asp"
     },
     {
         "id": "0901",
@@ -616,6 +627,7 @@
         "lang": "it",
         "campus": "Rimini",
         "url": "https://corsi.unibo.it/laurea/Infermieristica-Rimini",
+        "url_lastminute": "http://www.rimini.unibo.it/bacheca/avvisi_medicina.asp",
         "supported": false,
         "not_supported_reason": "unibo.it fornisce l'orario unicamente come PDF"
     },
@@ -1121,7 +1133,8 @@
         "title": "Progettazione e gestione dell'intervento educativo nel disagio sociale [LM]",
         "lang": "it",
         "campus": "Rimini",
-        "url": "https://corsi.unibo.it/magistrale/InterventoEducativoDisagioSocialeRimini"
+        "url": "https://corsi.unibo.it/magistrale/InterventoEducativoDisagioSocialeRimini",
+        "url_lastminute": "http://www.rimini.unibo.it/bacheca/avvisi_scformazione.asp"
     },
     {
         "id": "0990",
@@ -1163,7 +1176,8 @@
         "title": "Resource economics and sustainable development  [LM]",
         "lang": "en",
         "campus": "Rimini",
-        "url": "https://corsi.unibo.it/2cycle/ResourceEconomicsSustainableDevelopment"
+        "url": "https://corsi.unibo.it/2cycle/ResourceEconomicsSustainableDevelopment",
+        "url_lastminute": "http://www.rimini.unibo.it/bacheca/avvisi_economia.asp"
     },
     {
         "id": "8537",
@@ -1233,7 +1247,8 @@
         "title": "Scienze delle attivita' motorie e sportive [L]",
         "lang": "it",
         "campus": "Rimini",
-        "url": "https://corsi.unibo.it/laurea/ScienzeMotorieSportive-Rimini"
+        "url": "https://corsi.unibo.it/laurea/ScienzeMotorieSportive-Rimini",
+        "url_lastminute": "http://www.rimini.unibo.it/bacheca/avvisi_scmotorie.asp"
     },
     {
         "id": "8878",
@@ -1261,7 +1276,8 @@
         "title": "Scienze e tecniche dell'attivita' motoria preventiva e adattata [LM]",
         "lang": "it",
         "campus": "Rimini",
-        "url": "https://corsi.unibo.it/magistrale/AttivitaMotoriaPreventivaAdattata-Rimini"
+        "url": "https://corsi.unibo.it/magistrale/AttivitaMotoriaPreventivaAdattata-Rimini",
+        "url_lastminute": "http://www.rimini.unibo.it/bacheca/avvisi_scmotorie.asp"
     },
     {
         "id": "8037",
@@ -1359,7 +1375,8 @@
         "title": "Scienze statistiche, finanziarie e attuariali [LM]",
         "lang": "it",
         "campus": "Rimini",
-        "url": "https://corsi.unibo.it/magistrale/ScienzeStatisticheFinanziarieAttuariali"
+        "url": "https://corsi.unibo.it/magistrale/ScienzeStatisticheFinanziarieAttuariali",
+        "url_lastminute": "http://www.rimini.unibo.it/bacheca/avvisi_statistica.asp"
     },
     {
         "id": "8845",
@@ -1506,7 +1523,8 @@
         "title": "Tourism economics and management  [LM]",
         "lang": "en",
         "campus": "Rimini",
-        "url": "https://corsi.unibo.it/2cycle/team"
+        "url": "https://corsi.unibo.it/2cycle/team",
+        "url_lastminute": "http://www.rimini.unibo.it/bacheca/avvisi_economia.asp"
     },
     {
         "id": "8523",
@@ -1527,7 +1545,8 @@
         "title": "Wellness culture: sport, health and tourism [LM]",
         "lang": "en",
         "campus": "Rimini",
-        "url": "https://corsi.unibo.it/2cycle/WellnessCulture"
+        "url": "https://corsi.unibo.it/2cycle/WellnessCulture",
+        "url_lastminute": "http://www.rimini.unibo.it/bacheca/avvisi_scmotorie.asp"
     },
     {
         "id": "9236",

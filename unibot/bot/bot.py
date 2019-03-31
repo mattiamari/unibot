@@ -8,8 +8,8 @@ from telegram import ParseMode
 import telegram.error
 
 from unibot.bot import conversations, users as bot_users, announcements, messages
-from unibot.unibo import schedule as class_schedule
-from unibot.unibo.courses import NotSupportedError
+from unibot.unibo import schedule as class_schedule, lastminute
+from unibot.unibo.courses import get_courses, NotSupportedError
 
 
 class Bot:
@@ -27,6 +27,7 @@ class Bot:
             CommandHandler('settimana', self.cmd_schedule_week),
             CommandHandler('prossimasettimana', self.cmd_schedule_next_week),
             CommandHandler('nonricordarmi', self.cmd_remindme_off),
+            CommandHandler('lastminute', self.cmd_lastminute),
             conversations.setup.get_handler(),
             conversations.remindme.get_handler()
         ]
@@ -105,6 +106,32 @@ class Bot:
         setting.do_remind = False
         settings.update(setting)
         self.send(update, context, messages.REMINDME_OFF)
+
+    def cmd_lastminute(self, update, context):
+        settings = self.user_settings()
+        try:
+            setting = settings.get(update.effective_chat.id)
+        except bot_users.ChatNotFoundError:
+            self.send(update, context, messages.NEED_SETUP)
+            return
+        logging.info("REQUEST lastminute chat_id=%d course_id=%d year=%d curricula=%s",
+                     update.effective_chat.id, setting.course_id,
+                     setting.year, setting.curricula)
+        course = get_courses().get(setting.course_id)
+        if not course.has_lastminute():
+            self.send(update, context, messages.NOT_SUPPORTED_LASTMINUTE)
+            return
+        try:
+            news = lastminute.get_news(course.url_lastminute)
+        except Exception as ex:
+            logging.exception(ex)
+            self.send(update, context, messages.FETCH_ERROR)
+            return
+        if not news:
+            self.send(update, context, messages.NO_NEWS)
+            return
+        msg = '\n\n'.join(str(n) for n in news)
+        self.send(update, context, msg)
 
     def daily_schedule(self, context):
         now = datetime.now()
