@@ -16,7 +16,7 @@ class Bot:
     def __init__(self):
         self.users = bot_users.UserRepo
         self.user_settings = bot_users.UserSettingsRepo
-        self.updater = Updater(token=environ['BOT_TOKEN'], use_context=True)
+        self.updater = Updater(token=environ['BOT_TOKEN'])
         self.dispatcher = self.updater.dispatcher
         self.handlers = [
             CommandHandler('start', self.cmd_start),
