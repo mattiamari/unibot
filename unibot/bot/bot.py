@@ -9,6 +9,7 @@ import telegram.error
 
 from unibot.bot import conversations, users as bot_users, announcements, messages
 from unibot.unibo import schedule as class_schedule
+from unibot.unibo.courses import NotSupportedError
 
 
 class Bot:
@@ -81,8 +82,11 @@ class Bot:
         try:
             schedule = class_schedule.get_schedule(
                 settings.course_id, settings.year, settings.curricula)
-        except Exception as e:
-            logging.exception(e)
+        except NotSupportedError as ex:
+            self.send(update, context, messages.COURSE_NOT_SUPPORTED)
+            return
+        except Exception as ex:
+            logging.exception(ex)
             self.send(update, context, messages.SCHEDULE_FETCH_ERROR)
             return
         schedule = getattr(schedule, schedule_type)()

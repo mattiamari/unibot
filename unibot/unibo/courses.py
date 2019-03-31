@@ -25,6 +25,11 @@ class CourseNotFoundError(Exception):
         super().__init__("Course '{}' not found".format(course_id))
 
 
+class NotSupportedError(Exception):
+    def __init__(self, course_id, reason):
+        super().__init__("Course '{}' is not supported".format(course_id))
+        self.reason = reason
+
 class Course:
     def __init__(self, course_id, title, lang, campus, url, supported=True, not_supported_reason=''):
         self.course_id = course_id
@@ -43,10 +48,14 @@ class Course:
         return self.supported
 
     def get_url_curricula(self, year):
+        if not self.supported:
+            raise NotSupportedError(self.course_id, self.not_supported_reason)
         curricula_part = AVAILABLE_CURRICULA_URL.format(year)
         return '{}/{}/{}'.format(self.url, SCHEDULE_SUBDIR_URL[self.lang], curricula_part)
 
     def get_url_schedule(self, year, curricula=''):
+        if not self.supported:
+            raise NotSupportedError(self.course_id, self.not_supported_reason)
         schedule_part = SCHEDULE_URL.format(year, curricula)
         return '{}/{}/{}'.format(self.url, SCHEDULE_SUBDIR_URL[self.lang], schedule_part)
 
