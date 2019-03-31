@@ -18,6 +18,13 @@ announcements.append({
             "faccia il /setup e tutti i membri potranno richiedere l'orario")
 })
 
+announcements.append({
+    'seq': 1,
+    'msg': ("UniBot è stato aggiornato! 🎉🎉\n\n"
+            "- Ora è possibile cercare i corsi di laurea anche per campus (Bologna, Rimini, ...)\n\n"
+            "- Puoi richiedere gli ultimi avvisi con /lastminute (solo per i corsi del campus di Rimini)")
+})
+
 
 def get_announcements():
     announcements.sort(key=lambda a: a['seq'])
