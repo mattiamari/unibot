@@ -17,7 +17,8 @@ class InvalidSourceDataError(Exception):
 class Event:
     TIME_FORMAT = '%H:%M'
 
-    def __init__(self, title, date_start, date_end, room):
+    def __init__(self, subject_id, title, date_start, date_end, room):
+        self.subject_id = subject_id
         self.title = title
         self.date_start = date_start
         self.date_end = date_end
@@ -148,6 +149,7 @@ def remove_duplicates(events):
 
 def event_factory(e):
     event = Event(
+        subject_id=e['cod_modulo'],
         title=e['title'],
         date_start=parse_date(e['start']),
         date_end=parse_date(e['end']),

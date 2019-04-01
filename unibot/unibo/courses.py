@@ -11,6 +11,7 @@ from unibot.cache import cache_for
 QUERY_ALLOWED_CHARS = string.ascii_letters + string.digits + 'àèéìòù '
 QUERY_MIN_LENGTH = 4
 SCHEDULE_SUBDIR_URL = {'it': 'orario-lezioni', 'en': 'timetable'}
+EXAMS_SUBDIR_URL = {'it': 'appelli', 'en': 'exam-dates'}
 AVAILABLE_CURRICULA_URL = '@@available_curricula?anno={}&curricula='
 SCHEDULE_URL = '@@orario_reale_json?anno={}&curricula={}'
 
@@ -63,6 +64,9 @@ class Course:
             raise NotSupportedError(self.course_id, self.not_supported_reason)
         schedule_part = SCHEDULE_URL.format(year, curricula)
         return '{}/{}/{}'.format(self.url, SCHEDULE_SUBDIR_URL[self.lang], schedule_part)
+
+    def get_url_exams(self):
+        return '{}/{}'.format(self.url, EXAMS_SUBDIR_URL)
 
 
 class CourseRepo:
