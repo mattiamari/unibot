@@ -4,7 +4,7 @@ from datetime import datetime, time, timedelta
 import time as os_time
 
 from telegram.ext import Updater, CommandHandler
-from telegram import ParseMode
+from telegram import ParseMode, constants
 import telegram.error
 
 from unibot.bot import conversations, users as bot_users, announcements, messages
@@ -210,7 +210,21 @@ class Bot:
         announcements.save_sent()
 
     def send(self, update, context, text):
-        try:
-            context.bot.send_message(chat_id=update.message.chat_id, parse_mode=ParseMode.HTML, text=text)
-        except Exception as e:
-            logging.exception(e)
+        for msg in split_message(text):
+            try:
+                context.bot.send_message(chat_id=update.message.chat_id, parse_mode=ParseMode.HTML, text=msg)
+                os_time.sleep(0.05)
+            except Exception as e:
+                logging.exception(e)
+
+
+def split_message(msg):
+    out = []
+    rows = msg.split('\n')
+    end_row = len(rows)
+    while sum(len(r) for r in rows[:end_row]) > 2048:
+        end_row -= 1
+    out.append('\n'.join(rows[:end_row]))
+    if end_row < len(rows):
+        out += split_message('\n'.join(rows[end_row:]))
+    return out
