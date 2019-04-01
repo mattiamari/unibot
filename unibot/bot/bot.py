@@ -163,7 +163,7 @@ class Bot:
                     msg = msg.format(messages.NO_LESSONS)
                     context.bot.send_message(chat_id=user.chat_id, parse_mode=ParseMode.HTML, text=msg)
                     continue
-                msg = msg.format(schedule.today().tostring(with_date=True))
+                msg = msg.format(schedule.tostring(with_date=True))
                 context.bot.send_message(chat_id=user.chat_id, parse_mode=ParseMode.HTML, text=msg)
                 os_time.sleep(0.1)
             except NotSupportedError as ex:
