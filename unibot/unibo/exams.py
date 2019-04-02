@@ -5,6 +5,7 @@ from bs4 import BeautifulSoup
 from unibot.urlfetch import fetch
 from unibot.cache import cache_for
 from unibot.unibo.courses import get_courses
+from unibot.unibo.constants import DAY_NAMES
 
 from pprint import pformat
 
@@ -31,9 +32,9 @@ MONTH_NAMES_DICT = {
     'dicembre': 12
 }
 
-DATE_FORMAT = ''
-
 class Exam:
+    DATE_FORMAT = '%d/%m/%Y %H:%M'
+
     def __init__(self, subject_id, subject, course_id, prof, date, signup_dates, exam_type, location, notes=''):
         self.subject_id = subject_id
         self.subject = subject
@@ -55,8 +56,12 @@ class Exam:
         out = ""
         if with_heading:
             out += self.heading()
-        out += "{}\nIscrizione: {}\nTipo prova: {}\nLuogo: {}\nNote: {}" \
-               .format(self.date, self.signup_dates, self.exam_type, self.location, self.notes)
+        out += "= {} {} =\n<b>Iscrizione:</b> {}\n<b>Tipo prova:</b> {}\n<b>Luogo:</b> {}" \
+               .format(DAY_NAMES[self.date.weekday()],
+                       self.date.strftime(self.DATE_FORMAT),
+                       self.signup_dates, self.exam_type, self.location)
+        if self.notes:
+            out += "\n<b>Note:</b> {}".format(self.notes)
         return out
 
 
@@ -67,15 +72,17 @@ class ExamList:
     def __str__(self):
         return self.tostring()
 
-    def tostring(self):
+    def tostring(self, limit_per_subject=None):
         last_heading = ''
         out = ''
-        for e in self.items:
-            heading = e.heading()
-            if last_heading != heading:
-                out += '<b>' + heading + '</b>' + '\n'
-                last_heading = heading
-            out += e.tostring(with_heading=False) + '\n\n'
+        subjects = set([e.subject_id for e in self.items])
+        exams = {subj:{'heading': next(e.heading() for e in self.items if e.subject_id == subj),
+                       'exams': [e for e in self.items if e.subject_id == subj][:limit_per_subject]}
+                 for subj in subjects}
+        for exam in exams.values():
+            out += "<b>{}</b>\n".format(exam['heading'])
+            out += "\n\n".join(e.tostring(with_heading=False) for e in exam['exams'])
+            out += "\n\n"
         return out
 
     def subject_heading(self, subject_id):
@@ -96,15 +103,19 @@ class Exams:
     def subjects(self):
         return set([e.subject_id for e in self.exams])
 
-    def of_subject(self, subject_id):
-        return ExamList([e for e in self.exams if e.subject_id == subject_id])
+    def of_subject(self, subject_id, exclude_finished=False):
+        return self.of_subjects([subject_id], exclude_finished)
 
-    def of_subjects(self, subject_id_list):
-        exams = [e for e in self.exams if e.subject_id in subject_id_list]
+    def of_subjects(self, subject_id_list, exclude_finished=False):
+        now = datetime.now()
+        exams = [e for e in self.exams
+                 if e.subject_id in subject_id_list
+                 and (e.date > now or not exclude_finished)]
         exams.sort(key=lambda e: e.subject_id)  # sort() is stable so the date ordering will be kept
         return ExamList(exams)
 
 
+@cache_for(minutes=60)
 def get_exams(course_id):
     course = get_courses().get(course_id)
     src = fetch(course.get_url_exams())
@@ -134,7 +145,7 @@ def exam_factory(title, content, course_id):
                         parse_date(date_info['date']),
                         date_info['signup_dates'],
                         date_info['exam_type'],
-                        date_info['location'],
+                        ' '.join(date_info['location'].split()),
                         date_info['notes']))
     return out
 

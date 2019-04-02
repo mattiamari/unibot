@@ -4,9 +4,7 @@ from datetime import datetime, date, timedelta
 from unibot.cache import cache_for
 from unibot.urlfetch import fetch
 from unibot.unibo.courses import get_courses
-
-
-DAY_NAMES = ['Lunedì', 'Martedì', 'Mercoledì', 'Giovedì', 'Venerdì', 'Sabato', 'Domenica']
+from unibot.unibo.constants import DAY_NAMES
 
 
 class InvalidSourceDataError(Exception):
@@ -153,7 +151,7 @@ def remove_duplicates(events):
 def event_factory(e):
     event = Event(
         subject_id=e['cod_modulo'],
-        title=e['title'],
+        title=e['title'].capitalize(),
         date_start=parse_date(e['start']),
         date_end=parse_date(e['end']),
         room=''

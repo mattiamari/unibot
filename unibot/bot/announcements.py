@@ -25,6 +25,13 @@ announcements.append({
             "- Puoi richiedere gli ultimi avvisi con /lastminute (solo per i corsi del campus di Rimini)")
 })
 
+announcements.append({
+    'seq': 2,
+    'msg': ("<b>UniBot è stato aggiornato!</b> 🎉🎉\n"
+            "- Con /esami ti invierò le info dei prossimi 3 appelli per ogni materia\n\n\n"
+            "Se hai problemi o suggerimenti puoi farcelo sapere tramite il gruppo -> https://t.me/joinchat/GOSjsBP21eU22j3fDHzBOQ")
+})
+
 
 def get_announcements():
     announcements.sort(key=lambda a: a['seq'])

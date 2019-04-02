@@ -147,8 +147,8 @@ class Bot:
                      update.effective_chat.id, setting.course_id,
                      setting.year, setting.curricula)
         subjects = get_schedule(setting.course_id, setting.year, setting.curricula).subjects()
-        exams = get_exams(setting.course_id).of_subjects(subjects)
-        self.send(update, context, exams.tostring())
+        exams = get_exams(setting.course_id).of_subjects(subjects, exclude_finished=True)
+        self.send(update, context, exams.tostring(limit_per_subject=3))
 
 
     def daily_schedule(self, context):
