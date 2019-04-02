@@ -62,21 +62,27 @@
         "title": "Antropologia culturale ed etnologia [LM]",
         "lang": "it",
         "campus": "Bologna",
-        "url": "https://corsi.unibo.it/magistrale/AntropologiaCulturaleEtnologia"
+        "url": "https://corsi.unibo.it/magistrale/AntropologiaCulturaleEtnologia",
+        "supported": false,
+        "not_supported_reason": "il formato dell'orario non è standard. Il supporto per questo corso arriverà presto :)"
     },
     {
         "id": "8493",
         "title": "Antropologia, religioni, civilta' orientali [L]",
         "lang": "it",
         "campus": "Bologna",
-        "url": "https://corsi.unibo.it/laurea/ScienzeAntropologiche"
+        "url": "https://corsi.unibo.it/laurea/ScienzeAntropologiche",
+        "supported": false,
+        "not_supported_reason": "il formato dell'orario non è standard. Il supporto per questo corso arriverà presto :)"
     },
     {
         "id": "8855",
         "title": "Archeologia e culture del mondo antico [LM]",
         "lang": "it",
         "campus": "Bologna",
-        "url": "https://corsi.unibo.it/magistrale/archeologia"
+        "url": "https://corsi.unibo.it/magistrale/archeologia",
+        "supported": false,
+        "not_supported_reason": "il formato dell'orario non è standard. Il supporto per questo corso arriverà presto :)"
     },
     {
         "id": "0881",
@@ -90,7 +96,9 @@
         "title": "Arti visive [LM]",
         "lang": "it",
         "campus": "Bologna",
-        "url": "https://corsi.unibo.it/magistrale/artivisive"
+        "url": "https://corsi.unibo.it/magistrale/artivisive",
+        "supported": false,
+        "not_supported_reason": "il formato dell'orario non è standard. Il supporto per questo corso arriverà presto :)"
     },
     {
         "id": "8879",

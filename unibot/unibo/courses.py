@@ -90,7 +90,7 @@ class CourseRepo:
         return [c for c in self.courses if regx.search(c.search_name)]
 
 
-@cache_for(minutes=120)
+@cache_for(minutes=30)
 def get_courses():
     try:
         with open('assets/courses.json', 'r') as fp:
