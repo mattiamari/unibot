@@ -8,8 +8,10 @@ from telegram import ParseMode, constants
 import telegram.error
 
 from unibot.bot import conversations, users as bot_users, announcements, messages
-from unibot.unibo import schedule as class_schedule, lastminute
+from unibot.unibo import lastminute
+from unibot.unibo.schedule import get_schedule
 from unibot.unibo.courses import get_courses, NotSupportedError
+from unibot.unibo.exams import get_exams
 
 
 class Bot:
@@ -28,6 +30,7 @@ class Bot:
             CommandHandler('prossimasettimana', self.cmd_schedule_next_week),
             CommandHandler('nonricordarmi', self.cmd_remindme_off),
             CommandHandler('lastminute', self.cmd_lastminute),
+            CommandHandler('esami', self.cmd_exams),
             conversations.setup.get_handler(),
             conversations.remindme.get_handler()
         ]
@@ -81,7 +84,7 @@ class Bot:
                      schedule_type, update.effective_chat.id, settings.course_id,
                      settings.year, settings.curricula)
         try:
-            schedule = class_schedule.get_schedule(
+            schedule = get_schedule(
                 settings.course_id, settings.year, settings.curricula)
         except NotSupportedError as ex:
             self.send(update, context, messages.COURSE_NOT_SUPPORTED.format(ex.reason))
@@ -133,6 +136,21 @@ class Bot:
         msg = '\n\n'.join(str(n) for n in news)
         self.send(update, context, msg)
 
+    def cmd_exams(self, update, context):
+        settings = self.user_settings()
+        try:
+            setting = settings.get(update.effective_chat.id)
+        except bot_users.ChatNotFoundError:
+            self.send(update, context, messages.NEED_SETUP)
+            return
+        logging.info("REQUEST exams chat_id=%d course_id=%s year=%d curricula=%s",
+                     update.effective_chat.id, setting.course_id,
+                     setting.year, setting.curricula)
+        subjects = get_schedule(setting.course_id, setting.year, setting.curricula).subjects()
+        exams = get_exams(setting.course_id).of_subjects(subjects)
+        self.send(update, context, exams.tostring())
+
+
     def daily_schedule(self, context):
         now = datetime.now()
         if now.weekday() in [5, 6]:
@@ -149,9 +167,9 @@ class Bot:
         logging.info('Sending todays schedule to %d users', len(users))
         for user in users:
             try:
-                schedule = class_schedule.get_schedule(user.course_id,
-                                                       user.year,
-                                                       user.curricula)
+                schedule = get_schedule(user.course_id,
+                                        user.year,
+                                        user.curricula)
                 if not schedule.week_has_lessons():
                     if now.weekday() == 0:
                         msg = "{}\n\n{}".format(messages.NO_LESSONS_WEEK, messages.NO_REMIND_THIS_WEEK)

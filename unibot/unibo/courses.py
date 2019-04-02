@@ -66,7 +66,7 @@ class Course:
         return '{}/{}/{}'.format(self.url, SCHEDULE_SUBDIR_URL[self.lang], schedule_part)
 
     def get_url_exams(self):
-        return '{}/{}'.format(self.url, EXAMS_SUBDIR_URL)
+        return '{}/{}'.format(self.url, EXAMS_SUBDIR_URL[self.lang])
 
 
 class CourseRepo:

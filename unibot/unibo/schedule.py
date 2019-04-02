@@ -67,7 +67,7 @@ class EventList:
         out = ''
         last_day = None
         for event in self.items:
-            if (with_date and (last_day is None or last_day != event.date_start.date())):
+            if (with_date and last_day != event.date_start.date()):
                 # write date for each day
                 out += '<b>{} {}</b>\n'.format(
                     DAY_NAMES[event.date_start.date().weekday()],
@@ -82,6 +82,9 @@ class Schedule:
     def __init__(self, events):
         self.events = events
         self.events.sort(key=lambda e: e.date_start)
+
+    def subjects(self):
+        return set(e.subject_id for e in self.events)
 
     def today(self):
         return self.of_day(date.today())
