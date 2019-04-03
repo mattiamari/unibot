@@ -9,6 +9,7 @@ from unibot.unibo.constants import DAY_NAMES
 
 from pprint import pformat
 
+
 EXAM_DATE_HEADING_DICT = {
     'data e ora:': 'date',
     'lista iscrizioni:': 'signup_dates',
@@ -31,6 +32,7 @@ MONTH_NAMES_DICT = {
     'novembre': 11,
     'dicembre': 12
 }
+
 
 class Exam:
     DATE_FORMAT = '%d/%m/%Y %H:%M'
@@ -72,16 +74,21 @@ class ExamList:
     def __str__(self):
         return self.tostring()
 
+    def subjects(self):
+        # returns tuples like (subject_id, heading)
+        ids = {e.subject_id for e in self.items}
+        return [(sub_id, next(e.heading() for e in self.items if e.subject_id == sub_id))
+                for sub_id in ids]
+
+    def having_subject(self, subject_id):
+        return [e for e in self.items if e.subject_id == subject_id]
+
     def tostring(self, limit_per_subject=None):
-        last_heading = ''
         out = ''
-        subjects = set([e.subject_id for e in self.items])
-        exams = {subj:{'heading': next(e.heading() for e in self.items if e.subject_id == subj),
-                       'exams': [e for e in self.items if e.subject_id == subj][:limit_per_subject]}
-                 for subj in subjects}
-        for exam in exams.values():
-            out += "<b>{}</b>\n".format(exam['heading'])
-            out += "\n\n".join(e.tostring(with_heading=False) for e in exam['exams'])
+        for subject_id, heading in self.subjects():
+            out += "<b>{}</b>\n".format(heading)
+            out += "\n\n".join(e.tostring(with_heading=False)
+                               for e in self.having_subject(subject_id)[:limit_per_subject])
             out += "\n\n"
         return out
 
@@ -101,7 +108,7 @@ class Exams:
         return ExamList(self.exams)
 
     def subjects(self):
-        return set([e.subject_id for e in self.exams])
+        return {e.subject_id for e in self.exams}
 
     def of_subject(self, subject_id, exclude_finished=False):
         return self.of_subjects([subject_id], exclude_finished)
