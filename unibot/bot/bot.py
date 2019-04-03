@@ -4,10 +4,11 @@ from datetime import datetime, time, timedelta
 import time as os_time
 
 from telegram.ext import Updater, CommandHandler
-from telegram import ParseMode, constants
+from telegram import ParseMode
 import telegram.error
 
-from unibot.bot import conversations, users as bot_users, announcements, messages
+from unibot.bot import conversations, announcements, messages
+from unibot.bot.users import UserRepo, UserSettingsRepo, ChatNotFoundError
 from unibot.unibo import lastminute
 from unibot.unibo.schedule import get_schedule
 from unibot.unibo.courses import get_courses, NotSupportedError
@@ -16,8 +17,8 @@ from unibot.unibo.exams import get_exams
 
 class Bot:
     def __init__(self):
-        self.users = bot_users.UserRepo
-        self.user_settings = bot_users.UserSettingsRepo
+        self.users = UserRepo
+        self.user_settings = UserSettingsRepo
         self.updater = Updater(token=environ['BOT_TOKEN'], use_context=True)
         self.dispatcher = self.updater.dispatcher
         self.handlers = [
@@ -77,7 +78,7 @@ class Bot:
     def send_schedule(self, update, context, schedule_type):
         try:
             settings = self.user_settings().get(update.effective_chat.id)
-        except bot_users.ChatNotFoundError:
+        except ChatNotFoundError:
             self.send(update, context, messages.NEED_SETUP)
             return
         logging.info("REQUEST %s chat_id=%d course_id=%s year=%d curricula=%s",
@@ -103,7 +104,7 @@ class Bot:
         settings = self.user_settings()
         try:
             setting = settings.get(update.effective_chat.id)
-        except bot_users.ChatNotFoundError:
+        except ChatNotFoundError:
             self.send(update, context, messages.NEED_SETUP)
             return
         setting.do_remind = False
@@ -114,7 +115,7 @@ class Bot:
         settings = self.user_settings()
         try:
             setting = settings.get(update.effective_chat.id)
-        except bot_users.ChatNotFoundError:
+        except ChatNotFoundError:
             self.send(update, context, messages.NEED_SETUP)
             return
         logging.info("REQUEST lastminute chat_id=%d course_id=%s year=%d curricula=%s",
@@ -140,7 +141,7 @@ class Bot:
         settings = self.user_settings()
         try:
             setting = settings.get(update.effective_chat.id)
-        except bot_users.ChatNotFoundError:
+        except ChatNotFoundError:
             self.send(update, context, messages.NEED_SETUP)
             return
         logging.info("REQUEST exams chat_id=%d course_id=%s year=%d curricula=%s",
@@ -157,7 +158,6 @@ class Bot:
             self.send(update, context, messages.FETCH_ERROR)
             return
         self.send(update, context, exams.tostring(limit_per_subject=3))
-
 
     def daily_schedule(self, context):
         now = datetime.now()
