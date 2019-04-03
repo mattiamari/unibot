@@ -146,8 +146,16 @@ class Bot:
         logging.info("REQUEST exams chat_id=%d course_id=%s year=%d curricula=%s",
                      update.effective_chat.id, setting.course_id,
                      setting.year, setting.curricula)
-        subjects = get_schedule(setting.course_id, setting.year, setting.curricula).subjects()
-        exams = get_exams(setting.course_id).of_subjects(subjects, exclude_finished=True)
+        try:
+            subjects = get_schedule(setting.course_id, setting.year, setting.curricula).subjects()
+            exams = get_exams(setting.course_id).of_subjects(subjects, exclude_finished=True)
+        except NotSupportedError as ex:
+            self.send(update, context, messages.COURSE_NOT_SUPPORTED.format(ex.reason))
+            return
+        except Exception as ex:
+            logging.exception(ex)
+            self.send(update, context, messages.FETCH_ERROR)
+            return
         self.send(update, context, exams.tostring(limit_per_subject=3))
 
 
