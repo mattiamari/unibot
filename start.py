@@ -16,6 +16,7 @@ def main():
     logging.info('Server time is %s', datetime.now())
 
     db.migrate()
+
     bot.Bot().run()
 
 
