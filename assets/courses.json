@@ -1454,7 +1454,9 @@
         "title": "Storia [L]",
         "lang": "it",
         "campus": "Bologna",
-        "url": "https://corsi.unibo.it/laurea/storia"
+        "url": "https://corsi.unibo.it/laurea/storia",
+        "supported": false,
+        "not_supported_reason": "il formato dell'orario non è standard. Il supporto per questo corso arriverà presto :)"
     },
     {
         "id": "8890",
