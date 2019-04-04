@@ -89,6 +89,12 @@ migrations.append({
               "alter table user_settings_new rename to user_settings;")
 })
 
+migrations.append({
+    'seq': 8,
+    'desc': 'update remind_time to full time string',
+    'query': "update user_settings set remind_time = remind_time || ':00.000000' where remind_time is not null and remind_time != ''"
+})
+
 
 def migrate():
     logging.info('Applying migrations')
@@ -98,7 +104,8 @@ def migrate():
         if m['seq'] in applied_migrations:
             logging.info("* SKIPPED '%s'", m['desc'])
             continue
-        apply(db=db, seq=m['seq'], desc=m['desc'], query=m['query'])
+        if m['query'] is not None:
+            apply(db=db, seq=m['seq'], desc=m['desc'], query=m['query'])
     save_applied()
     db.close()
 

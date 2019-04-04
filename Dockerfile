@@ -17,7 +17,7 @@ RUN apk --no-cache add \
   python3 setup.py install && \
   cd / && \
   rm -rf /tmp/python-telegram-bot && \
-  python3 -m pip install beautifulsoup4 && \
+  python3 -m pip install beautifulsoup4 sqlalchemy alembic && \
   apk --no-cache del git build-base python3-dev openssl-dev && \
   ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
