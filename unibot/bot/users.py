@@ -82,8 +82,11 @@ class UserSettingsRepo(Repo):
     def get_all(self):
         return self.db.query(UserSettings).all()
 
-    def get_to_remind(self):
-        return self.db.query(UserSettings).filter_by(do_remind=True, deleted=False)
+    def get_to_remind_today(self):
+        return self.db.query(UserSettings).filter_by(do_remind_today=True, deleted=False)
+
+    def get_to_remind_tomorrow(self):
+        return self.db.query(UserSettings).filter_by(do_remind_tomorrow=True, deleted=False)
 
     def get_all_chat_id(self):
         return self.db.query(UserSettings.chat_id).all()

@@ -38,36 +38,48 @@ class UserSettings(Base):
     course_id = Column(String)
     year = Column(Integer)
     curricula = Column(String, default='')
-    do_remind = Column(Boolean, default=False)
-    remind_time = Column(Time, default=None)
+    do_remind_today = Column(Boolean, default=False)
+    remind_time_today = Column(Time, default=None)
+    do_remind_tomorrow = Column(Boolean, default=False)
+    remind_time_tomorrow = Column(Time, default=None)
     deleted = Column(Boolean, default=False)
 
-    def __init__(self, user_id, chat_id, course_id, year, curricula, do_remind=False, remind_time=None, deleted=False):
+    def __init__(self, user_id, chat_id, course_id, year, curricula,
+                 do_remind_today=False, remind_time_today=None,
+                 do_remind_tomorrow=False, remind_time_tomorrow=None, deleted=False):
         self.user_id = user_id
         self.chat_id = chat_id
         self.course_id = course_id
         self.year = year
         self.curricula = curricula
-        self.do_remind = do_remind
-        self.remind_time = remind_time
+        self.do_remind_today = do_remind_today
+        self.remind_time_today = remind_time_today
+        self.do_remind_tomorrow = do_remind_tomorrow
+        self.remind_time_tomorrow = remind_time_tomorrow
         self.deleted = deleted
 
     def __repr__(self):
         return "<UserSettings chat_id='{}' user_id='{}'>" \
             .format(self.chat_id, self.user_id)
 
-    def next_remind_time(self):
-        if not self.do_remind or not isinstance(self.remind_time, time):
+    def next_remind_time_today(self):
+        return self._next_remind_time(self.do_remind_today, self.remind_time_today)
+
+    def next_remind_time_tomorrow(self):
+        return self._next_remind_time(self.do_remind_tomorrow, self.remind_time_tomorrow)
+
+    def _next_remind_time(self, do_remind, remind_time):
+        if not do_remind or not isinstance(remind_time, time):
             return None
         now = datetime.now()
-        if self.remind_time > now.time():
+        if remind_time > now.time():
             next_date = now + timedelta(days=1)
         else:
             next_date = now
 
         return next_date.replace(
-            hour=self.remind_time.hour,
-            minute=self.remind_time.minute,
+            hour=remind_time.hour,
+            minute=remind_time.minute,
             second=0,
             microsecond=0
         )

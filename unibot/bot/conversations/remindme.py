@@ -10,9 +10,18 @@ from unibot.bot.users import UserSettingsRepo, ChatNotFoundError
 
 
 STEP_TIME_SELECT, STEP_TIME_INVALID = range(0, 2)
+
 TIME_FORMAT = '%H:%M'
 
 REGEX_TIME = re.compile(r'^(\d?\d)[.,:]*(\d?\d?)$')
+
+
+class RemindType:
+    TODAY = 1
+    TOMORROW = 2
+
+
+REMIND_TYPE_DICT = {'oggi': RemindType.TODAY, 'domani': RemindType.TOMORROW}
 
 
 def get_handler():
@@ -35,7 +44,21 @@ def step_start(update, context):
 
 
 def step_time_select(update, context):
-    match = REGEX_TIME.match(update.message.text)
+    parts = update.message.text.split()
+    if len(parts) > 2:
+        send(update, context, messages.REMINDME_TIME_INVALID)
+        return STEP_TIME_SELECT
+    if len(parts) == 1:
+        time_str = parts[0]
+        remind_type = RemindType.TODAY
+    else:
+        remind_type_str, time_str = parts
+        if remind_type_str not in REMIND_TYPE_DICT:
+            send(update, context, messages.REMINDME_TIME_INVALID)
+            return STEP_TIME_SELECT
+        remind_type = REMIND_TYPE_DICT[remind_type_str]
+
+    match = REGEX_TIME.match(time_str)
     time = time_from_match(match)
     if time is None:
         send(update, context, messages.REMINDME_TIME_INVALID)
@@ -43,8 +66,12 @@ def step_time_select(update, context):
 
     settings = UserSettingsRepo()
     setting = settings.get(update.effective_chat.id)
-    setting.do_remind = True
-    setting.remind_time = time
+    if remind_type == RemindType.TODAY:
+        setting.do_remind_today = True
+        setting.remind_time_today = time
+    elif remind_type == RemindType.TOMORROW:
+        setting.do_remind_tomorrow = True
+        setting.remind_time_tomorrow = time
     settings.update(setting)
     send(update, context, messages.REMINDME_END.format(time.strftime(TIME_FORMAT)))
     return ConversationHandler.END

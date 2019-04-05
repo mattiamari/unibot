@@ -36,11 +36,13 @@ class Bot:
             conversations.remindme.get_handler()
         ]
         self.daily_schedule_repeat_every = timedelta(minutes=3)
-        self.daily_schedule_last_run = datetime.now()
+        self.daily_schedule_today_last_run = datetime.now()
+        self.daily_schedule_tomorrow_last_run = datetime.now()
 
     def run(self):
         self.register_handlers()
-        self.dispatcher.job_queue.run_repeating(self.daily_schedule, self.daily_schedule_repeat_every)
+        self.dispatcher.job_queue.run_repeating(self.daily_schedule_today, self.daily_schedule_repeat_every)
+        self.dispatcher.job_queue.run_repeating(self.daily_schedule_tomorrow, self.daily_schedule_repeat_every)
         self.dispatcher.job_queue.run_once(self.send_announcements, 5)
         # self.dispatcher.job_queue.run_once(self.daily_schedule, 3)
         self.dispatcher.job_queue.start()
@@ -159,16 +161,16 @@ class Bot:
             return
         self.send(update, context, exams.tostring(limit_per_subject=3))
 
-    def daily_schedule(self, context):
+    def daily_schedule_today(self, context):
         now = datetime.now()
         if now.weekday() in [5, 6]:
             # don't send reminders on the weekend
-            self.daily_schedule_last_run = now
+            self.daily_schedule_today_last_run = now
             return
         settings_repo = self.user_settings()
-        users = settings_repo.get_to_remind()
-        users = [u for u in users if isinstance(u.remind_time, time)]
-        users = [u for u in users if self.daily_schedule_last_run < u.next_remind_time() <= now]
+        users = settings_repo.get_to_remind_today()
+        users = [u for u in users if isinstance(u.remind_time_today, time)]
+        users = [u for u in users if self.daily_schedule_today_last_run < u.next_remind_time_today() <= now]
         if not users:
             return
 
@@ -207,8 +209,59 @@ class Bot:
             except Exception as e:
                 logging.exception(e)
 
-        self.daily_schedule_last_run = now
-        logging.info("Done sending daily schedule")
+        self.daily_schedule_today_last_run = now
+        logging.info("Done sending today's schedule")
+
+    def daily_schedule_tomorrow(self, context):
+        now = datetime.now()
+        if now.weekday() == 5:
+            # don't send reminders on the weekend
+            self.daily_schedule_tomorrow_last_run = now
+            return
+        settings_repo = self.user_settings()
+        users = settings_repo.get_to_remind_tomorrow()
+        users = [u for u in users if isinstance(u.remind_time_tomorrow, time)]
+        users = [u for u in users if self.daily_schedule_tomorrow_last_run < u.next_remind_time_tomorrow() <= now]
+        if not users:
+            return
+
+        logging.info('Sending tomorrows schedule to %d users', len(users))
+        for user in users:
+            try:
+                schedule = get_schedule(user.course_id,
+                                        user.year,
+                                        user.curricula)
+                if not schedule.week_has_lessons():
+                    if now.weekday() == 0:
+                        msg = "{}\n\n{}".format(messages.NO_LESSONS_WEEK, messages.NO_REMIND_THIS_WEEK)
+                        context.bot.send_message(chat_id=user.chat_id, parse_mode=ParseMode.HTML, text=msg)
+                    continue
+                schedule = schedule.tomorrow()
+                msg = "<b>{}</b>\n\n{{}}".format(messages.YOUR_LESSONS_TODAY)
+                if not schedule.has_events():
+                    msg = msg.format(messages.NO_LESSONS)
+                    context.bot.send_message(chat_id=user.chat_id, parse_mode=ParseMode.HTML, text=msg)
+                    continue
+                msg = msg.format(schedule.tostring(with_date=True))
+                context.bot.send_message(chat_id=user.chat_id, parse_mode=ParseMode.HTML, text=msg)
+                os_time.sleep(0.1)
+            except NotSupportedError as ex:
+                context.bot.send_message(chat_id=user.chat_id,
+                                         parse_mode=ParseMode.HTML,
+                                         text=messages.COURSE_NOT_SUPPORTED.format(ex.reason))
+            except telegram.error.Unauthorized as e:
+                logging.warning(e)
+                settings_repo.delete(user)
+            except telegram.error.ChatMigrated as e:
+                old = user.chat_id
+                user.chat_id = e.new_chat_id
+                settings_repo.update(user)
+                logging.info("Updated chat_id %d to %d", old, user.chat_id)
+            except Exception as e:
+                logging.exception(e)
+
+        self.daily_schedule_tomorrow_last_run = now
+        logging.info("Done sending tomorrow's schedule")
 
     def send_announcements(self, context):
         anns = announcements.get_announcements()
