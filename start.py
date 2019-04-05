@@ -2,7 +2,7 @@ import logging
 import sys
 import os
 from datetime import datetime
-from unibot.bot import bot, db
+from unibot.bot import bot
 
 
 def main():
@@ -14,8 +14,6 @@ def main():
     logging.info("Starting UniBot version %s", os.environ['BOT_VERSION'])
     logging.info("Current mode is %s", mode)
     logging.info('Server time is %s', datetime.now())
-
-    db.migrate()
 
     bot.Bot().run()
 

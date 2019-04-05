@@ -6,7 +6,8 @@ from telegram import ParseMode
 from unibot.urlfetch import FetchError
 import unibot.bot.messages as messages
 from unibot.unibo.courses import get_courses, get_curricula, CourseNotFoundError, QueryTooShortError
-from unibot.bot.users import UserRepo, User, UserSettingsRepo, UserSettings, UserNotFoundError
+from unibot.bot.users import UserRepo, UserSettingsRepo, UserNotFoundError
+from unibot.bot.users_model import User, UserSettings
 
 
 SETUP_SEARCH, SETUP_SEARCH_SELECT, SETUP_YEAR, SETUP_CURRICULA_SELECT = range(0, 4)
