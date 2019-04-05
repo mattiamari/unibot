@@ -89,4 +89,5 @@ class UserSettingsRepo(Repo):
         return self.db.query(UserSettings.chat_id).all()
 
 
+# create database tables
 Base.metadata.create_all(engine)

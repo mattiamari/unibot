@@ -3,3 +3,6 @@ __pycache__
 .gitignore
 docker-compose.yml
 Dockerfile
+README.md
+deploy.sh
+getcourses.py

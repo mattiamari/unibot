@@ -23,8 +23,7 @@ RUN apk --no-cache add \
 
 WORKDIR /app
 
-COPY unibot ./unibot
-COPY assets ./assets
-COPY start.py ./start.py
+COPY . ./
 
-CMD ["python3", "start.py"]
+ENV PYTHONPATH=/app
+CMD ["sh", "start.sh"]
