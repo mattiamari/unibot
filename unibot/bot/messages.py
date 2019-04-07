@@ -1,5 +1,5 @@
 CMD_START = ("Ciao! Sono un bot che ti ricorda il tuo <b>orario delle lezioni</b> UniBo.\n"
-            "Scrivi /help per la lista comandi")
+             "Scrivi /help per la lista comandi")
 
 _COMMANDS = ["/help - Mostra l'elenco dei comandi disponibili",
              "/setup - Imposta facoltà e anno di corso per ricevere l'orario",
@@ -22,7 +22,7 @@ SETUP_STEP_START = ("Devo chiederti solo un paio di cose ma puoi usare il comand
                     "per uscire in qualsiasi momento")
 
 SETUP_STEP_SEARCH = ("Quale facoltà frequenti? (basta inserire una o più parole chiave, "
-                    "per esempio 'medicina' o 'ing inf'")
+                     "per esempio 'medicina' o 'ing inf'")
 
 QUERY_TOO_SHORT = "Mi servono almeno 4 caratteri (punteggiatura esclusa) per fare una ricerca. Prova di nuovo."
 
@@ -33,7 +33,7 @@ COURSE_SEARCH_NO_RESULT = "Non ho trovato nessun corso. Prova di nuovo."
 COURSE_SEARCH_RESULT_ITEM = "<b>({})</b> {}\n"
 
 COURSE_SEARCH_CHOOSE_RESULT = ("Per scegliere, scrivimi uno dei numeri che vedi tra parentesi "
-                                "oppure /cerca per cercare di nuovo")
+                               "oppure /cerca per cercare di nuovo")
 
 COURSE_NOT_SUPPORTED = "Mi dispiace ma questo corso non è supportato perchè {}."
 
@@ -48,7 +48,7 @@ CURRICULA_RESULTS = "Ho trovato questi curriculum:"
 CURRICULA_RESULT_ITEM = "<b>({})</b> {}\n"
 
 SETUP_DONE = ("Abbiamo finito! Ora puoi usare tutti i comandi (/help).\n"
-            "Puoi cambiare corso e anno semplicemente rifacendo il /setup")
+              "Puoi cambiare corso e anno semplicemente rifacendo il /setup")
 
 SETUP_STOPPED = "Setup interrotto. Puoi eseguirlo di nuovo con /setup"
 

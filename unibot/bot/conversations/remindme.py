@@ -13,7 +13,7 @@ STEP_TIME_SELECT, STEP_TIME_INVALID = range(0, 2)
 
 TIME_FORMAT = '%H:%M'
 
-REGEX_TIME = re.compile(r'^(\d?\d)[.,:]*(\d?\d?)$')
+REGEX_TIME = re.compile(r'((?:oggi){0,1}|domani)\s*(\d?\d)[.,:]*(\d?\d?)')
 
 
 class RemindType:
@@ -44,22 +44,21 @@ def step_start(update, context):
 
 
 def step_time_select(update, context):
-    parts = update.message.text.split()
-    if len(parts) > 2:
+    match = REGEX_TIME.search(update.message.text)
+    if not match:
         send(update, context, messages.REMINDME_TIME_INVALID)
         return STEP_TIME_SELECT
-    if len(parts) == 1:
-        time_str = parts[0]
+    remind_type_str, hour, minute = match.groups()
+
+    if remind_type_str == '':
         remind_type = RemindType.TODAY
     else:
-        remind_type_str, time_str = parts
         if remind_type_str not in REMIND_TYPE_DICT:
             send(update, context, messages.REMINDME_TIME_INVALID)
             return STEP_TIME_SELECT
         remind_type = REMIND_TYPE_DICT[remind_type_str]
 
-    match = REGEX_TIME.match(time_str)
-    time = time_from_match(match)
+    time = time_from_string(hour, minute)
     if time is None:
         send(update, context, messages.REMINDME_TIME_INVALID)
         return STEP_TIME_SELECT
@@ -87,14 +86,11 @@ def step_cancel(update, context):
     return ConversationHandler.END
 
 
-def time_from_match(match):
-    if not match:
-        return None
-    hour, minute = match.groups()
+def time_from_string(hour, minute):
     try:
         hour = int(hour)
         minute = int(minute) if minute is not None and minute != '' else 0
-    except Exception as e:
+    except ValueError as e:
         logging.exception(e)
         return None
     if hour not in range(0, 24) or minute not in range(0, 60):
