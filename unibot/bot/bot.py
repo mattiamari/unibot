@@ -289,6 +289,7 @@ class Bot:
                     logging.exception(e)
             announcements.set_sent(ann)
         announcements.save_sent()
+        logging.info('Done sending announcements')
 
     def send(self, update, context, text):
         for msg in split_message(text):
