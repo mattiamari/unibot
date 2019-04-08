@@ -1,3 +1,5 @@
 #!/bin/sh
 
-alembic upgrade head && python3 start.py
+python3 createdb.py && \
+    alembic upgrade head && \
+    python3 start.py

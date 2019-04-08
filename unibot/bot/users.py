@@ -1,18 +1,7 @@
 import logging
-from os import environ as env
 
+from unibot.db import Session
 from unibot.bot.users_model import Base, User, UserSettings
-
-from sqlalchemy import create_engine
-from sqlalchemy.orm import sessionmaker
-from sqlalchemy.pool import StaticPool
-
-
-engine = create_engine('sqlite:///{}'.format(env['DB_PATH']),
-                       echo=False,
-                       connect_args={'check_same_thread': False},
-                       poolclass=StaticPool)
-Session = sessionmaker(bind=engine)
 
 
 class UserNotFoundError(Exception):
@@ -90,7 +79,3 @@ class UserSettingsRepo(Repo):
 
     def get_all_chat_id(self):
         return self.db.query(UserSettings.chat_id).all()
-
-
-# create database tables
-Base.metadata.create_all(engine)
