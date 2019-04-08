@@ -33,12 +33,13 @@ class NotSupportedError(Exception):
 
 
 class Course:
-    def __init__(self, course_id, title, lang, campus, url, url_lastminute=None, supported=True, not_supported_reason=''):
+    def __init__(self, course_id, title, lang, campus, url, parser='json', url_lastminute=None, supported=True, not_supported_reason=''):
         self.course_id = course_id
         self.title = title
         self.lang = lang
         self.campus = campus
         self.url = url
+        self.parser = parser
         self.url_lastminute = url_lastminute
         self.supported = supported
         self.not_supported_reason = not_supported_reason
@@ -114,4 +115,6 @@ def course_factory(course):
         out.not_supported_reason = course['not_supported_reason']
     if 'url_lastminute' in course:
         out.url_lastminute = course['url_lastminute']
+    if 'parser' in course:
+        out.parser = course['parser']
     return out

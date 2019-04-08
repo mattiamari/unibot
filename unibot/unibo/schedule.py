@@ -5,11 +5,7 @@ from unibot.cache import cache_for
 from unibot.urlfetch import fetch
 from unibot.unibo.courses import get_courses
 from unibot.unibo.constants import DAY_NAMES
-
-
-class InvalidSourceDataError(Exception):
-    def __init__(self, url):
-        super().__init__("Invalid input data for url '{}'".format(url))
+from unibot.unibo.schedule_parsers import get_parser
 
 
 class Event:
@@ -130,40 +126,8 @@ class Schedule:
 
 @cache_for(minutes=60)
 def get_schedule(course_id, year, curricula=''):
-    courses = get_courses()
-    src_url = courses.get(course_id).get_url_schedule(year, curricula)
-    src_data = fetch(src_url).json()
-    if 'events' not in src_data:
-        logging.error("'events' key not found for url '%s'", src_url)
-        raise InvalidSourceDataError(src_url)
-    try:
-        events = [event_factory(e) for e in src_data['events']]
-        events = remove_duplicates(events)
-    except Exception as e:
-        logging.exception(e)
-        raise InvalidSourceDataError(src_url)
+    course = get_courses().get(course_id)
+    src_url = course.get_url_schedule(year, curricula)
+    src_data = fetch(src_url)
+    events = get_parser(course.parser).parse(src_data)
     return Schedule(events)
-
-
-def remove_duplicates(events):
-    seen = set()
-    return [e for e in events if not (e in seen or seen.add(e))]
-
-
-def event_factory(e):
-    event = Event(
-        subject_id=e['cod_modulo'],
-        title=e['title'].capitalize(),
-        date_start=parse_date(e['start']),
-        date_end=parse_date(e['end']),
-        room=''
-    )
-    try:
-        event.room = e['aule'][0]['des_risorsa']
-    except Exception:
-        pass
-    return event
-
-
-def parse_date(date_str):
-    return datetime.strptime(date_str, '%Y-%m-%dT%H:%M:%S')
