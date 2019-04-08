@@ -29,11 +29,11 @@ class Bot:
             CommandHandler('domani', self.cmd_schedule_tomorrow),
             CommandHandler('settimana', self.cmd_schedule_week),
             CommandHandler('prossimasettimana', self.cmd_schedule_next_week),
-            CommandHandler('nonricordarmi', self.cmd_remindme_off),
             CommandHandler('lastminute', self.cmd_lastminute),
             CommandHandler('esami', self.cmd_exams),
             conversations.setup.get_handler(),
-            conversations.remindme.get_handler()
+            conversations.remindme.get_handler(),
+            conversations.noremindme.get_handler()
         ]
         self.daily_schedule_repeat_every = timedelta(minutes=3)
         self.daily_schedule_today_last_run = datetime.now()
@@ -41,10 +41,11 @@ class Bot:
 
     def run(self):
         self.register_handlers()
-        self.dispatcher.job_queue.run_repeating(self.daily_schedule_today, self.daily_schedule_repeat_every)
-        self.dispatcher.job_queue.run_repeating(self.daily_schedule_tomorrow, self.daily_schedule_repeat_every)
-        self.dispatcher.job_queue.run_once(self.send_announcements, 5)
-        # self.dispatcher.job_queue.run_once(self.daily_schedule, 3)
+        if environ['TESTING'] == '0':
+            self.dispatcher.job_queue.run_repeating(self.daily_schedule_today, self.daily_schedule_repeat_every)
+            self.dispatcher.job_queue.run_repeating(self.daily_schedule_tomorrow, self.daily_schedule_repeat_every)
+            self.dispatcher.job_queue.run_once(self.send_announcements, 5)
+            # self.dispatcher.job_queue.run_once(self.daily_schedule, 3)
         self.dispatcher.job_queue.start()
         self.updater.start_polling(poll_interval=1.0)
         self.updater.idle()
@@ -231,13 +232,14 @@ class Bot:
                 schedule = get_schedule(user.course_id,
                                         user.year,
                                         user.curricula)
-                if not schedule.week_has_lessons():
-                    if now.weekday() == 0:
-                        msg = "{}\n\n{}".format(messages.NO_LESSONS_WEEK, messages.NO_REMIND_THIS_WEEK)
-                        context.bot.send_message(chat_id=user.chat_id, parse_mode=ParseMode.HTML, text=msg)
+                if now.weekday() == 6 and not schedule.next_week_has_lessons():
+                    msg = "{}\n\n{}".format(messages.NO_LESSONS_WEEK, messages.NO_REMIND_THIS_WEEK)
+                    context.bot.send_message(chat_id=user.chat_id, parse_mode=ParseMode.HTML, text=msg)
+                    continue
+                if now.weekday() != 6 and not schedule.week_has_lessons():
                     continue
                 schedule = schedule.tomorrow()
-                msg = "<b>{}</b>\n\n{{}}".format(messages.YOUR_LESSONS_TODAY)
+                msg = "<b>{}</b>\n\n{{}}".format(messages.YOUR_LESSONS_TOMORROW)
                 if not schedule.has_events():
                     msg = msg.format(messages.NO_LESSONS)
                     context.bot.send_message(chat_id=user.chat_id, parse_mode=ParseMode.HTML, text=msg)

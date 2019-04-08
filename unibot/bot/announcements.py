@@ -32,6 +32,13 @@ announcements.append({
             "Se hai problemi o suggerimenti puoi farcelo sapere tramite il gruppo -> https://t.me/joinchat/GOSjsBP21eU22j3fDHzBOQ")
 })
 
+announcements.append({
+    'seq': 3,
+    'msg': ("<b>UniBot è stato aggiornato!</b> 🎉🎉\n"
+            "- /ricordami ora può inviarti sia l'orario del giorno, sia quello del giorno dopo, in due orari impostabili.\n\n\n"
+            "Se hai problemi o suggerimenti puoi farcelo sapere tramite il gruppo -> https://t.me/joinchat/GOSjsBP21eU22j3fDHzBOQ")
+})
+
 
 def get_announcements():
     announcements.sort(key=lambda a: a['seq'])

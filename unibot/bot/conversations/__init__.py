@@ -1,1 +1,1 @@
-from . import remindme, setup
+from . import remindme, noremindme, setup
