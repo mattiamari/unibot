@@ -23,7 +23,7 @@ class Event:
         self.room = room
 
     def __str__(self):
-        return "<i>{} - {}</i>    {}  ({})".format(
+        return "<b>{} - {}</b>  {}  ({})".format(
             self.date_start.time().strftime(self.TIME_FORMAT),
             self.date_end.time().strftime(self.TIME_FORMAT),
             self.title,
@@ -67,7 +67,7 @@ class EventList:
         for event in self.items:
             if (with_date and last_day != event.date_start.date()):
                 # write date for each day
-                out += '<b>{} {}</b>\n'.format(
+                out += '<b>{} {}</b>\n\n'.format(
                     DAY_NAMES[event.date_start.date().weekday()],
                     event.date_start.date().strftime(self.DATE_FORMAT)
                 )
