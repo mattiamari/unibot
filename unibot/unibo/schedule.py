@@ -67,6 +67,8 @@ class EventList:
         for event in self.items:
             if (with_date and last_day != event.date_start.date()):
                 # write date for each day
+                if last_day is not None:
+                    out += '\n'
                 out += '<b>{} {}</b>\n\n'.format(
                     DAY_NAMES[event.date_start.date().weekday()],
                     event.date_start.date().strftime(self.DATE_FORMAT)
