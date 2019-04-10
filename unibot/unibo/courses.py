@@ -13,7 +13,8 @@ QUERY_MIN_LENGTH = 4
 SCHEDULE_SUBDIR_URL = {'it': 'orario-lezioni', 'en': 'timetable'}
 EXAMS_SUBDIR_URL = {'it': 'appelli', 'en': 'exam-dates'}
 AVAILABLE_CURRICULA_URL = '@@available_curricula?anno={}&curricula='
-SCHEDULE_URL = '@@orario_reale_json?anno={}&curricula={}'
+SCHEDULE_URL = {'json': '@@orario_reale_json?anno={}&curricula={}',
+                'html': '?anno={}&curricula={}'}
 
 
 class QueryTooShortError(Exception):
@@ -63,7 +64,7 @@ class Course:
     def get_url_schedule(self, year, curricula=''):
         if not self.supported:
             raise NotSupportedError(self.course_id, self.not_supported_reason)
-        schedule_part = SCHEDULE_URL.format(year, curricula)
+        schedule_part = SCHEDULE_URL[self.parser].format(year, curricula)
         return '{}/{}/{}'.format(self.url, SCHEDULE_SUBDIR_URL[self.lang], schedule_part)
 
     def get_url_exams(self):

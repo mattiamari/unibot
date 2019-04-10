@@ -39,6 +39,14 @@ announcements.append({
             "Se hai problemi o suggerimenti puoi farcelo sapere tramite il gruppo -> https://t.me/joinchat/GOSjsBP21eU22j3fDHzBOQ")
 })
 
+announcements.append({
+    'seq': 4,
+    'msg': ("<b>UniBot è stato aggiornato!</b> 🎉🎉\n"
+            "Aggiunto il supporto ai corsi con l'orario suddiviso per materie (come Storia e Antropologia di Bologna).\n"
+            "Se il tuo corso non era supportato, riprova ora!\n"
+            "\n\nSe riscontri problemi o hai suggerimenti puoi farcelo sapere tramite il gruppo > https://t.me/joinchat/GOSjsBP21eU22j3fDHzBOQ <")
+})
+
 
 def get_announcements():
     announcements.sort(key=lambda a: a['seq'])

@@ -84,12 +84,10 @@ class Bot:
         except ChatNotFoundError:
             self.send(update, context, messages.NEED_SETUP)
             return
-        logging.info("REQUEST %s chat_id=%d course_id=%s year=%d curricula=%s",
-                     schedule_type, update.effective_chat.id, settings.course_id,
-                     settings.year, settings.curricula)
+        log_request(schedule_type, update.effective_chat.id, settings.course_id,
+                    settings.year, settings.curricula)
         try:
-            schedule = get_schedule(
-                settings.course_id, settings.year, settings.curricula)
+            schedule = get_schedule(settings.course_id, settings.year, settings.curricula)
         except NotSupportedError as ex:
             self.send(update, context, messages.COURSE_NOT_SUPPORTED.format(ex.reason))
             return
@@ -121,9 +119,8 @@ class Bot:
         except ChatNotFoundError:
             self.send(update, context, messages.NEED_SETUP)
             return
-        logging.info("REQUEST lastminute chat_id=%d course_id=%s year=%d curricula=%s",
-                     update.effective_chat.id, setting.course_id,
-                     setting.year, setting.curricula)
+        log_request('lastminute', update.effective_chat.id, setting.course_id,
+                    setting.year, setting.curricula)
         course = get_courses().get(setting.course_id)
         if not course.has_lastminute():
             self.send(update, context, messages.NOT_SUPPORTED_LASTMINUTE)
@@ -147,9 +144,8 @@ class Bot:
         except ChatNotFoundError:
             self.send(update, context, messages.NEED_SETUP)
             return
-        logging.info("REQUEST exams chat_id=%d course_id=%s year=%d curricula=%s",
-                     update.effective_chat.id, setting.course_id,
-                     setting.year, setting.curricula)
+        log_request('exams', update.effective_chat.id, setting.course_id,
+                    setting.year, setting.curricula)
         try:
             subjects = get_schedule(setting.course_id, setting.year, setting.curricula).subjects()
             exams = get_exams(setting.course_id).of_subjects(subjects, exclude_finished=True)
@@ -310,3 +306,8 @@ def split_message(msg):
     if end_row < len(rows):
         out += split_message('\n'.join(rows[end_row:]))
     return out
+
+
+def log_request(req_type, chat_id=None, course_id=None, year=None, curricula=None):
+    logging.info("REQUEST type='%s' chat_id='%d' course_id='%s' year='%d' curricula='%s'",
+                 req_type, chat_id, course_id, year, curricula)

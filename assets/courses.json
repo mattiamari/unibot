@@ -63,7 +63,8 @@
         "lang": "it",
         "campus": "Bologna",
         "url": "https://corsi.unibo.it/magistrale/AntropologiaCulturaleEtnologia",
-        "supported": false,
+        "supported": true,
+        "parser": "html",
         "not_supported_reason": "il formato dell'orario non è standard. Il supporto per questo corso arriverà presto :)"
     },
     {
@@ -72,7 +73,8 @@
         "lang": "it",
         "campus": "Bologna",
         "url": "https://corsi.unibo.it/laurea/ScienzeAntropologiche",
-        "supported": false,
+        "supported": true,
+        "parser": "html",
         "not_supported_reason": "il formato dell'orario non è standard. Il supporto per questo corso arriverà presto :)"
     },
     {
@@ -81,7 +83,8 @@
         "lang": "it",
         "campus": "Bologna",
         "url": "https://corsi.unibo.it/magistrale/archeologia",
-        "supported": false,
+        "supported": true,
+        "parser": "html",
         "not_supported_reason": "il formato dell'orario non è standard. Il supporto per questo corso arriverà presto :)"
     },
     {
@@ -97,7 +100,8 @@
         "lang": "it",
         "campus": "Bologna",
         "url": "https://corsi.unibo.it/magistrale/artivisive",
-        "supported": false,
+        "supported": true,
+        "parser": "html",
         "not_supported_reason": "il formato dell'orario non è standard. Il supporto per questo corso arriverà presto :)"
     },
     {
@@ -1455,7 +1459,8 @@
         "lang": "it",
         "campus": "Bologna",
         "url": "https://corsi.unibo.it/laurea/storia",
-        "supported": false,
+        "supported": true,
+        "parser": "html",
         "not_supported_reason": "il formato dell'orario non è standard. Il supporto per questo corso arriverà presto :)"
     },
     {
