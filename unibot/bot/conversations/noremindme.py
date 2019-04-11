@@ -9,7 +9,7 @@ from unibot.bot.conversations.common import step_cancel, send
 
 
 STEP_DAY_SELECT, STEP_DAY_INVALID = range(0, 2)
-REGEX_DAY = re.compile(r'(oggi|domani)')
+REGEX_DAY = re.compile(r'(oggi|domani)', flags=re.IGNORECASE)
 
 
 def get_handler():
@@ -48,6 +48,7 @@ def step_day_select(update, context):
         send(update, context, messages.NOREMINDME_INVALID_DAY)
         return STEP_DAY_SELECT
     day, = match.groups()
+    day = day.lower()
 
     settingsrepo = UserSettingsRepo()
     settings = settingsrepo.get(update.effective_chat.id)
