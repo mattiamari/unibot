@@ -14,7 +14,7 @@ STEP_TIME_SELECT, STEP_TIME_INVALID = range(0, 2)
 
 TIME_FORMAT = '%H:%M'
 
-REGEX_TIME = re.compile(r'((?:oggi){0,1}|domani)\s*(\d?\d)[.,:]*(\d?\d?)', flags=re.IGNORECASE)
+REGEX_TIME = re.compile(r'((?:oggi){0,1}|domani)\s*(\d{1,2})[.,: ]*(\d{0,2})', flags=re.IGNORECASE)
 
 
 class RemindType:
@@ -89,9 +89,6 @@ def time_from_string(hour, minute):
     try:
         hour = int(hour)
         minute = int(minute) if minute is not None and minute != '' else 0
-    except ValueError as e:
-        logging.exception(e)
+        return datetime.time(hour, minute)
+    except ValueError:
         return None
-    if hour not in range(0, 24) or minute not in range(0, 60):
-        return None
-    return datetime.time(hour, minute)
