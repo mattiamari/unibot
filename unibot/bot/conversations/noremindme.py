@@ -38,7 +38,7 @@ def step_start(update, context):
     settings.do_remind_tomorrow = False
     settingsrepo.update(settings)
 
-    send(update, context, messages.REMINDME_OFF_DAY.format(day))
+    send(update, context, messages.NOREMINDME_OFF_DAY.format(day))
     return ConversationHandler.END
 
 
