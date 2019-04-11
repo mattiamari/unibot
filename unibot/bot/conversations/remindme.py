@@ -14,7 +14,7 @@ STEP_TIME_SELECT, STEP_TIME_INVALID = range(0, 2)
 
 TIME_FORMAT = '%H:%M'
 
-REGEX_TIME = re.compile(r'((?:oggi){0,1}|domani)\s*(\d?\d)[.,:]*(\d?\d?)')
+REGEX_TIME = re.compile(r'((?:oggi){0,1}|domani)\s*(\d?\d)[.,:]*(\d?\d?)', flags=re.IGNORECASE)
 
 
 class RemindType:
@@ -50,6 +50,7 @@ def step_time_select(update, context):
         send(update, context, messages.REMINDME_TIME_INVALID)
         return STEP_TIME_SELECT
     remind_type_str, hour, minute = match.groups()
+    remind_type_str = remind_type_str.lower()
 
     if remind_type_str == '':
         remind_type = RemindType.TODAY
