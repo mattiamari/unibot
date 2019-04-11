@@ -2,7 +2,7 @@ import json
 from os import environ, path
 
 sent = []
-sent_file = path.join(path.dirname(environ['DB_PATH']), 'sent_announcements.json')
+sent_file = path.join(environ['DATA_PATH'], 'sent_announcements.json')
 if path.isfile(sent_file):
     with open(sent_file, 'r') as fp:
         sent = json.load(fp)

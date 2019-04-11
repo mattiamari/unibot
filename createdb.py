@@ -1,11 +1,13 @@
 import logging
 import sys
-from os import path, environ
+from time import sleep
+from os import environ
 
+import pymysql.cursors
 from alembic.config import Config
 from alembic import command
 
-from unibot.db import engine
+from unibot.db import engine, conn_string
 from unibot.bot.users_model import Base
 
 
@@ -14,15 +16,26 @@ logging.basicConfig(format='%(asctime)s - %(levelname)s - %(message)s',
                     stream=sys.stdout)
 
 
-def db_exists():
-    return path.isfile(environ['DB_PATH'])
+def db_available():
+    try:
+        pymysql.connect(host=environ['DB_HOST'],
+                        user=environ['DB_USER'],
+                        password=environ['DB_PASS'],
+                        db=environ['DB_NAME'],
+                        charset='utf8mb4',
+                        cursorclass=pymysql.cursors.DictCursor)
+        return True
+    except Exception:
+        return False
 
 
 if __name__ == '__main__':
-    if not db_exists():
-        logging.info('DB does not exist. Creating...')
-        Base.metadata.create_all(engine)
-        alembic_cfg = Config("alembic.ini")
-        command.stamp(alembic_cfg, "head")
-        sys.exit(0)
-    logging.info('DB already exists')
+    while not db_available():
+        logging.info('Waiting for DB...')
+        sleep(2)
+    logging.info('Initializing DB...')
+    Base.metadata.create_all(engine)
+    alembic_cfg = Config("alembic.ini")
+    alembic_cfg.set_main_option('sqlalchemy.url', conn_string)
+    command.stamp(alembic_cfg, "head")
+    sys.exit(0)

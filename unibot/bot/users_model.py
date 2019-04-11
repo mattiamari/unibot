@@ -10,9 +10,9 @@ class User(Base):
     __tablename__ = 'user'
     user_id = Column(Integer, primary_key=True)
     chat_id = Column(Integer, primary_key=True)
-    first_name = Column(String)
-    last_name = Column(String)
-    username = Column(String)
+    first_name = Column(String(128))
+    last_name = Column(String(128))
+    username = Column(String(64))
 
     def __init__(self,
                  user_id,
@@ -35,9 +35,9 @@ class UserSettings(Base):
     __tablename__ = 'user_settings'
     chat_id = Column(Integer, primary_key=True)
     user_id = Column(Integer)
-    course_id = Column(String)
+    course_id = Column(String(32))
     year = Column(Integer)
-    curricula = Column(String, default='')
+    curricula = Column(String(32), default='')
     do_remind_today = Column(Boolean, default=False)
     remind_time_today = Column(Time, default=None)
     do_remind_tomorrow = Column(Boolean, default=False)

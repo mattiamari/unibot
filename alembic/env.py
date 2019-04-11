@@ -15,6 +15,9 @@ config = context.config
 # This line sets up loggers basically.
 fileConfig(config.config_file_name)
 
+from unibot.db import conn_string
+config.set_main_option('sqlalchemy.url', conn_string)
+
 # add your model's MetaData object here
 # for 'autogenerate' support
 # from myapp import mymodel

@@ -1,16 +1,25 @@
 version: '3.5'
 
 services:
-  bot:
-    build: .
-    image: unibot:${BOT_VERSION}
-    env_file:
-      - ../unibo_orari_bot-env/bot.env
-    environment:
-      BOT_VERSION: ${BOT_VERSION}
-    volumes:
-        - bot-data:/app-data
-    restart: unless-stopped
+    bot:
+        build: .
+        image: unibot:${BOT_VERSION}
+        env_file:
+            - ../unibo_orari_bot-env/bot.env
+        environment:
+            BOT_VERSION: ${BOT_VERSION}
+        volumes:
+            - bot-data:/app-data
+        depends_on:
+            - db
+        restart: unless-stopped
+    db:
+        image: mariadb:latest
+        env_file: ../unibo_orari_bot-env/db.env
+        volumes:
+            - db-data:/var/lib/mysql
+        restart: unless-stopped
 
 volumes:
     bot-data:
+    db-data:
