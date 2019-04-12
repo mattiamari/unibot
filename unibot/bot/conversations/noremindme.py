@@ -26,17 +26,20 @@ def step_start(update, context):
     settingsrepo = UserSettingsRepo()
     if not settingsrepo.has(update.effective_chat.id):
         send(update, context, messages.NEED_SETUP)
+        settingsrepo.close()
         return ConversationHandler.END
     settings = settingsrepo.get(update.effective_chat.id)
 
     if settings.do_remind_today and settings.do_remind_tomorrow:
         send(update, context, messages.NOREMINDME_BOTH_ACTIVE)
+        settingsrepo.close()
         return STEP_DAY_SELECT
 
     day = 'oggi' if settings.do_remind_today else 'domani'
     settings.do_remind_today = False
     settings.do_remind_tomorrow = False
     settingsrepo.update(settings)
+    settingsrepo.close()
 
     send(update, context, messages.NOREMINDME_OFF_DAY.format(day))
     return ConversationHandler.END
@@ -58,6 +61,7 @@ def step_day_select(update, context):
         settings.do_remind_tomorrow = False
 
     settingsrepo.update(settings)
+    settingsrepo.close()
 
     send(update, context, messages.NOREMINDME_OFF_DAY.format(day))
     return ConversationHandler.END

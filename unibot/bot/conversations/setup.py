@@ -164,6 +164,9 @@ def setup_step_curricula_select(update, context):
     ctx['user_repo'].update(ctx['user'])
     ctx['user_settings_repo'].update(ctx['settings'])
 
+    ctx['user_repo'].close()
+    ctx['user_settings_repo'].close()
+
     send(update, context, messages.SETUP_DONE)
     del conv_context[update.effective_chat.id]
     return ConversationHandler.END

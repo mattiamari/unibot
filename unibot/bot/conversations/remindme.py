@@ -37,10 +37,13 @@ def get_handler():
 
 
 def step_start(update, context):
-    if not UserSettingsRepo().has(update.effective_chat.id):
+    settingsrepo = UserSettingsRepo()
+    if not settingsrepo.has(update.effective_chat.id):
         send(update, context, messages.NEED_SETUP)
+        settingsrepo.close()
         return ConversationHandler.END
     send(update, context, messages.REMINDME_START)
+    settingsrepo.close()
     return STEP_TIME_SELECT
 
 
@@ -65,8 +68,8 @@ def step_time_select(update, context):
         send(update, context, messages.REMINDME_TIME_INVALID)
         return STEP_TIME_SELECT
 
-    settings = UserSettingsRepo()
-    setting = settings.get(update.effective_chat.id)
+    settingsrepo = UserSettingsRepo()
+    setting = settingsrepo.get(update.effective_chat.id)
     if remind_type == RemindType.TODAY:
         setting.do_remind_today = True
         setting.remind_time_today = time
@@ -75,7 +78,8 @@ def step_time_select(update, context):
         setting.do_remind_tomorrow = True
         setting.remind_time_tomorrow = time
         term_day = messages.TERM_TOMORROW
-    settings.update(setting)
+    settingsrepo.update(setting)
+    settingsrepo.close()
     send(update, context, messages.REMINDME_END.format(term_day, time.strftime(TIME_FORMAT)))
     return ConversationHandler.END
 

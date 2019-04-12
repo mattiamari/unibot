@@ -1,7 +1,7 @@
 import logging
 
 from unibot.db import Session
-from unibot.bot.users_model import Base, User, UserSettings
+from unibot.bot.users_model import User, UserSettings
 
 
 class UserNotFoundError(Exception):
@@ -17,6 +17,9 @@ class ChatNotFoundError(Exception):
 class Repo:
     def __init__(self):
         self.db = Session()
+
+    def close(self):
+        self.db.close()
 
 
 class UserRepo(Repo):

@@ -17,8 +17,6 @@ from unibot.unibo.exams import get_exams
 
 class Bot:
     def __init__(self):
-        self.users = UserRepo
-        self.user_settings = UserSettingsRepo
         self.updater = Updater(token=environ['BOT_TOKEN'], use_context=True)
         self.dispatcher = self.updater.dispatcher
         self.handlers = [
@@ -79,11 +77,13 @@ class Bot:
         self.send_schedule(update, context, 'next_week')
 
     def send_schedule(self, update, context, schedule_type):
+        settingsrepo = UserSettingsRepo()
         try:
-            settings = self.user_settings().get(update.effective_chat.id)
+            settings = settingsrepo.get(update.effective_chat.id)
         except ChatNotFoundError:
             self.send(update, context, messages.NEED_SETUP)
             return
+        settingsrepo.close()
         log_request(schedule_type, update.effective_chat.id, settings.course_id,
                     settings.year, settings.curricula)
         try:
@@ -102,23 +102,27 @@ class Bot:
         self.send(update, context, schedule.tostring(with_date=True))
 
     def cmd_remindme_off(self, update, context):
-        settings = self.user_settings()
+        settingsrepo = UserSettingsRepo()
         try:
-            setting = settings.get(update.effective_chat.id)
+            setting = settingsrepo.get(update.effective_chat.id)
         except ChatNotFoundError:
             self.send(update, context, messages.NEED_SETUP)
             return
         setting.do_remind = False
-        settings.update(setting)
+        settingsrepo.update(setting)
+        settingsrepo.close()
         self.send(update, context, messages.REMINDME_OFF)
 
     def cmd_lastminute(self, update, context):
-        settings = self.user_settings()
+        settingsrepo = UserSettingsRepo()
         try:
-            setting = settings.get(update.effective_chat.id)
+            setting = settingsrepo.get(update.effective_chat.id)
+            settingsrepo.close()
         except ChatNotFoundError:
             self.send(update, context, messages.NEED_SETUP)
+            settingsrepo.close()
             return
+        settingsrepo.close()
         log_request('lastminute', update.effective_chat.id, setting.course_id,
                     setting.year, setting.curricula)
         course = get_courses().get(setting.course_id)
@@ -138,12 +142,15 @@ class Bot:
         self.send(update, context, msg)
 
     def cmd_exams(self, update, context):
-        settings = self.user_settings()
+        settingsrepo = UserSettingsRepo()
         try:
-            setting = settings.get(update.effective_chat.id)
+            setting = settingsrepo.get(update.effective_chat.id)
+            settingsrepo.close()
         except ChatNotFoundError:
             self.send(update, context, messages.NEED_SETUP)
+            settingsrepo.close()
             return
+        settingsrepo.close()
         log_request('exams', update.effective_chat.id, setting.course_id,
                     setting.year, setting.curricula)
         try:
@@ -164,8 +171,8 @@ class Bot:
             # don't send reminders on the weekend
             self.daily_schedule_today_last_run = now
             return
-        settings_repo = self.user_settings()
-        users = settings_repo.get_to_remind_today()
+        settingsrepo = UserSettingsRepo()
+        users = settingsrepo.get_to_remind_today()
         users = [u for u in users if isinstance(u.remind_time_today, time)]
         users = [u for u in users if self.daily_schedule_today_last_run < u.next_remind_time_today() <= now]
         if not users:
@@ -197,16 +204,19 @@ class Bot:
                                          text=messages.COURSE_NOT_SUPPORTED.format(ex.reason))
             except telegram.error.Unauthorized as e:
                 logging.warning(e)
-                settings_repo.delete(user)
+                settingsrepo.delete(user)
+                settingsrepo.close()
             except telegram.error.ChatMigrated as e:
                 old = user.chat_id
                 user.chat_id = e.new_chat_id
-                settings_repo.update(user)
+                settingsrepo.update(user)
+                settingsrepo.close()
                 logging.info("Updated chat_id %d to %d", old, user.chat_id)
             except Exception as e:
                 logging.exception(e)
 
         self.daily_schedule_today_last_run = now
+        settingsrepo.close()
         logging.info("Done sending today's schedule")
 
     def daily_schedule_tomorrow(self, context):
@@ -215,8 +225,8 @@ class Bot:
             # don't send reminders on the weekend
             self.daily_schedule_tomorrow_last_run = now
             return
-        settings_repo = self.user_settings()
-        users = settings_repo.get_to_remind_tomorrow()
+        settingsrepo = UserSettingsRepo()
+        users = settingsrepo.get_to_remind_tomorrow()
         users = [u for u in users if isinstance(u.remind_time_tomorrow, time)]
         users = [u for u in users if self.daily_schedule_tomorrow_last_run < u.next_remind_time_tomorrow() <= now]
         if not users:
@@ -249,24 +259,27 @@ class Bot:
                                          text=messages.COURSE_NOT_SUPPORTED.format(ex.reason))
             except telegram.error.Unauthorized as e:
                 logging.warning(e)
-                settings_repo.delete(user)
+                settingsrepo.delete(user)
+                settingsrepo.close()
             except telegram.error.ChatMigrated as e:
                 old = user.chat_id
                 user.chat_id = e.new_chat_id
-                settings_repo.update(user)
+                settingsrepo.update(user)
+                settingsrepo.close()
                 logging.info("Updated chat_id %d to %d", old, user.chat_id)
             except Exception as e:
                 logging.exception(e)
 
         self.daily_schedule_tomorrow_last_run = now
+        settingsrepo.close()
         logging.info("Done sending tomorrow's schedule")
 
     def send_announcements(self, context):
         anns = announcements.get_announcements()
         if not anns:
             return
-        settings_repo = self.user_settings()
-        chats = settings_repo.get_all()
+        settingsrepo = UserSettingsRepo()
+        chats = settingsrepo.get_all()
         logging.info('Sending announcements to %d chats', len(chats))
         for ann in anns:
             for chat in chats:
@@ -275,16 +288,19 @@ class Bot:
                     os_time.sleep(0.1)
                 except telegram.error.Unauthorized as e:
                     logging.warning(e)
-                    settings_repo.delete(chat)
+                    settingsrepo.delete(chat)
+                    settingsrepo.close()
                 except telegram.error.ChatMigrated as e:
                     old = chat.chat_id
                     chat.chat_id = e.new_chat_id
-                    settings_repo.update(chat)
+                    settingsrepo.update(chat)
+                    settingsrepo.close()
                     logging.info("Updated chat_id %d to %d", old, chat.chat_id)
                 except Exception as e:
                     logging.exception(e)
             announcements.set_sent(ann)
         announcements.save_sent()
+        settingsrepo.close()
         logging.info('Done sending announcements')
 
     def send(self, update, context, text):
