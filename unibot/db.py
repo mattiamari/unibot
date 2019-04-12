@@ -1,6 +1,5 @@
 from os import environ
 from sqlalchemy import create_engine
-from sqlalchemy.pool import QueuePool
 from sqlalchemy.orm import sessionmaker
 
 conn_string = ('mysql+pymysql://{}:{}@{}/{}?charset=utf8mb4'
@@ -11,7 +10,6 @@ conn_string = ('mysql+pymysql://{}:{}@{}/{}?charset=utf8mb4'
 
 engine = create_engine(conn_string,
                        echo=False,
-                       poolclass=QueuePool,
                        pool_recycle=120,
                        pool_size=5,
                        max_overflow=20)
