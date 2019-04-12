@@ -16,6 +16,6 @@ engine = create_engine(conn_string,
                        pool_size=5,
                        max_overflow=10)
 
-engine.execute('SET GLOBAL wait_timeout=120').close()
+engine.execute('SET wait_timeout=120').close()
 
 Session = sessionmaker(bind=engine)
