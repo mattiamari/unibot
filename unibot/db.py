@@ -12,8 +12,8 @@ conn_string = ('mysql+pymysql://{}:{}@{}/{}?charset=utf8mb4'
 engine = create_engine(conn_string,
                        echo=False,
                        poolclass=QueuePool,
-                       pool_recycle=100,
+                       pool_recycle=120,
                        pool_size=5,
-                       max_overflow=10)
+                       max_overflow=20)
 
 Session = sessionmaker(bind=engine)
