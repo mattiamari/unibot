@@ -8,8 +8,8 @@ Base = declarative_base()
 
 class User(Base):
     __tablename__ = 'user'
-    user_id = Column(Integer, primary_key=True)
-    chat_id = Column(Integer, primary_key=True)
+    user_id = Column(Integer(64), primary_key=True)
+    chat_id = Column(Integer(64), primary_key=True)
     first_name = Column(String(128))
     last_name = Column(String(128))
     username = Column(String(64))
@@ -33,8 +33,8 @@ class User(Base):
 
 class UserSettings(Base):
     __tablename__ = 'user_settings'
-    chat_id = Column(Integer, primary_key=True)
-    user_id = Column(Integer)
+    chat_id = Column(Integer(64), primary_key=True)
+    user_id = Column(Integer(64))
     course_id = Column(String(32))
     year = Column(Integer)
     curricula = Column(String(32), default='')
