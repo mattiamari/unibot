@@ -18,6 +18,7 @@ services:
         env_file: ../unibo_orari_bot-env/db.env
         volumes:
             - db-data:/var/lib/mysql
+            - ./config/mariadb:/etc/mysql/conf.d
         restart: unless-stopped
 
 volumes:
