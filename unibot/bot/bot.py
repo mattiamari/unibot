@@ -8,7 +8,7 @@ from telegram import ParseMode
 import telegram.error
 
 from unibot.bot import conversations, announcements, messages
-from unibot.bot.users import UserRepo, UserSettingsRepo, ChatNotFoundError
+from unibot.bot.users import UserSettingsRepo, ChatNotFoundError
 from unibot.unibo import lastminute
 from unibot.unibo.schedule import get_schedule
 from unibot.unibo.courses import get_courses, NotSupportedError

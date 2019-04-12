@@ -5,7 +5,7 @@ from unibot.urlfetch import fetch
 from unibot.cache import cache_for
 
 
-RE_HTML_TR = re.compile(r'(annunci -->\s*)<td ', flags=re.MULTILINE|re.IGNORECASE)
+RE_HTML_TR = re.compile(r'(annunci -->\s*)<td ', flags=re.MULTILINE | re.IGNORECASE)
 
 
 class News:
@@ -29,7 +29,7 @@ def get_news(url):
 
 
 def news_factory(news):
-    strings = [s for s in news.stripped_strings]
+    strings = list(news.stripped_strings)
     return News(strings[0], strings[1])
 
 

@@ -5,9 +5,7 @@ from bs4 import BeautifulSoup
 from unibot.urlfetch import fetch
 from unibot.cache import cache_for
 from unibot.unibo.courses import get_courses
-from unibot.unibo.constants import DAY_NAMES
-
-from pprint import pformat
+from unibot.unibo.constants import DAY_NAMES, MONTHNAME_NUM_DICT
 
 
 EXAM_DATE_HEADING_DICT = {
@@ -16,21 +14,6 @@ EXAM_DATE_HEADING_DICT = {
     'tipo prova:': 'exam_type',
     'luogo:': 'location',
     'note:': 'notes'
-}
-
-MONTH_NAMES_DICT = {
-    'gennaio': 1,
-    'febbraio': 2,
-    'marzo': 3,
-    'aprile': 4,
-    'maggio': 5,
-    'giugno': 6,
-    'luglio': 7,
-    'agosto': 8,
-    'settembre': 9,
-    'ottobre': 10,
-    'novembre': 11,
-    'dicembre': 12
 }
 
 
@@ -117,7 +100,7 @@ class Exams:
         now = datetime.now()
         exams = [e for e in self.exams
                  if e.subject_id in subject_id_list
-                 and (e.date > now or not exclude_finished)]
+                 and (not exclude_finished or e.date > now)]
         exams.sort(key=lambda e: e.subject_id)  # sort() is stable so the date ordering will be kept
         return ExamList(exams)
 
@@ -171,7 +154,7 @@ def parse_date(date_str):
     day, month, year, _, time = date_str.split()
     hour, minute = time.split(':')
     return datetime(day=int(day),
-                    month=MONTH_NAMES_DICT[month.lower()],
+                    month=MONTHNAME_NUM_DICT[month.lower()],
                     year=int(year),
                     hour=int(hour),
                     minute=int(minute))

@@ -4,8 +4,10 @@ import requests
 
 USER_AGENT = 'unibo_orari_bot/{}'.format(os.environ['BOT_VERSION'])
 
+
 class FetchError(Exception):
     pass
+
 
 def fetch(url):
     try:
