@@ -11,6 +11,11 @@ conn_string = ('mysql+pymysql://{}:{}@{}/{}?charset=utf8mb4'
 
 engine = create_engine(conn_string,
                        echo=False,
-                       poolclass=QueuePool)
+                       poolclass=QueuePool,
+                       pool_recycle=100,
+                       pool_size=5,
+                       max_overflow=10)
+
+engine.execute('SET wait_timeout=120')
 
 Session = sessionmaker(bind=engine)
