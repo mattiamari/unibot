@@ -117,3 +117,6 @@ class Schedule:
 
     def week_has_lessons(self):
         return len(self.week()) > 0
+
+    def next_week_has_lessons(self):
+        return len(self.next_week()) > 0
