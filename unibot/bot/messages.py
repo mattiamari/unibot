@@ -3,13 +3,14 @@ CMD_START = ("Ciao! Sono un bot che ti ricorda il tuo <b>orario delle lezioni</b
 
 _COMMANDS = ["/help - Mostra l'elenco dei comandi disponibili",
              "/setup - Imposta facoltà e anno di corso per ricevere l'orario",
-             "/oggi - Ricevi l'orario delle lezioni di oggi",
-             "/domani - Ricevi l'orario delle lezioni di domani",
-             "/settimana - Ricevi l'orario della settimana in corso",
-             "/prossimasettimana - Ricevi l'orario della prossima settimana",
-             "/ricordami - Ricevi l'orario automaticamente all'orario scelto",
+             "/oggi - Mostra l'orario delle lezioni di oggi",
+             "/domani - Mostra l'orario delle lezioni di domani",
+             "/settimana - Mostra l'orario della settimana in corso",
+             "/prossimasettimana - Mostra l'orario della prossima settimana",
+             "/ricordami - Ricevi l'orario di lezione automaticamente all'orario scelto",
              "/nonricordarmi - Smetti di ricevere l'orario automaticamente",
-             "/lastminute - Ricevi gli avvisi dalla pagina Last Minute"]
+             "/lastminute - Mostra gli avvisi dalla pagina Last Minute",
+             "/esami - Mostra le info dei prossimi 3 appelli d'esame per ogni materia"]
 
 COMMAND_LIST = ("<b>Lista comandi</b>\n{}"
                 "\n\n\n<b>Se riscontri un problema non esitare a contattarci tramite il gruppo</b> "
@@ -19,7 +20,7 @@ COMMAND_LIST = ("<b>Lista comandi</b>\n{}"
 NEED_SETUP = "Non mi hai ancora detto quale facoltà frequenti. Fallo subito con /setup"
 
 SETUP_STEP_START = ("Devo chiederti solo un paio di cose ma puoi usare il comando /annulla "
-                    "per uscire in qualsiasi momento")
+                    "per fermarmi in qualsiasi momento")
 
 SETUP_STEP_SEARCH = ("Quale facoltà frequenti? (basta inserire una o più parole chiave, "
                      "anche abbreviate, per esempio 'medicina' o 'ing inf'")
@@ -62,7 +63,7 @@ REMINDME_START = ("A che ora vuoi essere avvisato? Inserisci 'oggi' o 'domani' s
 REMINDME_TIME_INVALID = "L'orario che hai inserito non è valido. Inserisci un orario 00:00 - 23:59 o /annulla"
 REMINDME_END = "Perfetto, ti avviserò ogni giorno con l'orario di {} alle {} (ora italiana)"
 
-NOREMINDME_BOTH_ACTIVE = ("Sono attivi entrambi i reminder, quale vuoi disattivare?\n"
+NOREMINDME_BOTH_ACTIVE = ("Sono attivi entrambi i promemoria, quale vuoi disattivare?\n"
                           "Scrivi 'oggi' o 'domani'")
 NOREMINDME_INVALID_DAY = "Scrivi 'oggi' o 'domani' oppure /annulla"
 NOREMINDME_OFF = "Smetterò di inviarti l'orario ogni giorno"
@@ -72,7 +73,7 @@ NO_LESSONS = "Nessuna lezione"
 YOUR_LESSONS_TODAY = "Le tue lezioni di oggi"
 YOUR_LESSONS_TOMORROW = "Le tue lezioni di domani"
 NO_LESSONS_WEEK = "Nessuna lezione questa settimana."
-NO_REMIND_THIS_WEEK = "Per il resto della settimana non ti scriverò, lo farò solo se l'orario cambia."
+NO_REMIND_THIS_WEEK = "Per il resto della settimana non ti scriverò, lo farò solo se l'orario dovesse cambiare."
 
 FETCH_ERROR = "Non sono riuscito ad ottenere i dati. Riprova più tardi."
 SCHEDULE_FETCH_ERROR = "Non sono riuscito ad ottenere l'orario. Riprova più tardi."
