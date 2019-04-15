@@ -26,4 +26,4 @@ WORKDIR /app
 COPY . ./
 
 ENV PYTHONPATH=/app
-CMD ["sh", "start.sh"]
+CMD ["python3", "start.py"]

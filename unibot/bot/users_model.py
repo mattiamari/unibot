@@ -10,9 +10,9 @@ class User(Base):
     __tablename__ = 'user'
     user_id = Column(BigInteger, primary_key=True, autoincrement=False)
     chat_id = Column(BigInteger, primary_key=True, autoincrement=False)
-    first_name = Column(String(128))
-    last_name = Column(String(128))
-    username = Column(String(64))
+    first_name = Column(String(128, collation='utf8mb4_unicode_ci'))
+    last_name = Column(String(128, collation='utf8mb4_unicode_ci'))
+    username = Column(String(64, collation='utf8mb4_unicode_ci'))
 
     def __init__(self,
                  user_id,
@@ -35,9 +35,9 @@ class UserSettings(Base):
     __tablename__ = 'user_settings'
     chat_id = Column(BigInteger, primary_key=True, autoincrement=False)
     user_id = Column(BigInteger)
-    course_id = Column(String(32))
+    course_id = Column(String(32, collation='utf8mb4_unicode_ci'))
     year = Column(Integer)
-    curricula = Column(String(32), default='')
+    curricula = Column(String(32, collation='utf8mb4_unicode_ci'), default='')
     do_remind_today = Column(Boolean, default=False)
     remind_time_today = Column(Time, default=None)
     do_remind_tomorrow = Column(Boolean, default=False)
