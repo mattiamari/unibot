@@ -5,7 +5,7 @@ from unibot.urlfetch import fetch
 from unibot.cache import cache_for
 
 
-RE_HTML_TR = re.compile(r'(annunci -->\s*)<td ', flags=re.MULTILINE | re.IGNORECASE)
+RE_HTML_TR = re.compile(r'(<\/tr>[\w\d\s<>!\-/]*)<td ', flags=re.MULTILINE | re.IGNORECASE)
 
 
 class News:
