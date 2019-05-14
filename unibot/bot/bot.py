@@ -101,18 +101,6 @@ class Bot:
             return
         self.send(update, context, schedule.tostring(with_date=True))
 
-    def cmd_remindme_off(self, update, context):
-        settingsrepo = UserSettingsRepo()
-        try:
-            setting = settingsrepo.get(update.effective_chat.id)
-        except ChatNotFoundError:
-            self.send(update, context, messages.NEED_SETUP)
-            return
-        setting.do_remind = False
-        settingsrepo.update(setting)
-        settingsrepo.close()
-        self.send(update, context, messages.REMINDME_OFF)
-
     def cmd_lastminute(self, update, context):
         settingsrepo = UserSettingsRepo()
         try:
