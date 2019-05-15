@@ -10,9 +10,10 @@ conn_string = ('mysql+pymysql://{}:{}@{}/{}?charset=utf8mb4'
 
 engine = create_engine(conn_string,
                        echo=False,
-                       pool_recycle=3500,  # a couple seconds lower than mysql's wait_timeout
-                       pool_size=40,
-                       max_overflow=80,
+                       pool_recycle=600, # seconds
+                       pool_size=10,
+                       max_overflow=5,
+                       pool_timeout=5, # seconds
                        pool_pre_ping=True)
 
 Session = sessionmaker(bind=engine)
