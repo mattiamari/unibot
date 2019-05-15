@@ -80,10 +80,11 @@ class Bot:
         settingsrepo = UserSettingsRepo()
         try:
             settings = settingsrepo.get(update.effective_chat.id)
+            settingsrepo.close()
         except ChatNotFoundError:
             self.send(update, context, messages.NEED_SETUP)
+            settingsrepo.close()
             return
-        settingsrepo.close()
         log_request(schedule_type, update.effective_chat.id, settings.course_id,
                     settings.year, settings.curricula)
         try:
@@ -110,7 +111,6 @@ class Bot:
             self.send(update, context, messages.NEED_SETUP)
             settingsrepo.close()
             return
-        settingsrepo.close()
         log_request('lastminute', update.effective_chat.id, setting.course_id,
                     setting.year, setting.curricula)
         course = get_courses().get(setting.course_id)
@@ -163,6 +163,7 @@ class Bot:
         users = [u for u in users if isinstance(u.remind_time_today, time)]
         users = [u for u in users if self.daily_schedule_today_last_run < u.next_remind_time_today() <= now]
         if not users:
+            settingsrepo.close()
             return
 
         logging.info('Sending todays schedule to %d users', len(users))
@@ -192,12 +193,10 @@ class Bot:
             except telegram.error.Unauthorized as e:
                 logging.warning(e)
                 settingsrepo.delete(user)
-                settingsrepo.close()
             except telegram.error.ChatMigrated as e:
                 old = user.chat_id
                 user.chat_id = e.new_chat_id
                 settingsrepo.update(user)
-                settingsrepo.close()
                 logging.info("Updated chat_id %d to %d", old, user.chat_id)
             except Exception as e:
                 logging.exception(e)
@@ -217,6 +216,7 @@ class Bot:
         users = [u for u in users if isinstance(u.remind_time_tomorrow, time)]
         users = [u for u in users if self.daily_schedule_tomorrow_last_run < u.next_remind_time_tomorrow() <= now]
         if not users:
+            settingsrepo.close()
             return
 
         logging.info('Sending tomorrows schedule to %d users', len(users))
@@ -247,12 +247,10 @@ class Bot:
             except telegram.error.Unauthorized as e:
                 logging.warning(e)
                 settingsrepo.delete(user)
-                settingsrepo.close()
             except telegram.error.ChatMigrated as e:
                 old = user.chat_id
                 user.chat_id = e.new_chat_id
                 settingsrepo.update(user)
-                settingsrepo.close()
                 logging.info("Updated chat_id %d to %d", old, user.chat_id)
             except Exception as e:
                 logging.exception(e)
@@ -276,12 +274,10 @@ class Bot:
                 except telegram.error.Unauthorized as e:
                     logging.warning(e)
                     settingsrepo.delete(chat)
-                    settingsrepo.close()
                 except telegram.error.ChatMigrated as e:
                     old = chat.chat_id
                     chat.chat_id = e.new_chat_id
                     settingsrepo.update(chat)
-                    settingsrepo.close()
                     logging.info("Updated chat_id %d to %d", old, chat.chat_id)
                 except Exception as e:
                     logging.exception(e)
