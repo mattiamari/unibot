@@ -81,5 +81,7 @@ SCHEDULE_FETCH_ERROR = "Non sono riuscito ad ottenere l'orario. Riprova più tar
 NOT_SUPPORTED_LASTMINUTE = "Last Minute è supportato solo dal campus di Rimini."
 NO_NEWS = "Nessuna news"
 
+NO_EXAMS = "Nessun esame trovato."
+
 TERM_TODAY = 'oggi'
 TERM_TOMORROW = 'domani'

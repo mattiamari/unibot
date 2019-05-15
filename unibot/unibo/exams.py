@@ -107,6 +107,7 @@ class Exams:
 
 @cache_for(minutes=60)
 def get_exams(course_id):
+    # FIXME does not handle paginated results like https://corsi.unibo.it/magistralecu/Giurisprudenza-Bologna/appelli
     course = get_courses().get(course_id)
     src = fetch(course.get_url_exams())
     soup = BeautifulSoup(src.text, 'html.parser')

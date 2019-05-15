@@ -150,6 +150,10 @@ class Bot:
             logging.exception(ex)
             self.send(update, context, messages.FETCH_ERROR)
             return
+        if not exams.has_exams():
+            logging.warning(f'No exam found for course_id={setting.course_id} year={setting.year} curricula={setting.curricula}')
+            self.send(update, context, messages.NO_EXAMS)
+            return
         self.send(update, context, exams.tostring(limit_per_subject=3))
 
     def daily_schedule_today(self, context):
