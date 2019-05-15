@@ -138,7 +138,6 @@ class Bot:
             self.send(update, context, messages.NEED_SETUP)
             settingsrepo.close()
             return
-        settingsrepo.close()
         log_request('exams', update.effective_chat.id, setting.course_id,
                     setting.year, setting.curricula)
         try:
