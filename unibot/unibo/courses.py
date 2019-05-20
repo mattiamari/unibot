@@ -19,17 +19,17 @@ SCHEDULE_URL = {'json': '@@orario_reale_json?anno={}&curricula={}',
 
 class QueryTooShortError(Exception):
     def __init__(self, query):
-        super().__init__("Search query '{}' is too short".format(query))
+        super().__init__(f"Search query '{query}' is too short")
 
 
 class CourseNotFoundError(Exception):
     def __init__(self, course_id):
-        super().__init__("Course '{}' not found".format(course_id))
+        super().__init__(f"Course '{course_id}' not found")
 
 
 class NotSupportedError(Exception):
     def __init__(self, course_id, reason):
-        super().__init__("Course '{}' is not supported".format(course_id))
+        super().__init__(f"Course '{course_id}' is not supported")
         self.reason = reason
 
 
@@ -47,7 +47,7 @@ class Course:
 
     @property
     def search_name(self):
-        return '{} - {} - {}'.format(self.title, self.course_id, self.campus)
+        return f"{self.title} - {self.course_id} - {self.campus}"
 
     def is_supported(self):
         return self.supported
@@ -59,16 +59,16 @@ class Course:
         if not self.supported:
             raise NotSupportedError(self.course_id, self.not_supported_reason)
         curricula_part = AVAILABLE_CURRICULA_URL.format(year)
-        return '{}/{}/{}'.format(self.url, SCHEDULE_SUBDIR_URL[self.lang], curricula_part)
+        return f"{self.url}/{SCHEDULE_SUBDIR_URL[self.lang]}/{curricula_part}"
 
     def get_url_schedule(self, year, curricula=''):
         if not self.supported:
             raise NotSupportedError(self.course_id, self.not_supported_reason)
         schedule_part = SCHEDULE_URL[self.parser].format(year, curricula)
-        return '{}/{}/{}'.format(self.url, SCHEDULE_SUBDIR_URL[self.lang], schedule_part)
+        return f"{self.url}/{SCHEDULE_SUBDIR_URL[self.lang]}/{schedule_part}"
 
     def get_url_exams(self):
-        return '{}/{}'.format(self.url, EXAMS_SUBDIR_URL[self.lang])
+        return f"{self.url}/{EXAMS_SUBDIR_URL[self.lang]}"
 
 
 class CourseRepo:

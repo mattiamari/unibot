@@ -16,7 +16,7 @@ def get_schedule(course_id, year, curricula=''):
     course = get_courses().get(course_id)
     src_url = course.get_url_schedule(year, curricula)
     src_data = fetch(src_url)
-    logging.info("Parsing '{}' using parser '{}'".format(src_url, course.parser))
+    logging.info(f"Parsing '{src_url}' using parser '{course.parser}'")
     events = get_parser(course.parser).parse(src_data)
     events = _remove_duplicates(events)
     return Schedule(events)

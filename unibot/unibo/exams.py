@@ -35,7 +35,7 @@ class Exam:
         return self.tostring()
 
     def heading(self):
-        return "{} ({}) - {}".format(self.subject, self.subject_id, self.prof)
+        return f"{self.subject} ({self.subject_id}) - {self.prof}"
 
     def tostring(self, with_heading=True):
         out = ""
@@ -46,7 +46,7 @@ class Exam:
                        self.date.strftime(self.DATE_FORMAT),
                        self.signup_dates, self.exam_type, self.location)
         if self.notes:
-            out += "\n<b>Note:</b> {}".format(self.notes)
+            out += f"\n<b>Note:</b> {self.notes}"
         return out
 
 
@@ -69,7 +69,7 @@ class ExamList:
     def tostring(self, limit_per_subject=None):
         out = ''
         for subject_id, heading in self.subjects():
-            out += "<b>{}</b>\n".format(heading)
+            out += f"<b>{heading}</b>\n"
             out += "\n\n".join(e.tostring(with_heading=False)
                                for e in self.having_subject(subject_id)[:limit_per_subject])
             out += "\n\n"

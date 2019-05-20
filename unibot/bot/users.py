@@ -6,12 +6,12 @@ from unibot.bot.users_model import User, UserSettings
 
 class UserNotFoundError(Exception):
     def __init__(self, user_id):
-        super().__init__("User '{}' does not exist".format(user_id))
+        super().__init__(f"User '{user_id}' does not exist")
 
 
 class ChatNotFoundError(Exception):
     def __init__(self, chat_id):
-        super().__init__("Chat '{}' does not exist".format(chat_id))
+        super().__init__(f"Chat '{chat_id}' does not exist")
 
 
 class Repo:

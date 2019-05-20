@@ -17,7 +17,7 @@ class News:
         return hash((self.title, self.content))
 
     def __str__(self):
-        return "<b>{}</b>\n{}".format(self.title, self.content)
+        return f"<b>{self.title}</b>\n{self.content}"
 
 
 @cache_for(minutes=30)

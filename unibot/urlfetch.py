@@ -2,7 +2,7 @@ import logging
 import os
 import requests
 
-USER_AGENT = 'UniBot/{}'.format(os.environ['BOT_VERSION'])
+USER_AGENT = f"UniBot/{os.environ['BOT_VERSION']}"
 
 
 class FetchError(Exception):
