@@ -23,7 +23,7 @@ class HtmlParser:
 
     def parse(self, response):
         source = response.text
-        soup = BeautifulSoup(source)
+        soup = BeautifulSoup(source, features='html.parser')
         try:
             subjectiter = SubjectIterator(soup)
             events = list(subjectiter)
