@@ -12,7 +12,7 @@ engine = create_engine(conn_string,
                        echo=False,
                        pool_recycle=600, # seconds
                        pool_size=10,
-                       max_overflow=5,
+                       max_overflow=500,
                        pool_timeout=5, # seconds
                        pool_pre_ping=True)
 
