@@ -1569,5 +1569,12 @@
         "lang": "en",
         "campus": "Cesena",
         "url": "https://corsi.unibo.it/2cycle/OrganizationalPsychology"
+    },
+    {
+        "id": "9063",
+        "title": "Artificial Intelligence [LM]",
+        "lang": "en",
+        "campus": "Bologna",
+        "url": "https://corsi.unibo.it/2cycle/artificial-intelligence"
     }
 ]
