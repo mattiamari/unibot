@@ -45,7 +45,7 @@ class Bot:
             self.dispatcher.job_queue.run_once(self.send_announcements, 5)
             # self.dispatcher.job_queue.run_once(self.daily_schedule, 3)
         self.dispatcher.job_queue.start()
-        self.updater.start_polling(poll_interval=1.0)
+        self.updater.start_polling(poll_interval=0.0, timeout=30)
         self.updater.idle()
 
     def register_handlers(self):
