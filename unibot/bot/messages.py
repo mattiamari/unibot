@@ -14,7 +14,7 @@ _COMMANDS = ["/help - Mostra l'elenco dei comandi disponibili",
 
 COMMAND_LIST = ("<b>Lista comandi</b>\n{}"
                 "\n\n\n<b>Se riscontri un problema non esitare a contattarci tramite il gruppo</b> "
-                "https://t.me/joinchat/GOSjsBP21eU22j3fDHzBOQ\n\n"
+                "https://t.me/joinchat/GOSjsE9XIKETP9DWbaRugQ\n\n"
                 "<i>Version: {{}}</i>").format('\n\n'.join(_COMMANDS))
 
 NEED_SETUP = "Non mi hai ancora detto quale facoltà frequenti. Fallo subito con /setup"
