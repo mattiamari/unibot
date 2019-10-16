@@ -5,17 +5,17 @@ services:
         build: .
         image: unibot:${BOT_VERSION}
         env_file:
-            - ../unibo_orari_bot-env/bot.env
+            - ../unibot-env/bot.env
         environment:
             BOT_VERSION: ${BOT_VERSION}
         volumes:
-            - bot-data:/app-data
+            - ../unibot-data:/app-data
         depends_on:
             - db
         restart: unless-stopped
     db:
         image: mariadb:latest
-        env_file: ../unibo_orari_bot-env/db.env
+        env_file: ../unibot-env/db.env
         volumes:
             - db-data:/var/lib/mysql
             - ./config/mariadb:/etc/mysql/conf.d
