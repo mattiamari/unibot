@@ -10,11 +10,11 @@ class JsonParser:
 
     def parse(self, response):
         source = response.json()
-        if 'events' not in source:
-            logging.error("'events' key not found for url '%s'", response.url)
+        if not isinstance(source, list):
+            logging.error("Response is not an array for url '%s'", response.url)
             raise ParseError(response.url)
         try:
-            events = [self._event_factory(e) for e in source['events']]
+            events = [self._event_factory(e) for e in source]
         except Exception as e:
             logging.exception(e)
             raise ParseError(response.url)
