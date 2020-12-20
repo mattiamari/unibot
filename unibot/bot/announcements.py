@@ -47,6 +47,13 @@ announcements.append({
             "\n\nSe riscontri problemi o hai suggerimenti puoi farcelo sapere tramite il gruppo https://t.me/joinchat/GOSjsBP21eU22j3fDHzBOQ")
 })
 
+announcements.append({
+    'seq': 5,
+    'msg': ("Da oggi UniBot smetterà di funzionare!\n"
+            "Per chi volesse mettere in piedi la propria istanza, il codice è disponibile su GitHub (https://github.com/mattiamari/unibot). Fatemi un fischio a @mattia_mm in caso di problemi.\n"
+            "Buono studio!")
+})
+
 
 def get_announcements():
     announcements.sort(key=lambda a: a['seq'])
