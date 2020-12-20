@@ -3,5 +3,4 @@ A Telegram bot that reminds you your class schedule, picked fresh from [unibo.it
 
 Find it on Telegram: @unibo_orari_bot or https://t.me/unibo_orari_bot
 
-Feel free to open new issues for problems you encountered or features you would like
-to be added, I'll try my best to make them happen.
+**The project is now DISCONTINUED**, feel free to spin up your own instance though.
